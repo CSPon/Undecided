@@ -3,7 +3,12 @@ package cs.instruction;
 public interface Instruction
 {
 	/**
+	 * Parses given line
+	 */
+	public void parse();
+	
+	/**
 	 * Performs instruction
 	 */
-	public void perform();
+	public void perform(Internal internal);
 }

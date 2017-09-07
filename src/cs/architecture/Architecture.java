@@ -2,7 +2,7 @@ package cs.architecture;
 
 public class Architecture
 {
-	private int 	ZERO = 0;
+	private final int 	ZERO = 0;
 	private int		AT;
 	private int[]	VALS = new int[2];
 	private int[]	ARGS = new int[4];
@@ -13,6 +13,20 @@ public class Architecture
 	private int		STKP;
 	private int		FRMP;
 	private int		RTRN;
+	
+	public Architecture()
+	{
+		AT = 0;
+		VALS = new int[]{0, 0};
+		ARGS = new int[]{0, 0, 0, 0};
+		TEMP = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		SEMP = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		ROSK = new int[]{0, 0};
+		GLBP = 0;
+		STKP = 0;
+		FRMP = 0;
+		RTRN = 0;
+	}
 	
 	public int getZero()
 	{
@@ -57,72 +71,82 @@ public class Architecture
 	
 	public int getTEMP(int addr)
 	{
-		return 0;
+		if(addr > TEMP.length - 1)
+			return -1;
+		return TEMP[addr];
 	}
 	
 	public void setTEMP(int addr, int val)
 	{
 		if(addr < TEMP.length)
 			TEMP[addr] = val;
+		
+		System.out.println(TEMP[addr]);
 	}
 	
 	public int getSEMP(int addr)
 	{
-		return 0;
+		if(addr > SEMP.length - 1)
+			return -1;
+		return SEMP[addr];
 	}
 	
 	public void setSEMP(int addr, int val)
 	{
-		
+		if(addr < SEMP.length)
+			SEMP[addr] = val;
 	}
 	
 	public int getROSK(int addr)
 	{
-		
+		if(addr > ROSK.length - 1)
+			return -1;
+		return ROSK[addr];
 	}
 	
 	public void setROSK(int addr, int val)
 	{
-		
+		if(addr < ROSK.length)
+			ROSK[addr] = val;
 	}
 	
-	public int getGLBP(int addr)
+	public int getGLBP()
 	{
-		
+		return GLBP;
 	}
 	
 	public void setGLBP(int val)
 	{
-		
+		GLBP = val;
 	}
 	
-	public int getSTKP(int addr)
+	public int getSTKP()
 	{
-		
+		return STKP;
 	}
 	
 	public void setSTKP(int val)
 	{
-		
+		STKP = val;
 	}
 	
-	public int getFRMP(int addr)
+	public int getFRMP()
 	{
-		
+		return FRMP;
 	}
 	
 	public void setFRMP(int val)
 	{
-		
+		FRMP = val;
 	}
 	
-	public int getRTRN(int addr)
+	public int getRTRN()
 	{
-		
+		return RTRN;
 	}
 	
 	public void setRTRN(int val)
 	{
-		
+		RTRN = val;
 	}
 }

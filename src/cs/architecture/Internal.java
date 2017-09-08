@@ -9,7 +9,7 @@ public class Internal
 		this.arc = new Architecture();
 	}
 	
-	public int getFrom(String NAME, int offset)
+	public int getFrom(String NAME)
 	{
 		NAME = NAME.toUpperCase();
 		if(NAME.startsWith("$"))
@@ -18,25 +18,25 @@ public class Internal
 				return arc.getZero();
 			else if(NAME.contains("A") && NAME.charAt(1) == 'A')
 			{
-				return arc.getARGS((int)(NAME.charAt(2) - 48), offset);
+				return arc.getARGS((int)(NAME.charAt(2) - 48));
 			}
 			else if(NAME.contains("S") && NAME.charAt(1) == 'S')
 			{
-				return arc.getSEMP((int)(NAME.charAt(2) - 48), offset);
+				return arc.getSEMP((int)(NAME.charAt(2) - 48));
 			}
 			else if(NAME.contains("T") && NAME.charAt(1) == 'T')
 			{
-				return arc.getTEMP((int)(NAME.charAt(2) - 48), offset);
+				return arc.getTEMP((int)(NAME.charAt(2) - 48));
 			}
 			else if(NAME.contains("V") && NAME.charAt(1) == 'V')
 			{
-				return arc.getVALS((int)(NAME.charAt(2) - 48), offset);
+				return arc.getVALS((int)(NAME.charAt(2) - 48));
 			}
 		}
 		return -1;
 	}
 	
-	public void setTo(String NAME, int offset, int val)
+	public void setTo(String NAME, int val)
 	{
 		NAME = NAME.toUpperCase();
 		if(NAME.startsWith("$"))
@@ -44,23 +44,33 @@ public class Internal
 			if(NAME.contains("A") && NAME.charAt(1) == 'A')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setARGS(addr, offset, val);
+				arc.setARGS(addr, val);
 			}
 			else if(NAME.contains("S") && NAME.charAt(1) == 'S')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setSEMP(addr, offset, val);
+				arc.setSEMP(addr, val);
 			}
 			else if(NAME.contains("T") && NAME.charAt(1) == 'T')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setTEMP(addr, offset, val);
+				arc.setTEMP(addr, val);
 			}
 			else if(NAME.contains("V") && NAME.charAt(1) == 'V')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setVALS(addr, offset, val);
+				arc.setVALS(addr, val);
 			}
 		}
+	}
+	
+	public int getFromMem(int addr, int offset)
+	{
+		return arc.getMem(addr, offset);
+	}
+	
+	public void setToMem(int addr, int offset, int val)
+	{
+		arc.setMem(addr, offset, val);
 	}
 }

@@ -16,16 +16,15 @@ public class ISA_LOADWORD extends ISA_IType
 	public void parseReg()
 	{
 		String[] parsed = REGS.split(",");
-		RT = parsed[0];
-		RS = parsed[1];
 		
-		OFFSET_RT = checkShift(RT); RT = checkReg(RT);
-		OFFSET_RS = checkShift(RS); RS = checkReg(RS);
+		RT = checkReg(parsed[0]);
+		IMMEDIATE = checkShift(parsed[1]);
+		RS = checkReg(parsed[1]);
 	}
 
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setTo(RT, OFFSET_RT, internal.getFrom(RS, OFFSET_RS));
+		internal.setTo(RT, internal.getFromMem(internal.getFrom(RS), IMMEDIATE));
 	}
 }

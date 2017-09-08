@@ -22,14 +22,14 @@ public class ISA_ADD extends ISA_RType
 		SHAMT = "0";
 		FUNCT = "0";
 		
-		OFFSET_RD = checkShift(RD); RD = checkReg(RD);
-		OFFSET_RS = checkShift(RS); RS = checkReg(RS);
-		OFFSET_RT = checkShift(RT); RT = checkReg(RT);
+		RD = checkReg(parsed[0]);
+		RS = checkReg(parsed[1]);
+		RT = checkReg(parsed[2]);
 	}
 	
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setTo(RD, OFFSET_RD, (int) (internal.getFrom(RS, OFFSET_RS) + internal.getFrom(RT, OFFSET_RT)));
+		internal.setTo(RD, internal.getFrom(RS) + internal.getFrom(RT));
 	}
 }

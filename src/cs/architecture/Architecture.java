@@ -1,7 +1,5 @@
 package cs.architecture;
 
-import java.util.ArrayList;
-
 public class Architecture
 {
 	/* Registers */
@@ -174,5 +172,15 @@ public class Architecture
 	{
 		if(addr < MEM.length)
 			MEM[addr + offset] = val;
+	}
+	
+	public int getPC()
+	{
+		return PC;
+	}
+	
+	public void setPC(int _PC)
+	{
+		this.PC = _PC;
 	}
 }

@@ -4,60 +4,37 @@ import java.util.ArrayList;
 
 public class Architecture
 {
+	/* Registers */
 	private final int 	ZERO = 0;
-	private int		AT;
-	private ArrayList<ArrayList<Integer>> VALS, ARGS, TEMP, SEMP, ROSK;
-	private int		GLBP;
-	private int		STKP;
-	private int		FRMP;
-	private int		RTRN;
+	private int			AT;
+	private int[] 		VALS, ARGS, TEMP, SEMP, ROSK;
+	private int			GLBP;
+	private int			STKP;
+	private int			FRMP;
+	private int			RTRN;
+	private int			PC;
+	
+	/* Memory */
+	private int[]		MEM;
+	
 	
 	public Architecture()
-	{
-		int i, j;
-		
-		VALS = new ArrayList<ArrayList<Integer>>(2);
-		ARGS = new ArrayList<ArrayList<Integer>>(4);
-		TEMP = new ArrayList<ArrayList<Integer>>(10);
-		SEMP = new ArrayList<ArrayList<Integer>>(8);
-		ROSK = new ArrayList<ArrayList<Integer>>(2);
-		
-		for(i = 0; i < 2; i++)
-		{
-			VALS.add(i, new ArrayList<Integer>(4096));
-			for(j = 0; j < 4096; j++)
-				VALS.get(i).add(j, 0);
-		}
-		for(i = 0; i < 4; i++)
-		{
-			ARGS.add(i, new ArrayList<Integer>(4096));
-			for(j = 0; j < 4096; j++)
-				ARGS.get(i).add(j, 0);
-		}
-		for(i = 0; i < 10; i++)
-		{
-			TEMP.add(i, new ArrayList<Integer>(4096));
-			for(j = 0; j < 4096; j++)
-				TEMP.get(i).add(j, 0);
-		}
-		for(i = 0; i < 8; i++)
-		{
-			SEMP.add(i, new ArrayList<Integer>(4096));
-			for(j = 0; j < 4096; j++)
-				SEMP.get(i).add(j, 0);
-		}
-		for(i = 0; i < 2; i++)
-		{
-			ROSK.add(i, new ArrayList<Integer>(4096));
-			for(j = 0; j < 4096; j++)
-				ROSK.get(i).add(j, 0);
-		}
+	{	
+		VALS = new int[2];
+		ARGS = new int[4];
+		TEMP = new int[10];
+		SEMP = new int[8];
+		ROSK = new int[2];
 		
 		AT = 0;
 		GLBP = 0;
 		STKP = 0;
 		FRMP = 0;
 		RTRN = 0;
+		
+		MEM = new int[0xFF];
+		
+		PC = 0;
 	}
 	
 	public int getZero()
@@ -75,69 +52,74 @@ public class Architecture
 		this.AT = _AT;
 	}
 	
-	public int getVALS(int addr, int offset)
+	public int getVALS(int addr)
 	{
-		if(addr > VALS.size() - 1)
-			return -1;
-		return VALS.get(addr).get(offset);
+		if(addr < ARGS.length)
+			return VALS[addr];
+		
+		return -1;
 	}
 	
-	public void setVALS(int addr, int offset, int val)
+	public void setVALS(int addr, int val)
 	{
-		if(addr < VALS.size())
-			VALS.get(addr).set(offset, val);
+		if(addr < VALS.length)
+			VALS[addr] = val;
 	}
 	
-	public int getARGS(int addr, int offset)
+	public int getARGS(int addr)
 	{
-		if(addr > ARGS.size() - 1)
-			return -1;
-		return ARGS.get(addr).get(offset);
+		if(addr > ARGS.length)
+			return ARGS[addr];
+		
+		return -1;
 	}
 	
-	public void setARGS(int addr, int offset, int val)
+	public void setARGS(int addr, int val)
 	{
-		if(addr < ARGS.size())
-			ARGS.get(addr).set(offset, val);
+		if(addr < ARGS.length)
+			ARGS[addr] = val;
 	}
 	
-	public int getTEMP(int addr, int offset)
+	public int getTEMP(int addr)
 	{
-		if(addr > TEMP.size() - 1)
-			return -1;
-		return TEMP.get(addr).get(offset);
+		if(addr < TEMP.length)
+			return TEMP[addr];
+		
+		return -1;
 	}
 	
-	public void setTEMP(int addr, int offset, int val)
+	public void setTEMP(int addr, int val)
 	{
-		if(addr < TEMP.size())
-			TEMP.get(addr).set(offset, val);
+		if(addr < TEMP.length)
+			TEMP[addr] = val;
 	}
 	
-	public int getSEMP(int addr, int offset)
+	public int getSEMP(int addr)
 	{
-		if(addr > SEMP.size() - 1)
-			return -1;
-		return SEMP.get(addr).get(offset);
+		if(addr < SEMP.length)
+			return SEMP[addr];
+		
+		return -1;
 	}
 	
-	public void setSEMP(int addr, int offset, int val)
+	public void setSEMP(int addr, int val)
 	{
-		if(addr < SEMP.size())
-			SEMP.get(addr).set(offset, val);
+		if(addr < SEMP.length)
+			SEMP[addr] = val;
 	}
 	
-	public int getROSK(int addr, int offset)
+	public int getROSK(int addr)
 	{
-		if(addr > ROSK.size() - 1)
-			return -1;
-		return ROSK.get(addr).get(offset);
+		if(addr < ROSK.length)
+			return ROSK[addr];
+		
+		return -1;
 	}
 	
-	public void setROSK(int addr, int offset, int val)
+	public void setROSK(int addr, int val)
 	{
-		if(addr < ROSK.size())
-			ROSK.get(addr).set(offset, val);
+		if(addr < ROSK.length)
+			ROSK[addr] = val;
 	}
 	
 	public int getGLBP()
@@ -178,5 +160,19 @@ public class Architecture
 	public void setRTRN(int val)
 	{
 		RTRN = val;
+	}
+	
+	public int getMem(int addr, int offset)
+	{
+		if(addr < MEM.length)
+			return MEM[addr + offset];
+		
+		return -1;
+	}
+	
+	public void setMem(int addr, int offset, int val)
+	{
+		if(addr < MEM.length)
+			MEM[addr + offset] = val;
 	}
 }

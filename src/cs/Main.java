@@ -1,7 +1,8 @@
 package cs;
 
+import cs.architecture.Internal;
 import cs.instruction.ISA_ADD;
-import cs.instruction.Internal;
+import cs.instruction.ISA_ADDI;
 
 public class Main
 {
@@ -9,11 +10,9 @@ public class Main
 	{
 		Internal internal = new Internal();
 		
-		ISA_ADD test = new ISA_ADD("$s0,$t0,$t1");
+		ISA_ADDI test = new ISA_ADDI("$s0, $t0, 15");
 		
 		test.parse();
-		internal.setTo("$t0", 1);
-		internal.setTo("$t1", 2);
 		test.perform(internal);
 		System.out.println(internal.getFrom("$s0"));
 	}

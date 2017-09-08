@@ -1,5 +1,8 @@
 package cs.instruction;
 
+import cs.architecture.Internal;
+import cs.instruction.types.ISA_RType;
+
 public class ISA_ADD extends ISA_RType
 {	
 	public ISA_ADD(String line)

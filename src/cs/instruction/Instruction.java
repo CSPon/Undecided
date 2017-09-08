@@ -1,5 +1,7 @@
 package cs.instruction;
 
+import cs.architecture.Internal;
+
 public interface Instruction
 {
 	/**

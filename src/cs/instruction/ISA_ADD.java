@@ -7,30 +7,29 @@ public class ISA_ADD extends ISA_RType
 {	
 	public ISA_ADD(String line)
 	{
-		this.line = line;
+		super(line);
+		parseFull();
+		parseReg();
 	}
 	
 	@Override
-	public void parse()
+	public void parseReg()
 	{
-		// OPCODE has been parsed
-		line = line.replace(" ", "");
-		String[] parsed = line.split(",");
-		rd = parsed[0];
-		rs = parsed[1];
-		rt = parsed[2];
-		if(parsed.length > 3)
-		{
-			shamt = parsed[3];
-			funct = parsed[4];
-		}
+		String[] parsed = REGS.split(",");
+		RD = parsed[0];
+		RS = parsed[1];
+		RT = parsed[2];
+		SHAMT = "0";
+		FUNCT = "0";
+		
+		OFFSET_RD = checkShift(RD); RD = checkReg(RD);
+		OFFSET_RS = checkShift(RS); RS = checkReg(RS);
+		OFFSET_RT = checkShift(RT); RT = checkReg(RT);
 	}
 	
 	@Override
 	public void perform(Internal internal)
 	{
-		int _rs = internal.getFrom(rs);
-		int _rt = internal.getFrom(rt);
-		internal.setTo(rd, (_rs + _rt));
+		internal.setTo(RD, OFFSET_RD, (int) (internal.getFrom(RS, OFFSET_RS) + internal.getFrom(RT, OFFSET_RT)));
 	}
 }

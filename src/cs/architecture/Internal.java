@@ -9,7 +9,7 @@ public class Internal
 		this.arc = new Architecture();
 	}
 	
-	public int getFrom(String NAME)
+	public int getFrom(String NAME, int offset)
 	{
 		NAME = NAME.toUpperCase();
 		if(NAME.startsWith("$"))
@@ -18,25 +18,25 @@ public class Internal
 				return arc.getZero();
 			else if(NAME.contains("A") && NAME.charAt(1) == 'A')
 			{
-				return arc.getARGS((int)(NAME.charAt(2) - 48));
+				return arc.getARGS((int)(NAME.charAt(2) - 48), offset);
 			}
 			else if(NAME.contains("S") && NAME.charAt(1) == 'S')
 			{
-				return arc.getSEMP((int)(NAME.charAt(2) - 48));
+				return arc.getSEMP((int)(NAME.charAt(2) - 48), offset);
 			}
 			else if(NAME.contains("T") && NAME.charAt(1) == 'T')
 			{
-				return arc.getTEMP((int)(NAME.charAt(2) - 48));
+				return arc.getTEMP((int)(NAME.charAt(2) - 48), offset);
 			}
 			else if(NAME.contains("V") && NAME.charAt(1) == 'V')
 			{
-				return arc.getVALS((int)(NAME.charAt(2) - 48));
+				return arc.getVALS((int)(NAME.charAt(2) - 48), offset);
 			}
 		}
 		return -1;
 	}
 	
-	public void setTo(String NAME, int val)
+	public void setTo(String NAME, int offset, int val)
 	{
 		NAME = NAME.toUpperCase();
 		if(NAME.startsWith("$"))
@@ -44,22 +44,22 @@ public class Internal
 			if(NAME.contains("A") && NAME.charAt(1) == 'A')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setARGS(addr, val);
+				arc.setARGS(addr, offset, val);
 			}
 			else if(NAME.contains("S") && NAME.charAt(1) == 'S')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setSEMP(addr, val);
+				arc.setSEMP(addr, offset, val);
 			}
 			else if(NAME.contains("T") && NAME.charAt(1) == 'T')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setTEMP(addr, val);
+				arc.setTEMP(addr, offset, val);
 			}
 			else if(NAME.contains("V") && NAME.charAt(1) == 'V')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setVALS(addr, val);
+				arc.setVALS(addr, offset, val);
 			}
 		}
 	}

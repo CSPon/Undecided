@@ -1,13 +1,15 @@
-package cs.instruction.types;
+package cs.instruction;
 
 import cs.architecture.Internal;
+import cs.instruction.types.ISA_OPCODE;
 
-public abstract class ISA_IType extends ISA_OPCODE
+public class ISA_LOADIMM extends ISA_OPCODE
 {
-	public ISA_IType(String line)
+	public ISA_LOADIMM(String line)
 	{
 		super(line);
-		IMMEDIATE = 0;
+		parseFull();
+		parseReg();
 	}
 	
 	@Override
@@ -23,11 +25,14 @@ public abstract class ISA_IType extends ISA_OPCODE
 	{
 		String[] parsed = REGS.split(",");
 		
-		RT = checkReg(parsed[0]);
-		RS = checkReg(parsed[1]);
+		RD = checkReg(parsed[0]);
 		IMMEDIATE = Integer.parseInt(parsed[1]);
 	}
 
 	@Override
-	public abstract void perform(Internal internal);
+	public void perform(Internal internal)
+	{
+		if(OPCODE.equalsIgnoreCase("li"))
+			internal.setTo(RD, IMMEDIATE);
+	}
 }

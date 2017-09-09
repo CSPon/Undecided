@@ -1,15 +1,17 @@
-package cs.instruction.types;
+package cs.instruction;
 
 import cs.architecture.Internal;
+import cs.instruction.types.ISA_OPCODE;
 
-public abstract class ISA_IType extends ISA_OPCODE
+public class ISA_MOVE extends ISA_OPCODE
 {
-	public ISA_IType(String line)
+	public ISA_MOVE(String line)
 	{
 		super(line);
-		IMMEDIATE = 0;
+		parseFull();
+		parseReg();
 	}
-	
+
 	@Override
 	public void parseFull()
 	{
@@ -17,17 +19,20 @@ public abstract class ISA_IType extends ISA_OPCODE
 		REGS = INSTRUCTION.substring(INSTRUCTION.indexOf(" ") + 1);
 		REGS = REGS.replaceAll(" ", "");
 	}
-	
+
 	@Override
 	public void parseReg()
 	{
 		String[] parsed = REGS.split(",");
 		
-		RT = checkReg(parsed[0]);
+		RD = checkReg(parsed[0]);
 		RS = checkReg(parsed[1]);
-		IMMEDIATE = Integer.parseInt(parsed[1]);
 	}
 
 	@Override
-	public abstract void perform(Internal internal);
+	public void perform(Internal internal)
+	{
+		if(OPCODE.equalsIgnoreCase("move"))
+			internal.setTo(RD, internal.getFrom(RS));
+	}
 }

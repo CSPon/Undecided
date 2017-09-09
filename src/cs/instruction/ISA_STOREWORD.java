@@ -11,7 +11,7 @@ public class ISA_STOREWORD extends ISA_IType
 		parseFull();
 		parseReg();
 	}
-
+	
 	@Override
 	public void parseReg()
 	{
@@ -25,6 +25,7 @@ public class ISA_STOREWORD extends ISA_IType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT));
+		if(OPCODE.equalsIgnoreCase("sw"))
+			internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT));
 	}
 }

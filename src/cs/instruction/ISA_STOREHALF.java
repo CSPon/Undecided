@@ -3,9 +3,9 @@ package cs.instruction;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_IType;
 
-public class ISA_LOADWORD extends ISA_IType
+public class ISA_STOREHALF extends ISA_IType
 {
-	public ISA_LOADWORD(String line)
+	public ISA_STOREHALF(String line)
 	{
 		super(line);
 		parseFull();
@@ -25,7 +25,7 @@ public class ISA_LOADWORD extends ISA_IType
 	@Override
 	public void perform(Internal internal)
 	{
-		if(OPCODE.equalsIgnoreCase("lw"))
-			internal.setTo(RT, internal.getFromMem(internal.getFrom(RS), IMMEDIATE));
+		if(OPCODE.equalsIgnoreCase("sh"))
+			internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT) & 0xFFFF);
 	}
 }

@@ -10,11 +10,13 @@ public class Architecture
 	private int			STKP;
 	private int			FRMP;
 	private int			RTRN;
+	
+	/* Special Registers */
+	private int			HI, LO;
 	private int			PC;
 	
 	/* Memory */
 	private int[]		MEM;
-	
 	
 	public Architecture()
 	{	
@@ -23,6 +25,9 @@ public class Architecture
 		TEMP = new int[10];
 		SEMP = new int[8];
 		ROSK = new int[2];
+		
+		HI = 0;
+		LO = 0;
 		
 		AT = 0;
 		GLBP = 0;
@@ -33,6 +38,26 @@ public class Architecture
 		MEM = new int[0xFF];
 		
 		PC = 0;
+	}
+	
+	public int getHI()
+	{
+		return HI;
+	}
+	
+	public void setHI(int val)
+	{
+		HI = val;
+	}
+	
+	public int getLO()
+	{
+		return LO;
+	}
+	
+	public void setLO(int val)
+	{
+		LO = val;
 	}
 	
 	public int getZero()

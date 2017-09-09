@@ -3,9 +3,10 @@ package cs.instruction;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_IType;
 
-public class ISA_LOADWORD extends ISA_IType
+public class ISA_LOADBYTE_U extends ISA_IType
 {
-	public ISA_LOADWORD(String line)
+
+	public ISA_LOADBYTE_U(String line)
 	{
 		super(line);
 		parseFull();
@@ -25,7 +26,8 @@ public class ISA_LOADWORD extends ISA_IType
 	@Override
 	public void perform(Internal internal)
 	{
-		if(OPCODE.equalsIgnoreCase("lw"))
-			internal.setTo(RT, internal.getFromMem(internal.getFrom(RS), IMMEDIATE));
+		if(OPCODE.equalsIgnoreCase("lbu"))
+			internal.setTo(RT, internal.getFromMem(internal.getFrom(RS), IMMEDIATE) & 0xFF);
 	}
+
 }

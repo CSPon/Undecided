@@ -1,10 +1,7 @@
 package cs;
 
 import cs.architecture.Internal;
-import cs.instruction.ISA_ADD;
-import cs.instruction.ISA_ADDI;
-import cs.instruction.ISA_LOADWORD;
-import cs.instruction.ISA_STOREWORD;
+import cs.routine.SubRoutine;
 
 public class Main
 {
@@ -12,21 +9,41 @@ public class Main
 	{
 		Internal internal = new Internal();
 		
-		System.out.println(internal.getFrom("$t0"));
-		System.out.println(internal.getFrom("$t1"));
-		System.out.println(internal.getFrom("$t2"));
-		
-		internal.setToMem(0x00, 4, 999);
+		internal.setToMem(0x00, 0, 2);
+		internal.setToMem(0x01, 0, 1024);
 		internal.setTo("$s0", 0x00);
+		internal.setTo("$s1", 0x01);
 		
-		ISA_LOADWORD lw = new ISA_LOADWORD("LW $t0, 16($s0)"); lw.perform(internal);
-		lw = new ISA_LOADWORD("LW $t1, 16($s0)"); lw.perform(internal);
-		ISA_STOREWORD sw = new ISA_STOREWORD("SW $t0, $s0"); sw.perform(internal);
-		ISA_ADD add = new ISA_ADD("ADD $t2, $t1, $t0"); add.perform(internal);
-		ISA_ADDI addi = new ISA_ADDI("ADDI $t2, $t2, -10"); addi.perform(internal);
+		SubRoutine routine = new SubRoutine("Main", 0);
 		
-		System.out.println(internal.getFrom("$t0"));
-		System.out.println(internal.getFrom("$t1"));
-		System.out.println(internal.getFrom("$t2"));
+		routine.addInstruction(internal, "	lw		$t0, $s0");
+		routine.addInstruction(internal, "	lw		$t1, $s1");
+		routine.addInstruction(internal, "	slti	$t2, $t1, 4096");
+		
+		routine.execute(internal);
+		
+		printBinary(internal.getFrom("$t0"));
+		System.out.println(" " + internal.getFrom("$t0"));
+		
+		printBinary(internal.getFrom("$t1"));
+		System.out.println(" " + internal.getFrom("$t1"));
+		
+		printBinary(internal.getFrom("$t2"));
+		System.out.println(" " + internal.getFrom("$t2"));
+		
+		printBinary(internal.getFrom("$t3"));
+		System.out.println(" " + internal.getFrom("$t3"));
+	}
+	
+	public static void printBinary(int val)
+	{
+		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
+		System.out.print(t);
+	}
+	
+	public static void printlnBinary(int val)
+	{
+		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
+		System.out.println(t);
 	}
 }

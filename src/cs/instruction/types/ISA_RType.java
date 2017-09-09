@@ -4,9 +4,6 @@ import cs.architecture.Internal;
 
 public abstract class ISA_RType extends ISA_OPCODE
 {
-	protected String RS, RT, RD, SHAMT, FUNCT;
-	protected int OFFSET_RS, OFFSET_RT, OFFSET_RD;
-	
 	public ISA_RType(String line)
 	{
 		super(line);
@@ -20,25 +17,16 @@ public abstract class ISA_RType extends ISA_OPCODE
 		REGS = REGS.replaceAll(" ", "");
 	}
 	
-	public int checkShift(String reg)
+	@Override
+	public void parseReg()
 	{
-		if(!reg.startsWith("$"))
-		{
-			int shift = Integer.parseInt(reg.substring(0, reg.indexOf("(")));
-			shift /= 4;
-			return shift;
-		}
-		return 0;
-	}
-	
-	public String checkReg(String reg)
-	{
-		if(!reg.startsWith("$"))
-		{
-			reg = reg.substring(reg.indexOf("$"), reg.indexOf(")"));
-			return reg;
-		}
-		return reg;
+		String[] parsed = REGS.split(",");
+		SHAMT = 0;
+		FUNCT = "0";
+		
+		RD = checkReg(parsed[0]);
+		RS = checkReg(parsed[1]);
+		RT = checkReg(parsed[2]);
 	}
 
 	@Override

@@ -1,0 +1,9 @@
+# For testing and reference
+# !Pre-load data into memory 0x00 and 0x01 before start!
+# !Also set $s0 and $s1 to point 0x00 and 0x01!
+
+INIT:
+	lw		$t0, $s0
+	lw		$t1, $s1
+MAIN:
+	slti	$t2, $t1, 4096

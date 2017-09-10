@@ -5,11 +5,21 @@ import cs.instruction.types.ISA_OPCODE;
 
 public class Internal
 {
-	public Architecture arc;
+	private Architecture arc;
 	
 	public Internal()
 	{
 		this.arc = new Architecture();
+	}
+	
+	public int getPC()
+	{
+		return arc.getPC();
+	}
+	
+	public void setPC(int addr)
+	{
+		arc.setPC(addr);
 	}
 	
 	public ISA_OPCODE getType(String line)
@@ -120,6 +130,8 @@ public class Internal
 			return new ISA_AND(line);
 		else if(name.matches("\\bandi\\b"))
 			return new ISA_AND_I(line);
+		else if(name.matches("\\bj\\b"))
+			return new ISA_JUMP(line);
 		else if(name.matches("\\blbu\\b"))
 			return new ISA_LOADBYTE_U(line);
 		else if(name.matches("\\blhu\\b"))

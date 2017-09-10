@@ -1,26 +1,25 @@
 package cs;
 
 import cs.architecture.Internal;
-import cs.routine.SubRoutine;
+import cs.routine.Routine;
 
 public class Main
 {
 	public static void main(String[] args)
-	{
+	{	
 		Internal internal = new Internal();
+		
+		Routine routine = new Routine(internal);
+		
+		Parser parser = new Parser();
+		parser.parse("asm/Test.mips", routine);
 		
 		internal.setToMem(0x00, 0, 2);
 		internal.setToMem(0x01, 0, 1024);
 		internal.setTo("$s0", 0x00);
 		internal.setTo("$s1", 0x01);
 		
-		SubRoutine routine = new SubRoutine("Main", 0);
-		
-		routine.addInstruction(internal, "	lw		$t0, $s0");
-		routine.addInstruction(internal, "	lw		$t1, $s1");
-		routine.addInstruction(internal, "	slti	$t2, $t1, 4096");
-		
-		routine.execute(internal);
+		routine.execute();
 		
 		printBinary(internal.getFrom("$t0"));
 		System.out.println(" " + internal.getFrom("$t0"));

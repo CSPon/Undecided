@@ -1,11 +1,12 @@
 package cs.instruction.types;
 
 import cs.architecture.Internal;
+import cs.routine.Routine;
 
 public abstract class ISA_OPCODE implements Instruction
 {
 	protected String RS, RT, RD, FUNCT, ADDR;
-	protected int IMMEDIATE, SHAMT;
+	protected int IMMEDIATE, SHAMT, ADDRESS, TARGET_ADDR;
 	
 	protected String REGS;
 	protected String OPCODE;
@@ -14,6 +15,11 @@ public abstract class ISA_OPCODE implements Instruction
 	protected ISA_OPCODE(String line)
 	{
 		INSTRUCTION = line;
+		RS = "";
+		RT = "";
+		RD = "";
+		FUNCT = "";
+		ADDR = "";
 	}
 	
 	public abstract void perform(Internal internal);
@@ -37,5 +43,15 @@ public abstract class ISA_OPCODE implements Instruction
 			return reg;
 		}
 		return reg;
+	}
+	
+	public String getADDR()
+	{
+		return ADDR;
+	}
+	
+	public void parseJump(Routine routine, int currentPos)
+	{
+		TARGET_ADDR = routine.getLabelAddr(ADDR, currentPos);
 	}
 }

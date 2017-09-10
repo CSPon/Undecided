@@ -56,6 +56,8 @@ Memory address from 0x00 to 0xFF
 
 All possible registers are added.
 
+__Does not fully simulate actual MIPS architecture; only simulates core instructions!__
+
 __Does not simulate actual memory allocation!__
 
 ---

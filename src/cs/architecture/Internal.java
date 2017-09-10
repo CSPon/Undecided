@@ -130,6 +130,10 @@ public class Internal
 			return new ISA_AND(line);
 		else if(name.matches("\\bandi\\b"))
 			return new ISA_AND_I(line);
+		else if(name.matches("\\bbeq\\b"))
+			return new ISA_BRANCHEQ(line);
+		else if(name.matches("\\bbne\\b"))
+			return new ISA_BRANCHNE(line);
 		else if(name.matches("\\bj\\b"))
 			return new ISA_JUMP(line);
 		else if(name.matches("\\blbu\\b"))

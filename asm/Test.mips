@@ -5,10 +5,11 @@
 INIT:
 	lw		$t0, $s0
 	lw		$t1, $s1
+	j		MAIN
+INTERNAL:
+	addi	$t3, $t1, 512
 	j		END
 MAIN:
 	slti	$t2, $t1, 4096
-	j		END
-LOOP:
-	j		END
+	j		INTERNAL
 END:

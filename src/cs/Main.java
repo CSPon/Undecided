@@ -8,7 +8,6 @@ public class Main
 	public static void main(String[] args)
 	{	
 		Internal internal = new Internal();
-		
 		Routine routine = new Routine(internal);
 		
 		Parser parser = new Parser();

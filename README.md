@@ -42,6 +42,7 @@ Available function(s) (Checked and working ones only)
 * mflo (mflo $d)
 * mult (mult $s, $t)
 * _multu_
+* sra (sra $rd, $rt, shamt)
 * blt (blt $rs, $rt, LABEL)
 * bgt (bgt $rs, $rt, LABEL)
 * ble (ble $rs, $rt, LABEL)

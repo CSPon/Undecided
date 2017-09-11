@@ -26,7 +26,13 @@ public class ISA_LOADIMM extends ISA_OPCODE
 		String[] parsed = REGS.split(",");
 		
 		RD = checkReg(parsed[0]);
-		IMMEDIATE = Integer.parseInt(parsed[1]);
+		if(parsed[1].startsWith("0x"))
+		{
+			parsed[1] = parsed[1].replaceAll("0x", "");
+			IMMEDIATE = (int) Long.parseLong(parsed[1], 16);
+		}
+		else
+			IMMEDIATE = Integer.parseInt(parsed[1]);
 	}
 
 	@Override

@@ -6,8 +6,8 @@
 # Note: Save whitespace as 0x20 HEX or 32 DEC
 # Example below shows all valid inputs
 
-0x00:	H
-0x01:	E
+0x00:	2
+0x01:	4
 0x02:	L
 0x03:	L
 0x04:	O

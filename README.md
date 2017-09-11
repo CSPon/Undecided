@@ -57,6 +57,8 @@ Available function(s) (Checked and working ones only)
 
 2. Run Main.java
 
+Memory value can be changed via Memory.mem, under asm folder.
+
 ---
 
 ### For Reference

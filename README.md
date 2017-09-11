@@ -14,7 +14,11 @@ Available function(s) (Checked and working ones only)
 * _addu_
 * and (and $rd, $rs, $rt)
 * andi (andi $rt, $rs, imm)
+* beq (beq $rs, $st, LABEL)
+* bne (bne $rs, $st, LABEL)
 * j (j LABEL)
+* jal (jal LABEL)
+* jr (jr $rs)
 * lbu (lbu $rt, offset($rs))
 * lhu (lhu $rt, offset($rs))
 * lw (lw $rt, offset($rs))
@@ -38,7 +42,12 @@ Available function(s) (Checked and working ones only)
 * mflo (mflo $d)
 * mult (mult $s, $t)
 * _multu_
-
+* blt (blt $rs, $rt, LABEL)
+* bgt (bgt $rs, $rt, LABEL)
+* ble (ble $rs, $rt, LABEL)
+* bge (bge $rs, $rt, LABEL)
+* li (blt $rd, imm)
+* move (move $rd, $rs)
 ---
 
 ### To use

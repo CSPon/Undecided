@@ -21,8 +21,8 @@ BNETEST:
 	addi	$t2, $t2, 2
 	j BEQTEST
 JUMPREG:
-	addi	$t3, $zero, 21
-	jr		$t3
+	addi	$v0, $zero, 21
+	jr		$v0
 JUMPANDLINK:
 	jal		RETURN
 	j		END

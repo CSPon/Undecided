@@ -3,10 +3,7 @@ package cs.routine;
 import java.util.ArrayList;
 
 import cs.architecture.Internal;
-import cs.instruction.ISA_BRANCHEQ;
-import cs.instruction.ISA_BRANCHNE;
-import cs.instruction.ISA_JUMP;
-import cs.instruction.ISA_JUMPANDLINK;
+import cs.instruction.*;
 import cs.instruction.types.ISA_LABEL;
 import cs.instruction.types.ISA_OPCODE;
 
@@ -53,6 +50,14 @@ public class Routine
 			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHEQ)
 				INSTRUCTIONS.get(i).parseJump(this, i);
 			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHNE)
+				INSTRUCTIONS.get(i).parseJump(this, i);
+			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHLT)
+				INSTRUCTIONS.get(i).parseJump(this, i);
+			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHGT)
+				INSTRUCTIONS.get(i).parseJump(this, i);
+			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHLE)
+				INSTRUCTIONS.get(i).parseJump(this, i);
+			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHGE)
 				INSTRUCTIONS.get(i).parseJump(this, i);
 		}
 	}

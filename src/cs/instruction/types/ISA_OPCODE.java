@@ -13,7 +13,7 @@ public abstract class ISA_OPCODE implements Instruction
 	protected String OPCODE;
 	protected String INSTRUCTION;
 	
-	protected ISA_OPCODE(String line)
+	public ISA_OPCODE(String line)
 	{
 		INSTRUCTION = line;
 		RS = "";

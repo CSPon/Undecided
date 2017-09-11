@@ -142,6 +142,14 @@ public class Internal
 			return new ISA_BRANCHEQ(line);
 		else if(name.matches("\\bbne\\b"))
 			return new ISA_BRANCHNE(line);
+		else if(name.matches("\\bblt\\b"))
+			return new ISA_BRANCHLT(line);
+		else if(name.matches("\\bbgt\\b"))
+			return new ISA_BRANCHGT(line);
+		else if(name.matches("\\bble\\b"))
+			return new ISA_BRANCHLE(line);
+		else if(name.matches("\\bbge\\b"))
+			return new ISA_BRANCHGE(line);
 		else if(name.matches("\\bj\\b"))
 			return new ISA_JUMP(line);
 		else if(name.matches("\\bjal\\b"))

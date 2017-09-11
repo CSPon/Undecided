@@ -35,7 +35,7 @@ public class Architecture
 		FRMP = 0;
 		RTRN = 0;
 		
-		MEM = new int[0xFF];
+		MEM = new int[0xFF + 1];
 		
 		PC = 0;
 	}

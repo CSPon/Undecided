@@ -9,7 +9,18 @@ import cs.architecture.Internal;
 import cs.routine.Routine;
 
 public class Parser
-{	
+{
+	public void parseSingle(String line, Routine routine)
+	{
+		String[] parsed = line.split("#");
+		if(!parsed[0].isEmpty())
+		{
+			if(parsed[0].contains(":"))
+				routine.addLabel(line);
+			else
+				routine.addInstruction(line);
+		}
+	}
 	public void parse(String dir, Routine routine)
 	{
 		try

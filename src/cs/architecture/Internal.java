@@ -69,6 +69,10 @@ public class Internal
 			{
 				return arc.getVALS((int)(NAME.charAt(2) - 48));
 			}
+			else if(NAME.contains("RA"))
+			{
+				return arc.getRTRN();
+			}
 		}
 		return -1;
 	}
@@ -101,6 +105,10 @@ public class Internal
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
 				arc.setVALS(addr, val);
+			}
+			else if(NAME.contains("RA"))
+			{
+				arc.setRTRN(val);
 			}
 		}
 	}
@@ -136,6 +144,8 @@ public class Internal
 			return new ISA_BRANCHNE(line);
 		else if(name.matches("\\bj\\b"))
 			return new ISA_JUMP(line);
+		else if(name.matches("\\bjal\\b"))
+			return new ISA_JUMPANDLINK(line);
 		else if(name.matches("\\bjr\\b"))
 			return new ISA_JUMPREG(line);
 		else if(name.matches("\\blbu\\b"))

@@ -6,6 +6,7 @@ import cs.architecture.Internal;
 import cs.instruction.ISA_BRANCHEQ;
 import cs.instruction.ISA_BRANCHNE;
 import cs.instruction.ISA_JUMP;
+import cs.instruction.ISA_JUMPANDLINK;
 import cs.instruction.types.ISA_LABEL;
 import cs.instruction.types.ISA_OPCODE;
 
@@ -46,6 +47,8 @@ public class Routine
 		for(int i = 0; i < INSTRUCTIONS.size(); i++)
 		{
 			if(INSTRUCTIONS.get(i) instanceof ISA_JUMP)
+				INSTRUCTIONS.get(i).parseJump(this, i);
+			else if(INSTRUCTIONS.get(i) instanceof ISA_JUMPANDLINK)
 				INSTRUCTIONS.get(i).parseJump(this, i);
 			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHEQ)
 				INSTRUCTIONS.get(i).parseJump(this, i);

@@ -7,6 +7,7 @@ public abstract class ISA_OPCODE implements Instruction
 {
 	protected String RS, RT, RD, FUNCT, ADDR;
 	protected int IMMEDIATE, SHAMT, ADDRESS, TARGET_ADDR;
+	protected int SELF_ADDR;
 	
 	protected String REGS;
 	protected String OPCODE;
@@ -53,5 +54,6 @@ public abstract class ISA_OPCODE implements Instruction
 	public void parseJump(Routine routine, int currentPos)
 	{
 		TARGET_ADDR = routine.getLabelAddr(ADDR, currentPos);
+		SELF_ADDR = currentPos;
 	}
 }

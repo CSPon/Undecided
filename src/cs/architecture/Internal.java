@@ -22,26 +22,6 @@ public class Internal
 		arc.setPC(addr);
 	}
 	
-	public ISA_OPCODE getType(String line)
-	{
-		line = line.trim();
-		line = line.replaceAll("\\s{1,}", " ");
-		line = line.trim();
-		line = line.replace(", ", ":");
-		line = line.replace(" ", ":");
-		String[] parsed = line.split("\\:");
-		
-		String INSTRUCTION = parsed[0] + " ";
-		for(int i = 1; i < parsed.length - 1; i++)
-		{
-			INSTRUCTION += parsed[i];
-			INSTRUCTION += ",";
-		}
-		INSTRUCTION += parsed[parsed.length - 1];
-		
-		return checkOpcode(parsed[0], INSTRUCTION);
-	}
-	
 	public int getFrom(String NAME)
 	{
 		NAME = NAME.toUpperCase();
@@ -121,6 +101,26 @@ public class Internal
 	public void setToMem(int addr, int offset, int val)
 	{
 		arc.setMem(addr, offset, val);
+	}
+	
+	public ISA_OPCODE getType(String line)
+	{
+		line = line.trim();
+		line = line.replaceAll("\\s{1,}", " ");
+		line = line.trim();
+		line = line.replace(", ", ":");
+		line = line.replace(" ", ":");
+		String[] parsed = line.split("\\:");
+		
+		String INSTRUCTION = parsed[0] + " ";
+		for(int i = 1; i < parsed.length - 1; i++)
+		{
+			INSTRUCTION += parsed[i];
+			INSTRUCTION += ",";
+		}
+		INSTRUCTION += parsed[parsed.length - 1];
+		
+		return checkOpcode(parsed[0], INSTRUCTION);
 	}
 	
 	private ISA_OPCODE checkOpcode(String name, String line)

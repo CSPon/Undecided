@@ -4,10 +4,13 @@
 # To save hex value, be sure to add 0x in front of hex value.
 # To save a character, save only one character in one memory address.
 # Note: Save whitespace as 0x20 HEX or 32 DEC
+# Any memory address without a value will have default value of zero(0)
 # Example below shows all valid inputs
 
 0x00:	2
 0x01:	4
-0x02:	L
-0x03:	L
-0x04:	O
+0x02:	H
+0x03:	E
+0x04:	L
+0x05:	L
+0x06:	O

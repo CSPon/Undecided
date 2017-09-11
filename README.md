@@ -79,3 +79,5 @@ __Does not simulate actual memory allocation!__
 1. More Instructions!
 2. Add Memory Modifier
 3. Add program arguments
+4. Hex/Bin viewer for memory and registers
+5. GUI

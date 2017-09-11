@@ -136,6 +136,8 @@ public class Internal
 			return new ISA_BRANCHNE(line);
 		else if(name.matches("\\bj\\b"))
 			return new ISA_JUMP(line);
+		else if(name.matches("\\bjr\\b"))
+			return new ISA_JUMPREG(line);
 		else if(name.matches("\\blbu\\b"))
 			return new ISA_LOADBYTE_U(line);
 		else if(name.matches("\\blhu\\b"))

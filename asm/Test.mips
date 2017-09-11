@@ -10,7 +10,8 @@ INTERNAL:
 	addi	$t3, $t1, 512
 	j		BEQTEST
 MAIN:
-	slti	$t2, $t1, 4096
+	slti	$t2, $t1, 0
+	jr		$t2
 	j		INTERNAL
 BEQTEST:
 	beq		$t2, $t1, END

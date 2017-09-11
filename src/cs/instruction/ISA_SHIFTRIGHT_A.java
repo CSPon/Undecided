@@ -1,0 +1,42 @@
+package cs.instruction;
+
+import cs.architecture.Internal;
+import cs.instruction.types.ISA_RType;
+
+public class ISA_SHIFTRIGHT_A extends ISA_RType
+{
+	public ISA_SHIFTRIGHT_A(String line)
+	{
+		super(line);
+		parseFull();
+		parseReg();
+	}
+	
+	@Override
+	public void parseReg()
+	{
+		String[] parsed = REGS.split(",");
+		SHAMT = 0;
+		FUNCT = "0";
+		
+		RD = checkReg(parsed[0]);
+		RT = checkReg(parsed[1]);
+		SHAMT = Integer.parseInt(parsed[2]);
+	}
+
+	@Override
+	public void perform(Internal internal)
+	{
+		// Copy bottom (32 - SHAMT) bits to separate variable
+		// Shift RT to right by SHAMT
+		// Mask saved bits to RT
+		// Save to RD
+		
+		// 1001 0101 1010 1100
+		// 1100 1001 0101 1010
+		
+		int temp = internal.getFrom(RT) << (32 - SHAMT);
+		int _RT = internal.getFrom(RT) >> SHAMT;
+		internal.setTo(RD, temp | _RT);
+	}
+}

@@ -12,9 +12,10 @@ public class Main
 		
 		Parser parser = new Parser();
 		parser.parse("asm/Test.mips", routine);
+		parser.loadMemory("asm/Memory.mem", internal);
 		
-		internal.setToMem(0x00, 0, 2);
-		internal.setToMem(0x01, 0, 6);
+		//internal.setToMem(0x00, 0, 2);
+		//internal.setToMem(0x01, 0, 6);
 		internal.setTo("$s0", 0x00);
 		internal.setTo("$s1", 0x01);
 		

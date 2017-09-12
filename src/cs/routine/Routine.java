@@ -18,6 +18,26 @@ public class Routine
 		INSTRUCTIONS = new ArrayList<ISA_OPCODE>();
 	}
 	
+	public String getOPCODE(int i)
+	{
+		return INSTRUCTIONS.get(i).getOPCODE();
+	}
+	
+	public String getREGS(int i)
+	{
+		return INSTRUCTIONS.get(i).getREGS();
+	}
+	
+	public int getInstructionsCount()
+	{
+		return INSTRUCTIONS.size();
+	}
+	
+	public void clearInstruction()
+	{
+		INSTRUCTIONS.clear();
+	}
+	
 	public void addInstruction(String line)
 	{
 		INSTRUCTIONS.add(internal.getType(line));
@@ -30,8 +50,7 @@ public class Routine
 	
 	public void execute()
 	{
-		compile();
-		
+		internal.setPC(0);
 		while(internal.getPC() < INSTRUCTIONS.size())
 		{
 			INSTRUCTIONS.get(internal.getPC()).perform(internal);
@@ -39,7 +58,23 @@ public class Routine
 		}
 	}
 	
-	private void compile()
+	public void execute(int pc)
+	{
+		if(internal.getPC() > INSTRUCTIONS.size() - 1)
+		{
+			internal.setPC(0);
+			
+			INSTRUCTIONS.get(pc).perform(internal);
+			internal.setPC(internal.getPC() + 1);
+		}
+		else
+		{
+			INSTRUCTIONS.get(pc).perform(internal);
+			internal.setPC(internal.getPC() + 1);
+		}
+	}
+	
+	public void compile()
 	{
 		for(int i = 0; i < INSTRUCTIONS.size(); i++)
 		{

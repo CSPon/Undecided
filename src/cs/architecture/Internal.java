@@ -12,6 +12,11 @@ public class Internal
 		this.arc = new Architecture();
 	}
 	
+	public void printAll()
+	{
+		arc.printAll();
+	}
+	
 	public int getPC()
 	{
 		return arc.getPC();
@@ -33,6 +38,16 @@ public class Internal
 				return arc.getHI();
 			else if(NAME.contains("LO"))
 				return arc.getLO();
+			else if(NAME.contains("AT"))
+				return arc.getAT();
+			else if(NAME.contains("GP"))
+				return arc.getGLBP();
+			else if(NAME.contains("SP"))
+				return arc.getSTKP();
+			else if(NAME.contains("FP"))
+				return arc.getFRMP();
+			else if(NAME.contains("RA"))
+				return arc.getRTRN();
 			else if(NAME.contains("A") && NAME.charAt(1) == 'A')
 			{
 				return arc.getARGS((int)(NAME.charAt(2) - 48));
@@ -49,10 +64,6 @@ public class Internal
 			{
 				return arc.getVALS((int)(NAME.charAt(2) - 48));
 			}
-			else if(NAME.contains("RA"))
-			{
-				return arc.getRTRN();
-			}
 		}
 		return -1;
 	}
@@ -66,6 +77,16 @@ public class Internal
 				arc.setHI(val);
 			else if(NAME.contains("LO"))
 				arc.setLO(val);
+			else if(NAME.contains("AT"))
+				arc.setAT(val);
+			else if(NAME.contains("GP"))
+				arc.setGLBP(val);
+			else if(NAME.contains("SP"))
+				arc.setSTKP(val);
+			else if(NAME.contains("FP"))
+				arc.setFRMP(val);
+			else if(NAME.contains("RA"))
+				arc.setRTRN(val);
 			if(NAME.contains("A") && NAME.charAt(1) == 'A')
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
@@ -85,10 +106,6 @@ public class Internal
 			{
 				int addr = (int)(NAME.charAt(2) - 48);
 				arc.setVALS(addr, val);
-			}
-			else if(NAME.contains("RA"))
-			{
-				arc.setRTRN(val);
 			}
 		}
 	}

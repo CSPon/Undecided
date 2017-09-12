@@ -56,4 +56,14 @@ public abstract class ISA_OPCODE implements Instruction
 		TARGET_ADDR = routine.getLabelAddr(ADDR, currentPos);
 		SELF_ADDR = currentPos;
 	}
+
+	public String getOPCODE()
+	{
+		return OPCODE;
+	}
+	
+	public String getREGS()
+	{
+		return REGS;
+	}
 }

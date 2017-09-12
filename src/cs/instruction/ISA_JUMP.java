@@ -17,6 +17,7 @@ public class ISA_JUMP extends ISA_JType
 		String[] parsed = INSTRUCTION.split(" ");
 		OPCODE = parsed[0];
 		ADDR = parsed[1];
+		REGS = parsed[1];
 	}
 
 	@Override

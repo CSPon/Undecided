@@ -13,7 +13,9 @@ public class ISA_LABEL extends ISA_JType
 	@Override
 	public void parseFull()
 	{
-		ADDR = INSTRUCTION.split(":")[0];
+		OPCODE = "LABEL";
+		REGS = INSTRUCTION;
+		ADDR = INSTRUCTION;
 	}
 	
 	@Override

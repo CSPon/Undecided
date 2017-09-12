@@ -40,6 +40,88 @@ public class Architecture
 		PC = 0;
 	}
 	
+	public void printAll()
+	{
+		System.out.print("$zero: "); System.out.println(0);
+		System.out.println();
+		
+		System.out.print("$at: "); printlnHex(getAT());
+		System.out.println();
+		
+		System.out.print("$v0: "); printlnHex(getVALS(0));
+		System.out.print("$v1: "); printlnHex(getVALS(1));
+		System.out.println();
+		
+		System.out.print("$a0: "); printlnHex(getARGS(0));
+		System.out.print("$a1: "); printlnHex(getARGS(1));
+		System.out.print("$a2: "); printlnHex(getARGS(2));
+		System.out.print("$a3: "); printlnHex(getARGS(3));
+		System.out.println();
+		
+		System.out.print("$t0: "); printlnHex(getTEMP(0));
+		System.out.print("$t1: "); printlnHex(getTEMP(1));
+		System.out.print("$t2: "); printlnHex(getTEMP(2));
+		System.out.print("$t3: "); printlnHex(getTEMP(3));
+		System.out.print("$t4: "); printlnHex(getTEMP(4));
+		System.out.print("$t5: "); printlnHex(getTEMP(5));
+		System.out.print("$t6: "); printlnHex(getTEMP(6));
+		System.out.print("$t7: "); printlnHex(getTEMP(7));
+		System.out.print("$t8: "); printlnHex(getTEMP(8));
+		System.out.print("$t9: "); printlnHex(getTEMP(9));
+		System.out.println();
+		
+		System.out.print("$s0: "); printlnHex(getSEMP(0));
+		System.out.print("$s1: "); printlnHex(getSEMP(1));
+		System.out.print("$s2: "); printlnHex(getSEMP(2));
+		System.out.print("$s3: "); printlnHex(getSEMP(3));
+		System.out.print("$s4: "); printlnHex(getSEMP(4));
+		System.out.print("$s5: "); printlnHex(getSEMP(5));
+		System.out.print("$s6: "); printlnHex(getSEMP(6));
+		System.out.print("$s7: "); printlnHex(getSEMP(7));
+		System.out.println();
+		
+		System.out.print("$k0: "); printlnHex(getROSK(0));
+		System.out.print("$k1: "); printlnHex(getROSK(1));
+		System.out.println();
+		
+		System.out.print("$gp: "); printlnHex(getGLBP());
+		System.out.print("$sp: "); printlnHex(getSTKP());
+		System.out.print("$fp: "); printlnHex(getFRMP());
+		System.out.print("$ra: "); printlnHex(getRTRN());
+		
+		System.out.println();
+		
+		for(int i = 0; i < MEM.length; i++)
+		{
+			printHex(i); System.out.print(" ");
+			printlnHex(MEM[i]);			
+		}
+	}
+	
+	public static void printHex(int val)
+	{
+		String t = String.format("0x%04x", val);
+		System.out.print(t);
+	}
+	
+	public static void printlnHex(int val)
+	{
+		String t = String.format("0x%04x", val);
+		System.out.println(t);
+	}
+	
+	public static void printBinary(int val)
+	{
+		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
+		System.out.print(t);
+	}
+	
+	public static void printlnBinary(int val)
+	{
+		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
+		System.out.println(t);
+	}
+	
 	public int getHI()
 	{
 		return HI;

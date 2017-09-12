@@ -12,10 +12,19 @@ public class Routine
 	private Internal internal;
 	private ArrayList<ISA_OPCODE> INSTRUCTIONS;
 	
+	private int CYCLE_COUNTS;
+	
 	public Routine(Internal _internal)
 	{
 		this.internal = _internal;
 		INSTRUCTIONS = new ArrayList<ISA_OPCODE>();
+		
+		CYCLE_COUNTS = 0;
+	}
+	
+	public int getCYCLE()
+	{
+		return CYCLE_COUNTS;
 	}
 	
 	public String getOPCODE(int i)
@@ -51,27 +60,36 @@ public class Routine
 	
 	public void execute()
 	{
+		CYCLE_COUNTS = 0;
 		internal.setPC(0);
 		while(internal.getPC() < INSTRUCTIONS.size())
 		{
-			INSTRUCTIONS.get(internal.getPC()).perform(internal);
+			execute(internal.getPC());
 			internal.setPC(internal.getPC() + 1);
+//			INSTRUCTIONS.get(internal.getPC()).perform(internal);
+//			if(!(INSTRUCTIONS.get(internal.getPC()) instanceof ISA_LABEL))
+//				CYCLE_COUNTS += INSTRUCTIONS.get(internal.getPC()).getCYCLE();
+//			internal.setPC(internal.getPC() + 1);
 		}
 	}
 	
+	/**
+	 * Step Execution
+	 * @param pc
+	 */
 	public void execute(int pc)
 	{
 		if(internal.getPC() >= INSTRUCTIONS.size())
 		{
+			CYCLE_COUNTS = 0;
 			internal.setPC(0);
 			
-			//INSTRUCTIONS.get(internal.getPC()).perform(internal);
-			//internal.setPC(internal.getPC() + 1);
 		}
 		else
 		{
 			INSTRUCTIONS.get(pc).perform(internal);
-			//internal.setPC(internal.getPC() + 1);
+			if(!(INSTRUCTIONS.get(pc) instanceof ISA_LABEL))
+					CYCLE_COUNTS += INSTRUCTIONS.get(pc).getCYCLE();
 		}
 	}
 	

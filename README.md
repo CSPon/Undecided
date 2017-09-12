@@ -93,3 +93,9 @@ __Does not simulate actual memory allocation!__
 ### For Future
 
 1. Cycle counter (To see how many cycles it took to execute)
+
+---
+
+### Otherwise...
+
+The heck am I doing in the middle of night.

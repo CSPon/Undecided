@@ -57,8 +57,7 @@ Available function(s) (Checked and working ones only)
 
 If you are using Eclipse IDE to run...
 
-1. Add file to asm folder with file extesion of .mips   
-(Only Test.mips works at this point; will add function to allow read in all .mips files)
+1. Add file to asm folder with file extesion of .mips
 
 2. Run Main.java
 

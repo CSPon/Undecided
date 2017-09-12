@@ -97,8 +97,13 @@ public class Parser
 			BufferedReader br = new BufferedReader(new FileReader(dir));
 			
 			String line = br.readLine();
+			while(!line.contains("MEMORY:"))
+				line = br.readLine();
+			
+			line = br.readLine();
 			while(line != null)
 			{
+				
 				String[] parsed = line.split("#");
 				if(!parsed[0].isEmpty())
 				{
@@ -149,8 +154,13 @@ public class Parser
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			
 			String line = br.readLine();
+			while(!line.contains("MEMORY:"))
+				line = br.readLine();
+			
+			line = br.readLine();
 			while(line != null)
 			{
+				
 				String[] parsed = line.split("#");
 				if(!parsed[0].isEmpty())
 				{
@@ -209,5 +219,44 @@ public class Parser
 		{
 			err.printStackTrace();
 		}
+	}
+	
+	public String parsePrompt(String dir)
+	{
+		String prompt = "";
+		try
+		{
+			File file = new File(dir);
+			
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			
+			String line = br.readLine();
+			while(line != null)
+			{
+				String[] parsed = line.split("#");
+				if(!parsed[0].isEmpty())
+				{
+					if(parsed[0].contains("PROMPT:")) ;
+					else if(parsed[0].contains("MEMORY:"))
+					{
+						br.close();
+						return prompt;
+					}
+					else
+					{
+						prompt += line + "\n";
+					}
+				}
+				line = br.readLine();
+			}
+			
+			br.close();
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+			return prompt;
+		}
+		return prompt;
 	}
 }

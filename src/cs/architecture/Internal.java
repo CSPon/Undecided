@@ -17,6 +17,11 @@ public class Internal
 		arc.printAll();
 	}
 	
+	public void resetMEM()
+	{
+		arc.resetMEM();
+	}
+	
 	public int getPC()
 	{
 		return arc.getPC();

@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import cs.Parser;
+import cs.References;
 import cs.architecture.Internal;
 import cs.routine.Routine;
 
@@ -26,22 +28,24 @@ public class MIPSFrame extends javax.swing.JFrame {
 	private Internal internal;
 	private Routine routine;
 	private Parser parser;
+	private References refs;
 	
     public MIPSFrame(Internal _internal, Routine _routine, Parser _parser)
     {
     	internal = _internal;
     	routine = _routine;
     	parser = _parser;
+    	refs = new References();
         initComponents();
     }
                         
-    private void initComponents()
-    {
-    	instChooser = new javax.swing.JFileChooser();
+    private void initComponents() {
+
+        instChooser = new javax.swing.JFileChooser();
         saveChooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textAreaPrompt = new javax.swing.JTextArea();
         jSplitPane2 = new javax.swing.JSplitPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaInsturction = new javax.swing.JTextArea();
@@ -86,14 +90,31 @@ public class MIPSFrame extends javax.swing.JFrame {
         listPCAddress = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
         listOPCODE = new javax.swing.JList<>();
+        jSplitPane8 = new javax.swing.JSplitPane();
+        jLabel15 = new javax.swing.JLabel();
+        jSplitPane9 = new javax.swing.JSplitPane();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        listOPCODEs = new javax.swing.JList<>();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        textAreaReference = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSave = new javax.swing.JMenuItem();
         menuLoadInstFile = new javax.swing.JMenuItem();
         menuLoadMemory = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menuLoadCustomQuestion = new javax.swing.JMenuItem();
+        menuLoadQ0 = new javax.swing.JMenuItem();
+        menuLoadQ1 = new javax.swing.JMenuItem();
+        menuLoadQ2 = new javax.swing.JMenuItem();
+        menuLoadQ3 = new javax.swing.JMenuItem();
+        menuLoadQ4 = new javax.swing.JMenuItem();
+        menuLoadQ5 = new javax.swing.JMenuItem();
+        menuLoadQ6 = new javax.swing.JMenuItem();
+        menuLoadQ7 = new javax.swing.JMenuItem();
+        menuLoadQ8 = new javax.swing.JMenuItem();
+        menuLoadQ9 = new javax.swing.JMenuItem();
+        menuLoadQ10 = new javax.swing.JMenuItem();
 
         instChooser.setCurrentDirectory(new java.io.File("C:\\Program Files\\NetBeans 8.2"));
 
@@ -107,10 +128,13 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Prompt");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        textAreaPrompt.setEditable(false);
+        textAreaPrompt.setColumns(20);
+        textAreaPrompt.setLineWrap(true);
+        textAreaPrompt.setRows(5);
+        jScrollPane1.setViewportView(textAreaPrompt);
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -143,7 +167,8 @@ public class MIPSFrame extends javax.swing.JFrame {
         jSplitPane5.setDividerLocation(100);
 
         listRegister.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra" };
+			private static final long serialVersionUID = 1L;
+			String[] strings = { "$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -304,7 +329,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -326,7 +351,7 @@ public class MIPSFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(fieldRA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonCompileOnly)
@@ -341,11 +366,45 @@ public class MIPSFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jSplitPane6.setRightComponent(jPanel1);
+
+        jSplitPane8.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("MIPS ISA Reference");
+        jSplitPane8.setTopComponent(jLabel15);
+
+        jSplitPane9.setDividerLocation(100);
+
+        listOPCODEs.setModel(new javax.swing.AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+			String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "j", "jal", "jr", "lw", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "div", "mfhi", "mflo", "mult", "sra", "blt", "bgt", "ble", "bge", "li", "move" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listOPCODEs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listOPCODEs.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listOPCODEsValueChanged(evt);
+            }
+        });
+        jScrollPane9.setViewportView(listOPCODEs);
+
+        jSplitPane9.setLeftComponent(jScrollPane9);
+
+        textAreaReference.setEditable(false);
+        textAreaReference.setColumns(20);
+        textAreaReference.setLineWrap(true);
+        textAreaReference.setRows(5);
+        jScrollPane10.setViewportView(textAreaReference);
+
+        jSplitPane9.setRightComponent(jScrollPane10);
+
+        jSplitPane8.setRightComponent(jSplitPane9);
 
         jMenu1.setText("File");
 
@@ -367,7 +426,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         });
         jMenu1.add(menuLoadInstFile);
 
-        menuLoadMemory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuLoadMemory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuLoadMemory.setText("Load Memory From File...");
         menuLoadMemory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,11 +437,101 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         jMenu3.setText("Load Question...");
 
-        jMenuItem1.setText("Question 00: Self Test");
-        jMenu3.add(jMenuItem1);
+        menuLoadCustomQuestion.setText("Custom Question...");
+        menuLoadCustomQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadCustomQuestionActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadCustomQuestion);
 
-        jMenuItem3.setText("Question 01: Amplifier");
-        jMenu3.add(jMenuItem3);
+        menuLoadQ0.setText("Question 00: Self Test");
+        menuLoadQ0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ0ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ0);
+
+        menuLoadQ1.setText("Question 01: Amplifier");
+        menuLoadQ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ1);
+
+        menuLoadQ2.setText("Question 02: Compare 01");
+        menuLoadQ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ2);
+
+        menuLoadQ3.setText("Question 03: Compare 02");
+        menuLoadQ3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ3);
+
+        menuLoadQ4.setText("Question 04: Compare 03");
+        menuLoadQ4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ4);
+
+        menuLoadQ5.setText("Question 05: Mixer");
+        menuLoadQ5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ5);
+
+        menuLoadQ6.setText("Question 06: For loop");
+        menuLoadQ6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ6ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ6);
+
+        menuLoadQ7.setText("Question 07: Nested for loop");
+        menuLoadQ7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ7ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ7);
+
+        menuLoadQ8.setText("Question 08: Bitwise Operation 01");
+        menuLoadQ8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ8);
+
+        menuLoadQ9.setText("Question 09: Bitwise Operation 02");
+        menuLoadQ9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ9ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ9);
+
+        menuLoadQ10.setText("Question 10: Interrupt Handler");
+        menuLoadQ10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoadQ10ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoadQ10);
 
         jMenu1.add(jMenu3);
 
@@ -394,23 +543,25 @@ public class MIPSFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSplitPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSplitPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSplitPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                            .addComponent(jSplitPane8))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSplitPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -419,17 +570,17 @@ public class MIPSFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSplitPane2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSplitPane4)
-                            .addComponent(jSplitPane1)
-                            .addComponent(jSplitPane6))))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jSplitPane8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSplitPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jSplitPane6))
                 .addContainerGap())
         );
 
@@ -442,24 +593,43 @@ public class MIPSFrame extends javax.swing.JFrame {
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = instChooser.getSelectedFile();
-            ArrayList<String> lines = parser.parseOnly(file);
-            
-            textAreaInsturction.setText("");
-            for(String line : lines)
+            if(file.toString().contains(".mips"))
             {
-            	line += "\n";
-            	textAreaInsturction.append(line);
+            	ArrayList<String> lines = parser.parseOnly(file);
+                
+                textAreaPrompt.setText("");
+                textAreaInsturction.setText("");
+                for(String line : lines)
+                {
+                	line += "\n";
+                	textAreaInsturction.append(line);
+                }
+            }
+            else
+            {
+            	JOptionPane.showMessageDialog(null, "Not a valid .mips file!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     
     private void menuLoadMemoryActionPerformed(java.awt.event.ActionEvent evt)
     {
-    	int returnVal = saveChooser.showOpenDialog(this);
+    	int returnVal = instChooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = instChooser.getSelectedFile();
-            parser.writeToFile(file, textAreaInsturction.getText());
+            
+            if(file.toString().contains(".mem"))
+            {
+            	internal.resetMEM();
+                parser.loadMemory(file, internal);
+                
+                updateMemoryList();
+            }
+            else
+            {
+            	JOptionPane.showMessageDialog(null, "Not a valid .mem file!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     
@@ -471,6 +641,98 @@ public class MIPSFrame extends javax.swing.JFrame {
             File file = new File(saveChooser.getSelectedFile().toString() + ".mips");
             parser.writeToFile(file, textAreaInsturction.getText());
         }
+    }
+    
+    private void menuLoadQ0ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(0);
+    	
+    }
+    
+    private void menuLoadQ1ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(1);
+    }
+
+    private void menuLoadQ2ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(2);
+    }
+
+    private void menuLoadQ3ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(3);
+    }
+
+    private void menuLoadQ4ActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+    	loadQuestion(4);
+    }
+
+    private void menuLoadQ5ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(5);
+    }
+
+    private void menuLoadQ6ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(6);
+    }
+
+    private void menuLoadQ7ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(7);
+    }
+
+    private void menuLoadQ8ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(8);
+    }
+
+    private void menuLoadQ9ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(9);
+    }
+
+    private void menuLoadQ10ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(10);
+    }
+    
+    private void menuLoadCustomQuestionActionPerformed(java.awt.event.ActionEvent evt)
+    {                                                       
+    	int returnVal = instChooser.showOpenDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            File file = instChooser.getSelectedFile();
+            
+            if(file.toString().contains(".mipsq"))
+            {
+            	String prompt = parser.parsePrompt(file.toString());
+            	textAreaPrompt.setText(prompt);
+            	
+            	internal.resetMEM();
+                parser.loadMemory(file, internal);
+                
+                updateMemoryList();
+            }
+            else
+            {
+            	JOptionPane.showMessageDialog(null, "Not a valid .mipsq file!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void loadQuestion(int number)
+    {
+    	String prompt = parser.parsePrompt("asm/questions/question_" + String.format("%02d", number) + ".mipsq");
+    	textAreaPrompt.setText(prompt);
+    	
+    	File file = new File("asm/questions/question_" + String.format("%02d", number) + ".mipsq");
+    	internal.resetMEM();
+        parser.loadMemory(file, internal);
+        
+        updateMemoryList();
     }
     
     private void listRegisterValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -580,19 +842,23 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listOPCODE.ensureIndexIsVisible(index);
     }
     
+    private void listOPCODEsValueChanged(javax.swing.event.ListSelectionEvent evt)
+    {                                         
+        String key = listOPCODEs.getSelectedValue();
+        String value = refs.getReference(key);
+        textAreaReference.setText(value);
+    }
+    
     public void updateMemoryList()
     {
         DefaultListModel<String> memoryList = new DefaultListModel<String>();
         for(int i = 0; i <= 0xFF; i++)
         {
-        	String format = "0x";
-        	format += String.format("%02x", i).toUpperCase();
-        	
+        	String line;
         	int value = internal.getFromMem(i, 0);
-        	String valFormat = "0x";
-        	valFormat += String.format("%04x", value).toUpperCase();
-        	format += ": (" + value + ") " + valFormat;
-        	memoryList.addElement(format);
+        	line = String.format("0x%02X: (%2d) 0x%04X", i, value, value);
+        	
+        	memoryList.addElement(line);
         }
         listMemory.setModel(memoryList);
     }
@@ -671,6 +937,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -682,10 +949,9 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -693,6 +959,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
@@ -700,17 +967,33 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane5;
     private javax.swing.JSplitPane jSplitPane6;
     private javax.swing.JSplitPane jSplitPane7;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JSplitPane jSplitPane8;
+    private javax.swing.JSplitPane jSplitPane9;
     private javax.swing.JList<String> listMemory;
     private javax.swing.JList<String> listOPCODE;
+    private javax.swing.JList<String> listOPCODEs;
     private javax.swing.JList<String> listPCAddress;
     private javax.swing.JList<String> listRegister;
+    private javax.swing.JMenuItem menuLoadCustomQuestion;
     private javax.swing.JMenuItem menuLoadInstFile;
     private javax.swing.JMenuItem menuLoadMemory;
+    private javax.swing.JMenuItem menuLoadQ0;
+    private javax.swing.JMenuItem menuLoadQ1;
+    private javax.swing.JMenuItem menuLoadQ10;
+    private javax.swing.JMenuItem menuLoadQ2;
+    private javax.swing.JMenuItem menuLoadQ3;
+    private javax.swing.JMenuItem menuLoadQ4;
+    private javax.swing.JMenuItem menuLoadQ5;
+    private javax.swing.JMenuItem menuLoadQ6;
+    private javax.swing.JMenuItem menuLoadQ7;
+    private javax.swing.JMenuItem menuLoadQ8;
+    private javax.swing.JMenuItem menuLoadQ9;
     private javax.swing.JMenuItem menuSave;
     private javax.swing.JFileChooser saveChooser;
     private javax.swing.JTextArea textAreaCompilerWindow;
     private javax.swing.JTextArea textAreaInsturction;
+    private javax.swing.JTextArea textAreaPrompt;
+    private javax.swing.JTextArea textAreaReference;
     private javax.swing.JTextArea textAreaRegisterViewer;
-    // End of variables declaration                  
+    // End of variables declaration                                     
 }

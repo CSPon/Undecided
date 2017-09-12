@@ -290,4 +290,12 @@ public class Architecture
 	{
 		this.PC = _PC;
 	}
+	
+	public void resetMEM()
+	{
+		for(int i = 0; i < MEM.length; i++)
+		{
+			MEM[i] = 0;
+		}
+	}
 }

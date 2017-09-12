@@ -14,7 +14,5 @@ public class Main
 		
 		MIPSFrame gui = new MIPSFrame(internal, routine, parser);
 		gui.init(); gui.start();
-		
-		gui.updateMemoryList();
 	}
 }

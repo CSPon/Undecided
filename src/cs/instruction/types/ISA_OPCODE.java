@@ -9,6 +9,9 @@ public abstract class ISA_OPCODE implements Instruction
 	protected int IMMEDIATE, SHAMT, ADDRESS, TARGET_ADDR;
 	protected int SELF_ADDR;
 	
+	protected int HEX_OPCODE;
+	protected int HEX_FUNCT;
+	
 	protected int CYCLE_COUNT;
 	
 	protected String REGS;

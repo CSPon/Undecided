@@ -8,6 +8,8 @@ public class ISA_BRANCHGT extends ISA_OPCODE
 	public ISA_BRANCHGT(String line)
 	{
 		super(line);
+		
+		CYCLE_COUNT = 2;
 	}
 
 	@Override

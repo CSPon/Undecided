@@ -10,6 +10,8 @@ public class ISA_MOVE extends ISA_OPCODE
 		super(line);
 		parseFull();
 		parseReg();
+		
+		CYCLE_COUNT = 2;
 	}
 
 	@Override

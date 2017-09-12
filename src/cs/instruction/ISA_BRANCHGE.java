@@ -10,6 +10,8 @@ public class ISA_BRANCHGE extends ISA_OPCODE
 		super(line);
 		parseFull();
 		parseReg();
+		
+		CYCLE_COUNT = 3;
 	}
 	
 	@Override

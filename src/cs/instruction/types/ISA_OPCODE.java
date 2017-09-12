@@ -9,6 +9,8 @@ public abstract class ISA_OPCODE implements Instruction
 	protected int IMMEDIATE, SHAMT, ADDRESS, TARGET_ADDR;
 	protected int SELF_ADDR;
 	
+	protected int CYCLE_COUNT;
+	
 	protected String REGS;
 	protected String OPCODE;
 	protected String INSTRUCTION;
@@ -21,9 +23,16 @@ public abstract class ISA_OPCODE implements Instruction
 		RD = "";
 		FUNCT = "";
 		ADDR = "";
+		
+		CYCLE_COUNT = 1;
 	}
 	
 	public abstract void perform(Internal internal);
+	
+	public int getCYCLE()
+	{
+		return CYCLE_COUNT;
+	}
 	
 	public int checkShift(String reg)
 	{

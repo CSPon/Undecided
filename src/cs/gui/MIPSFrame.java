@@ -438,12 +438,13 @@ public class MIPSFrame extends javax.swing.JFrame {
 
     private void menuLoadInstFileActionPerformed(java.awt.event.ActionEvent evt)
     {                                                 
-    	textAreaInsturction.setText("");
         int returnVal = instChooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = instChooser.getSelectedFile();
             ArrayList<String> lines = parser.parseOnly(file);
+            
+            textAreaInsturction.setText("");
             for(String line : lines)
             {
             	line += "\n";
@@ -467,7 +468,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	int returnVal = saveChooser.showSaveDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
-            File file = saveChooser.getSelectedFile();
+            File file = new File(saveChooser.getSelectedFile().toString() + ".mips");
             parser.writeToFile(file, textAreaInsturction.getText());
         }
     }

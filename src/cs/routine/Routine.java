@@ -64,7 +64,7 @@ public class Routine
 		{
 			internal.setPC(0);
 			
-			INSTRUCTIONS.get(pc).perform(internal);
+			INSTRUCTIONS.get(0).perform(internal);
 			internal.setPC(internal.getPC() + 1);
 		}
 		else

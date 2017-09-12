@@ -25,7 +25,14 @@ public abstract class ISA_IType extends ISA_OPCODE
 		
 		RT = checkReg(parsed[0]);
 		RS = checkReg(parsed[1]);
-		IMMEDIATE = Integer.parseInt(parsed[2]);
+		
+		if(parsed[2].startsWith("0x"))
+		{
+			parsed[2] = parsed[2].replaceAll("0x", "");
+			IMMEDIATE = (int) Long.parseLong(parsed[2], 16);
+		}
+		else
+			IMMEDIATE = Integer.parseInt(parsed[2]);
 	}
 
 	@Override

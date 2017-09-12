@@ -11,16 +11,6 @@ public class ISA_ADD_I extends ISA_IType
 		parseFull();
 		parseReg();
 	}
-	
-	@Override
-	public void parseReg()
-	{
-		String[] parsed = REGS.split(",");
-		
-		RT = checkReg(parsed[0]);
-		RS = checkReg(parsed[1]);
-		IMMEDIATE = Integer.parseInt(parsed[2]);
-	}
 
 	@Override
 	public void perform(Internal internal)

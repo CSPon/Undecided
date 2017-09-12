@@ -593,7 +593,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = instChooser.getSelectedFile();
-            if(file.toString().contains(".mips"))
+            if(file.exists() && file.toString().contains(".mips"))
             {
             	ArrayList<String> lines = parser.parseOnly(file);
                 
@@ -638,7 +638,9 @@ public class MIPSFrame extends javax.swing.JFrame {
     	int returnVal = saveChooser.showSaveDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
-            File file = new File(saveChooser.getSelectedFile().toString() + ".mips");
+        	File file = saveChooser.getSelectedFile();
+        	if(!file.exists())
+        		file = new File(file.toString() + ".mips");
             parser.writeToFile(file, textAreaInsturction.getText());
         }
     }
@@ -727,6 +729,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     {
     	String prompt = parser.parsePrompt("asm/questions/question_" + String.format("%02d", number) + ".mipsq");
     	textAreaPrompt.setText(prompt);
+    	textAreaInsturction.setText("");
     	
     	File file = new File("asm/questions/question_" + String.format("%02d", number) + ".mipsq");
     	internal.resetMEM();

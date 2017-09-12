@@ -40,7 +40,8 @@ public class MIPSFrame extends javax.swing.JFrame {
         initComponents();
     }
                         
-    private void initComponents() {
+    private void initComponents()
+    {
 
         instChooser = new javax.swing.JFileChooser();
         saveChooser = new javax.swing.JFileChooser();
@@ -165,7 +166,8 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         listRegister.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
         listRegister.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra" };
+			private static final long serialVersionUID = 1L;
+			String[] strings = { "$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -366,7 +368,8 @@ public class MIPSFrame extends javax.swing.JFrame {
         jSplitPane9.setDividerLocation(100);
 
         listOPCODEs.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
+			private static final long serialVersionUID = 1L;
+			String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -735,6 +738,11 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
+    	
+    	listPCAddress.setSelectedIndex(internal.getPC());
+    	listPCAddress.ensureIndexIsVisible(internal.getPC());
+    	listOPCODE.setSelectedIndex(internal.getPC());
+    	listOPCODE.ensureIndexIsVisible(internal.getPC());
     }
 
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt)
@@ -754,13 +762,22 @@ public class MIPSFrame extends javax.swing.JFrame {
     	
     	routine.execute();
     	
+    	textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
+    	
     	updateDebugger();
     	updateRegisterViewer();
     }
 
     private void buttonStepActionPerformed(java.awt.event.ActionEvent evt)
     {
+    	routine.compile();
+    	
     	routine.execute(internal.getPC());
+    	internal.setPC(internal.getPC() + 1);
+    	
+    	textAreaCompilerWindow.setText("");
+    	if(internal.getPC() >= routine.getInstructionsCount())
+    		textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
     	
     	updateDebugger();
     	
@@ -771,8 +788,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listPCAddress.ensureIndexIsVisible(internal.getPC());
     	listOPCODE.setSelectedIndex(internal.getPC());
     	listOPCODE.ensureIndexIsVisible(internal.getPC());
-    	
-    	internal.setPC(internal.getPC() + 1);
     }
 
     private void buttonStopActionPerformed(java.awt.event.ActionEvent evt)
@@ -785,6 +800,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listOPCODE.ensureIndexIsVisible(internal.getPC());
     	
     	updateRegisterViewer();
+    	
+    	textAreaCompilerWindow.setText("");
     }
     
     private void listPCAddressValueChanged(javax.swing.event.ListSelectionEvent evt)

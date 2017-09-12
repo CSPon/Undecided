@@ -66,10 +66,6 @@ public class Routine
 		{
 			execute(internal.getPC());
 			internal.setPC(internal.getPC() + 1);
-//			INSTRUCTIONS.get(internal.getPC()).perform(internal);
-//			if(!(INSTRUCTIONS.get(internal.getPC()) instanceof ISA_LABEL))
-//				CYCLE_COUNTS += INSTRUCTIONS.get(internal.getPC()).getCYCLE();
-//			internal.setPC(internal.getPC() + 1);
 		}
 	}
 	

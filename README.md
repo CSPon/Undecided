@@ -87,6 +87,8 @@ __Does not simulate actual memory allocation!__
 
 1. More Instructions!
 
+2. Implement $gp, $sp, $fp
+
 ---
 
 ### For Future

@@ -12,6 +12,11 @@ public class Internal
 		this.arc = new Architecture();
 	}
 	
+	public int getAddress(String reg)
+	{
+		return arc.getAddress(reg);
+	}
+	
 	public void printAll()
 	{
 		arc.printAll();

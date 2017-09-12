@@ -1,3 +1,5 @@
+![image](https://github.com/CSPon/Undecided/blob/master/imgs/Sample_000.png)
+
 # Untitled
 
 Untitled MIPS Simulator using JAVA
@@ -53,10 +55,18 @@ Available function(s) (Checked and working ones only)
 
 ### To use
 
+If you are using Eclipse IDE to run...
+
 1. Add file to asm folder with file extesion of .mips   
 (Only Test.mips works at this point; will add function to allow read in all .mips files)
 
 2. Run Main.java
+
+If you are running the executable in Executable folder, run Run_Jar.bat (For Windows)
+
+I have no clue with Mac and Linux, so for those two, will have to run through Eclipse IDE
+
+(Just import the whole repository as project)
 
 Memory value can be changed via Memory.mem, under asm folder.
 
@@ -77,7 +87,9 @@ __Does not simulate actual memory allocation!__
 ### To do
 
 1. More Instructions!
-2. Add Memory Modifier
-3. Add program arguments
-4. Hex/Bin viewer for memory and registers
-5. GUI
+
+---
+
+### For Future
+
+1. Cycle counter (To see how many cycles it took to execute)

@@ -1,0 +1,13 @@
+PROMPT:
+For loop
+Convert following C code into assembly code.
+
+int i;
+int sum = 0;
+for(i = 1; i <= 100; i++)
+	sum += i;
+
+When executed, variable sum should hold value of 5050.
+
+MEMORY:
+# No memory values to pre-load

@@ -1,0 +1,18 @@
+PROMPT:
+Compare 03
+Read a value from array A(0x00 - 0x09).
+Write 1 to 0x14 and so on if A[i] > 0.
+Write 0 to 0x14 and so on if A[i] = 0.
+Write -1 to 0x14 and so on if A[i] < 0. 
+
+MEMORY:
+0x00:	1
+0x01:	2
+0x02:	0
+0x03:	-1
+0x04:	-2
+0x05:	1
+0x06:	0
+0x07:	-2
+0x08:	1
+0x09:	0

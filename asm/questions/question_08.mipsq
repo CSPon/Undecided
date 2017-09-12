@@ -1,0 +1,17 @@
+PROMPT:
+Bitwise Operation 01
+Read a value from array A(0x00 - 0x09).
+If 4th bit of A[i] is 1, put A[i] into memory 0x0A and so on.
+Else if 8th bit of A[i] is 1, put 0 into memory 0x0A and so on.
+
+MEMORY:
+0x00:	0
+0x01:	4
+0x02:	-12
+0x03:	22
+0x04:	13
+0x05:	-22
+0x06:	1024
+0x07:	-68
+0x08:	24
+0x09:	62

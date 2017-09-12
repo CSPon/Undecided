@@ -1,0 +1,16 @@
+PROMPT:
+Interrupt Handler
+Read values from array A(0x00 - 0x09).
+When value goes from 0 to 1, count number of zeros then save on memory 0x0A and so on.
+
+MEMORY:
+0x00:	0
+0x01:	0
+0x02:	0
+0x03:	1
+0x04:	0
+0x05:	0
+0x06:	1
+0x07:	0
+0x08:	0
+0x09:	1

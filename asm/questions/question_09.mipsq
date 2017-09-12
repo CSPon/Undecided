@@ -1,0 +1,15 @@
+PROMPT:
+Bitwise Operation 02
+(The XOR operation)
+Read a value from 0x00.
+Read a value from 0x01.
+If bit on A is 0 and bit on B is 0, set bit to 0.
+If bit on A is 1 and bit on B is 0, set bit to 1.
+If bit on A is 0 and bit on B is 1, set bit to 1.
+If bit on A is 1 and bit on B is 1, set bit to 0.
+Save result to 0x02.
+Hint: C = ((A & !B) | (!A & B))
+
+MEMORY:
+0x00:	0xACED
+0x01:	0xFFFF

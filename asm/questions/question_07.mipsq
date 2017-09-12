@@ -1,0 +1,15 @@
+PROMPT:
+Nested for loop
+Convert following C code into assembly code.
+
+int i;
+int j;
+int sum = 0;
+for(i = 0; i < 5; i++)
+	for(j = 0; j < 10; j++)
+		sum++;
+
+When executed, variable sum should hold value of 50.
+
+MEMORY:
+# No memory values to pre-load

@@ -1,0 +1,41 @@
+# Custom question template
+# Comments are denoted with pound(#) sign.
+# Start with PROMPT
+# Do not add any line on PROMPT: line.
+# Give prompt under PROMPT section.
+# Once prompt is done, add MEMORY to next line.
+# Same as PROMPT, do not add any memory address on MEMORY line.
+# Use memory location as hex value
+# Remember memory location from 0x00 to 0xFF
+# Memory location will trim first, then remove all whitespaces.
+# To save hex value, be sure to add 0x in front of hex value.
+# To save a character, save only one character in one memory address.
+# Note: Save whitespace as 0x20 HEX or 32 DEC
+# Any memory address without a value will have default value of zero(0)
+# Example below shows all valid inputs
+
+PROMPT:
+This is where prompt goes.
+Give user a proper instruction to perform a certain task!
+
+Use the Memory Viewer to look into each memory address.
+Use the Register Viewer to look into each register.
+Use the Debugger to debug/run your code.
+
+Compile Only will compile the code, but will not execute.
+Compile & Run will compile and execute the code.
+Step will execute only one step in running. (Compile first!)
+Stop will stop step execution and move PC to 0.
+
+MEMORY:
+0x00:	H
+0x01:	e
+0x02:	l
+0x03:	l
+0x04:	o
+0x05:	32 # Remember, space is 32 in decimal, or 0x20 in hex
+0x06:	W
+0x07:	o
+0x08:	r
+0x09:	l
+0x0A:	d

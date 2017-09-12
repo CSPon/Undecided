@@ -19,11 +19,27 @@ public class References
 		references.put("beq", "beq $s, $t, LABEL\n I-Type\n If $s is equal to $t, jump to target LABEL");
 		references.put("bne", "bne $s, $t, LABEL\n I-Type\n If $s is not equal to $t, jump to target LABEL");
 		
+		references.put("blt", "blt $s, $t, LABEL\n Pseudoinstruction\n Performes $s < $t. If true, jumps to LABEL");
+		references.put("bgt", "blt $s, $t, LABEL\n Pseudoinstruction\n Performes $s > $t. If true, jumps to LABEL");
+		references.put("ble", "ble $s, $t, LABEL\n Pseudoinstruction\n Performes $s <= $t. If true, jumps to LABEL");
+		references.put("bge", "bge $s, $t, LABEL\n Pseudoinstruction\n Performes $s >= $t. If true, jumps to LABEL");
+		
+		references.put("div", "div $s, $t, $t\n R-Type\n Performs $s / $t. $LO register $s / $t,\n while $HI saves $s % $t");
+		
 		references.put("j", "j LABEL\n J-Type\n Jump to target LABEL");
 		references.put("jal", "jal LABEL\n J-Type\n Jump to target LABEL.\n Current position + 1 is saved to $ra");
 		references.put("jr", "jr $s\n R-Type\n Jump to $s value");
 		
+		references.put("li", "li $d, immediate\n Pseudoinstruction\n Loads immediate to $d");
+		
 		references.put("lw", "lw $t, offset($s)\n I-Type\n Loads 32-bit word to $t, from memory address\n pointed by $s with offset");
+		
+		references.put("mfhi", "mfhi $d\n R-Type\n Moves value in $HI to $d");
+		references.put("mflo", "mflo $d\n R-Type\n Moves value in $LO to $d");
+		
+		references.put("move", "move $d, $s\n Pseudoinstruction\n Moves value in $s to $d");
+		
+		references.put("mult", "mult $s, $t\n R-Type\n Performs $s * $t.\n In case of 64-bit output, higher 32 bits are saved on $HI while lower 32 bits are saved\n on $LO");
 		
 		references.put("nor", "nor $d, $s, $t\n R-Type\n Performes $s | $t, then negates. Saves result to $d");
 		references.put("or", "or $d, $s, $t\n R-Type\n Performes $s | $t. Saves result to $d");
@@ -39,22 +55,7 @@ public class References
 		
 		references.put("sub", "sub $d, $s, $t\n R-Type\n Performs $s - $t. Saves result to $d");
 		
-		references.put("div", "div $s, $t, $t\n R-Type\n Performs $s / $t. $LO register $s / $t,\n while $HI saves $s % $t");
-		
-		references.put("mfhi", "mfhi $d\n R-Type\n Moves value in $HI to $d");
-		references.put("mflo", "mflo $d\n R-Type\n Moves value in $LO to $d");
-		
-		references.put("mult", "mult $s, $t\n R-Type\n Performs $s * $t.\n In case of 64-bit output, higher 32 bits are saved on $HI while lower 32 bits are saved\n on $LO");
-		
 		references.put("sra", "sra $d, $t, shamt\n R-Type\n Performes bitwise $t >> shamt. Any bit that got\n pushed out is moved to left side.\n Saves result to $d");
-		
-		references.put("blt", "blt $s, $t, LABEL\n Pseudoinstruction\n Performes $s < $t. If true, jumps to LABEL");
-		references.put("bgt", "blt $s, $t, LABEL\n Pseudoinstruction\n Performes $s > $t. If true, jumps to LABEL");
-		references.put("ble", "ble $s, $t, LABEL\n Pseudoinstruction\n Performes $s <= $t. If true, jumps to LABEL");
-		references.put("bge", "bge $s, $t, LABEL\n Pseudoinstruction\n Performes $s >= $t. If true, jumps to LABEL");
-		
-		references.put("li", "li $d, immediate\n Pseudoinstruction\n Loads immediate to $d");
-		references.put("move", "move $d, $s\n Pseudoinstruction\n Moves value in $s to $d");
 	}
 	
 	public String getReference(String key)

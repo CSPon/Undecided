@@ -6,6 +6,7 @@
 package cs.gui;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -56,11 +57,8 @@ public class MIPSFrame extends javax.swing.JFrame {
         listMemory = new javax.swing.JList<>();
         jSplitPane4 = new javax.swing.JSplitPane();
         jLabel3 = new javax.swing.JLabel();
-        jSplitPane5 = new javax.swing.JSplitPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         listRegister = new javax.swing.JList<>();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        textAreaRegisterViewer = new javax.swing.JTextArea();
         jSplitPane6 = new javax.swing.JSplitPane();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -154,6 +152,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         jLabel2.setText("Memory Viewer");
         jSplitPane1.setTopComponent(jLabel2);
 
+        listMemory.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
         jScrollPane4.setViewportView(listMemory);
 
         jSplitPane1.setRightComponent(jScrollPane4);
@@ -164,32 +163,16 @@ public class MIPSFrame extends javax.swing.JFrame {
         jLabel3.setText("Register Viewer");
         jSplitPane4.setTopComponent(jLabel3);
 
-        jSplitPane5.setDividerLocation(100);
-
+        listRegister.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
         listRegister.setModel(new javax.swing.AbstractListModel<String>() {
-			private static final long serialVersionUID = 1L;
-			String[] strings = { "$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra" };
+            String[] strings = { "$zero", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         listRegister.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listRegister.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listRegisterValueChanged(evt);
-            }
-        });
         jScrollPane3.setViewportView(listRegister);
 
-        jSplitPane5.setLeftComponent(jScrollPane3);
-
-        textAreaRegisterViewer.setEditable(false);
-        textAreaRegisterViewer.setColumns(20);
-        textAreaRegisterViewer.setRows(5);
-        jScrollPane6.setViewportView(textAreaRegisterViewer);
-
-        jSplitPane5.setRightComponent(jScrollPane6);
-
-        jSplitPane4.setRightComponent(jSplitPane5);
+        jSplitPane4.setRightComponent(jScrollPane3);
 
         jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -317,13 +300,16 @@ public class MIPSFrame extends javax.swing.JFrame {
                             .addComponent(fieldLO)
                             .addComponent(fieldAT, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fieldRA)))
-                    .addComponent(buttonCompileOnly, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonStep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonStop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                    .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7)
+                    .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(buttonCompileOnly, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonStep)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonStop)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -354,19 +340,18 @@ public class MIPSFrame extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonCompileOnly)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCompileOnly)
+                    .addComponent(buttonStep)
+                    .addComponent(buttonStop))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRun)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonStep)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonStop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -381,8 +366,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         jSplitPane9.setDividerLocation(100);
 
         listOPCODEs.setModel(new javax.swing.AbstractListModel<String>() {
-			private static final long serialVersionUID = 1L;
-			String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "j", "jal", "jr", "lw", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "div", "mfhi", "mflo", "mult", "sra", "blt", "bgt", "ble", "bge", "li", "move" };
+            String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -550,16 +534,15 @@ public class MIPSFrame extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSplitPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                            .addComponent(jSplitPane8))))
+                        .addComponent(jSplitPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSplitPane4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -585,7 +568,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }
 
     private void menuLoadInstFileActionPerformed(java.awt.event.ActionEvent evt)
     {                                                 
@@ -738,19 +721,6 @@ public class MIPSFrame extends javax.swing.JFrame {
         updateMemoryList();
     }
     
-    private void listRegisterValueChanged(javax.swing.event.ListSelectionEvent evt)
-    {                                            
-    	String register = listRegister.getSelectedValue();
-    	int value = internal.getFrom(register);
-    	
-    	String out = register + "\n";
-    	out += "Value(Dec): " + value + "\n";
-    	out += "Value(Hex): " + String.format("0x%04x", value).toUpperCase() + "\n";
-    	out += "Value(Bin): \n" + String.format("%32s", Integer.toBinaryString(value)).replace(' ', '0');;
-    	
-    	textAreaRegisterViewer.setText(out);
-    }
-    
     private void buttonCompileOnlyActionPerformed(java.awt.event.ActionEvent evt)
     {
     	routine.clearInstruction();
@@ -764,6 +734,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	
     	updateMemoryList();
     	updatePCAddressList();
+    	updateRegisterViewer();
     }
 
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt)
@@ -774,6 +745,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	{
     		parser.parseSingle(instruction, routine);
     	}
+    	
     	routine.compile();
     	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
@@ -781,38 +753,26 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updatePCAddressList();
     	
     	routine.execute();
+    	
+    	updateDebugger();
+    	updateRegisterViewer();
     }
 
     private void buttonStepActionPerformed(java.awt.event.ActionEvent evt)
     {
     	routine.execute(internal.getPC());
     	
+    	updateDebugger();
+    	
+    	updateRegisterViewer();
+    	updateMemoryList();
+    	
     	listPCAddress.setSelectedIndex(internal.getPC());
     	listPCAddress.ensureIndexIsVisible(internal.getPC());
     	listOPCODE.setSelectedIndex(internal.getPC());
     	listOPCODE.ensureIndexIsVisible(internal.getPC());
     	
-    	String format = "0x";
-    	format += String.format("%04x", internal.getPC()).toUpperCase();
-    	fieldPC.setText(format);
-    	
-    	format = "0x";
-    	format += String.format("%04x", internal.getFrom("$HI"));
-    	fieldHI.setText(format);
-    	
-    	format = "0x";
-    	format += String.format("%04x", internal.getFrom("$LO"));
-    	fieldLO.setText(format);
-    	
-    	format = "0x";
-    	format += String.format("%04x", internal.getFrom("$AT"));
-    	fieldAT.setText(format);
-    	
-    	format = "0x";
-    	format += String.format("%04x", internal.getFrom("$RA"));
-    	fieldRA.setText(format);
-    	
-    	updateRegisterViewer();
+    	internal.setPC(internal.getPC() + 1);
     }
 
     private void buttonStopActionPerformed(java.awt.event.ActionEvent evt)
@@ -859,7 +819,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         {
         	String line;
         	int value = internal.getFromMem(i, 0);
-        	line = String.format("0x%02X: (%2d) 0x%04X", i, value, value);
+        	line = String.format("0x%02X: 0x%04X (%-3d)", i, value, value);
         	
         	memoryList.addElement(line);
         }
@@ -883,20 +843,87 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listOPCODE.setModel(regList);
     }
     
+    private void updateDebugger()
+    {
+    	String format = "0x";
+    	format += String.format("%04X", internal.getPC()).toUpperCase();
+    	fieldPC.setText(format);
+    	
+    	format = "0x";
+    	format += String.format("%04X", internal.getFrom("$HI"));
+    	fieldHI.setText(format);
+    	
+    	format = "0x";
+    	format += String.format("%04X", internal.getFrom("$LO"));
+    	fieldLO.setText(format);
+    	
+    	format = "0x";
+    	format += String.format("%04X", internal.getFrom("$AT"));
+    	fieldAT.setText(format);
+    	
+    	format = "0x";
+    	format += String.format("%04X", internal.getFrom("$RA"));
+    	fieldRA.setText(format);
+    }
+    
     private void updateRegisterViewer()
     {
-    	String register = listRegister.getSelectedValue();
-    	if(register != null)
+    	int i = 0;
+    	DefaultListModel<String> regList = new DefaultListModel<String>();
+    	
+    	String format = "";
+    	format = toFormatString("$zero");
+    	regList.addElement(format);
+    	format = toFormatString("$at");
+    	regList.addElement(format);
+    	
+    	for(i = 0; i < 2; i++)
     	{
-    		int value = internal.getFrom(register);
-        	
-        	String out = register + "\n";
-        	out += "Value(Dec): " + value + "\n";
-        	out += "Value(Hex): " + String.format("0x%04x", value).toUpperCase() + "\n";
-        	out += "Value(Bin): \n" + String.format("%32s", Integer.toBinaryString(value)).replace(' ', '0');;
-        	
-        	textAreaRegisterViewer.setText(out);
+    		format = toFormatString("$v" + i);
+        	regList.addElement(format);
     	}
+    	for(i = 0; i < 4; i++)
+    	{
+    		format = toFormatString("$a" + i);
+        	regList.addElement(format);
+    	}
+    	for(i = 0; i < 10; i++)
+    	{
+    		format = toFormatString("$t" + i);
+        	regList.addElement(format);
+    	}
+    	for(i = 0; i < 8; i++)
+    	{
+    		format = toFormatString("$s" + i);
+        	regList.addElement(format);
+    	}
+    	for(i = 0; i < 2; i++)
+    	{
+    		format = toFormatString("$k" + i);
+        	regList.addElement(format);
+    	}
+    	
+    	format = toFormatString("$gp");
+    	regList.addElement(format);
+    	format = toFormatString("$sp");
+    	regList.addElement(format);
+    	format = toFormatString("$fp");
+    	regList.addElement(format);
+    	format = toFormatString("$ra");
+    	regList.addElement(format);
+    	
+    	listRegister.setModel(regList);
+    }
+    
+    private String toFormatString(String reg)
+    {
+    	String format = "";
+    	int value = internal.getFrom(reg);
+    	format = String.format("%-5s: 0x%08X ", reg, value);
+    	format += String.format("0b%032d", new BigInteger(Integer.toBinaryString(value)));
+    	format += String.format(" (%-10d)", value);
+    	
+    	return format;
     }
 
     public void init() {
@@ -959,7 +986,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
@@ -967,7 +993,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane4;
-    private javax.swing.JSplitPane jSplitPane5;
     private javax.swing.JSplitPane jSplitPane6;
     private javax.swing.JSplitPane jSplitPane7;
     private javax.swing.JSplitPane jSplitPane8;
@@ -997,6 +1022,5 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea textAreaInsturction;
     private javax.swing.JTextArea textAreaPrompt;
     private javax.swing.JTextArea textAreaReference;
-    private javax.swing.JTextArea textAreaRegisterViewer;
     // End of variables declaration                                     
 }

@@ -36,6 +36,7 @@ public class Routine
 	public void clearInstruction()
 	{
 		INSTRUCTIONS.clear();
+		INSTRUCTIONS.trimToSize();
 	}
 	
 	public void addInstruction(String line)
@@ -60,17 +61,17 @@ public class Routine
 	
 	public void execute(int pc)
 	{
-		if(internal.getPC() > INSTRUCTIONS.size() - 1)
+		if(internal.getPC() >= INSTRUCTIONS.size())
 		{
 			internal.setPC(0);
 			
-			INSTRUCTIONS.get(0).perform(internal);
-			internal.setPC(internal.getPC() + 1);
+			//INSTRUCTIONS.get(internal.getPC()).perform(internal);
+			//internal.setPC(internal.getPC() + 1);
 		}
 		else
 		{
 			INSTRUCTIONS.get(pc).perform(internal);
-			internal.setPC(internal.getPC() + 1);
+			//internal.setPC(internal.getPC() + 1);
 		}
 	}
 	

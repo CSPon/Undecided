@@ -182,6 +182,8 @@ public class Internal
 			return new ISA_LOADBYTE_U(line);
 		else if(name.matches("\\blhu\\b"))
 			return new ISA_LOADHALF_U(line);
+		else if(name.matches("\\blui\\b"))
+			return new ISA_LOADUPPER_I(line);
 		else if(name.matches("\\bli\\b"))
 			return new ISA_LOADIMM(line);
 		else if(name.matches("\\blw\\b"))

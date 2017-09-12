@@ -1,0 +1,4 @@
+# For testing and reference
+# Load memory first (Memory.mem)
+INIT:
+lui	$t0, 0xFFFF1234

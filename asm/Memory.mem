@@ -7,6 +7,7 @@
 # Any memory address without a value will have default value of zero(0)
 # Example below shows all valid inputs
 
+MEMORY:
 0x00:	2
 0x01:	4
 0x02:	H

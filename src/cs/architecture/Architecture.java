@@ -298,4 +298,73 @@ public class Architecture
 			MEM[i] = 0;
 		}
 	}
+	
+	public int getAddress(String reg)
+	{
+		if(reg.contains("$zero"))
+			return 0;
+		else if(reg.contains("$at"))
+			return 1;
+		else if(reg.contains("$v0"))
+			return 2;
+		else if(reg.contains("$v1"))
+			return 3;
+		else if(reg.contains("$a0"))
+			return 4;
+		else if(reg.contains("$a1"))
+			return 5;
+		else if(reg.contains("$a2"))
+			return 6;
+		else if(reg.contains("$a3"))
+			return 7;
+		else if(reg.contains("$t0"))
+			return 8;
+		else if(reg.contains("$t1"))
+			return 9;
+		else if(reg.contains("$t2"))
+			return 10;
+		else if(reg.contains("$t3"))
+			return 11;
+		else if(reg.contains("$t4"))
+			return 12;
+		else if(reg.contains("$t5"))
+			return 13;
+		else if(reg.contains("$t6"))
+			return 14;
+		else if(reg.contains("$t7"))
+			return 15;
+		else if(reg.contains("$s0"))
+			return 16;
+		else if(reg.contains("$s1"))
+			return 17;
+		else if(reg.contains("$s2"))
+			return 18;
+		else if(reg.contains("$s3"))
+			return 19;
+		else if(reg.contains("$s4"))
+			return 20;
+		else if(reg.contains("$s5"))
+			return 21;
+		else if(reg.contains("$s6"))
+			return 22;
+		else if(reg.contains("$s7"))
+			return 23;
+		else if(reg.contains("$t8"))
+			return 24;
+		else if(reg.contains("$t9"))
+			return 25;
+		else if(reg.contains("$k0"))
+			return 26;
+		else if(reg.contains("$k1"))
+			return 27;
+		else if(reg.contains("$gp"))
+			return 28;
+		else if(reg.contains("$sp"))
+			return 29;
+		else if(reg.contains("$fp"))
+			return 30;
+		else if(reg.contains("$ra"))
+			return 31;
+		else return 0xFF;
+	}
 }

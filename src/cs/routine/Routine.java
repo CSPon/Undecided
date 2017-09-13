@@ -1,6 +1,7 @@
 package cs.routine;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
@@ -13,12 +14,15 @@ public class Routine
 	private Internal internal;
 	private ArrayList<ISA_OPCODE> INSTRUCTIONS;
 	
+	private LinkedHashMap<Integer, ISA_OPCODE> _INSTRUCTIONS;
+	
 	private int CYCLE_COUNTS;
 	
 	public Routine(Internal _internal)
 	{
 		this.internal = _internal;
 		INSTRUCTIONS = new ArrayList<ISA_OPCODE>();
+		_INSTRUCTIONS = new LinkedHashMap<>();
 		
 		CYCLE_COUNTS = 0;
 	}
@@ -50,21 +54,28 @@ public class Routine
 	
 	public void clearInstruction()
 	{
+		_INSTRUCTIONS.clear();
 		INSTRUCTIONS.clear();
 		INSTRUCTIONS.trimToSize();
 	}
 	
 	public void addInstruction(String line)
 	{
+		int PC = Architecture.$PC + (_INSTRUCTIONS.size() * 4);
+		_INSTRUCTIONS.put(PC, internal.getType(line));
+		
 		INSTRUCTIONS.add(internal.getType(line));
-		int PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 4);
+		PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 4);
 		INSTRUCTIONS.get(INSTRUCTIONS.size() - 1).setPC(PC);
 	}
 	
 	public void addLabel(String line)
 	{
+		int PC = Architecture.$PC + (_INSTRUCTIONS.size() * 4);
+		_INSTRUCTIONS.put(PC, new ISA_LABEL(line)); 
+		
 		INSTRUCTIONS.add(new ISA_LABEL(line));
-		int PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 4);
+		PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 4);
 		INSTRUCTIONS.get(INSTRUCTIONS.size() - 1).setPC(PC);
 	}
 	

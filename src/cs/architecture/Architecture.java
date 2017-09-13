@@ -50,7 +50,7 @@ public class Architecture
 		
 		MEM = new int[0xFF + 1];
 		
-		PC = 0;
+		PC = $PC;
 	}
 	
 	public LinkedHashMap<Integer, Integer> getRegisterVals()

@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Architecture
 {
+	/* Constants */
+	public static final int $PC = 0x00400000;
 	/* Registers */
 	private final int 	ZERO = 0;
 	private int			AT;

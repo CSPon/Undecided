@@ -736,6 +736,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	routine.compile();
     	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
+    	updateDebugger();
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
@@ -758,14 +759,18 @@ public class MIPSFrame extends javax.swing.JFrame {
     	routine.compile();
     	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
+    	updateDebugger();
     	updateMemoryList();
     	updatePCAddressList();
+    	updateRegisterViewer();
     	
     	routine.execute();
     	
     	textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
     	
     	updateDebugger();
+    	updateMemoryList();
+    	updatePCAddressList();
     	updateRegisterViewer();
     }
 
@@ -781,9 +786,9 @@ public class MIPSFrame extends javax.swing.JFrame {
     		textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
     	
     	updateDebugger();
-    	
-    	updateRegisterViewer();
     	updateMemoryList();
+    	updatePCAddressList();
+    	updateRegisterViewer();
     	
     	listPCAddress.setSelectedIndex(internal.getPC());
     	listPCAddress.ensureIndexIsVisible(internal.getPC());
@@ -800,6 +805,9 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listOPCODE.setSelectedIndex(internal.getPC());
     	listOPCODE.ensureIndexIsVisible(internal.getPC());
     	
+    	updateDebugger();
+    	updateMemoryList();
+    	updatePCAddressList();
     	updateRegisterViewer();
     	
     	textAreaCompilerWindow.setText("");
@@ -838,15 +846,6 @@ public class MIPSFrame extends javax.swing.JFrame {
         {
         	memoryList.addElement(String.format("0x%08X: 0x%08X", entry.getKey(), entry.getValue()));
         }
-        
-//        for(int i = 0; i <= 0xFF; i++)
-//        {
-//        	String line;
-//        	int value = internal.getFromMem(i, 0);
-//        	line = String.format("0x%02X: 0x%04X (%-3d)", i, value, value);
-//        	
-//        	memoryList.addElement(line);
-//        }
         listMemory.setModel(memoryList);
     }
     
@@ -857,9 +856,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	
     	for(int i = 0; i < routine.getInstructionsCount(); i++)
     	{
-    		String format = "0x";
-        	format += String.format("%02x", i).toUpperCase();
-    		pcList.addElement(format);
+    		pcList.addElement(String.format("0x%08X", routine.getInstructionPC(i)));
     		regList.addElement(routine.getOPCODE(i) + " " + routine.getREGS(i));
     	}
     	

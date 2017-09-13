@@ -2,6 +2,7 @@ package cs.routine;
 
 import java.util.ArrayList;
 
+import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.instruction.*;
 import cs.instruction.types.ISA_LABEL;
@@ -42,6 +43,11 @@ public class Routine
 		return INSTRUCTIONS.size();
 	}
 	
+	public int getInstructionPC(int i)
+	{
+		return INSTRUCTIONS.get(i).getPC();
+	}
+	
 	public void clearInstruction()
 	{
 		INSTRUCTIONS.clear();
@@ -51,11 +57,15 @@ public class Routine
 	public void addInstruction(String line)
 	{
 		INSTRUCTIONS.add(internal.getType(line));
+		int PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 4);
+		INSTRUCTIONS.get(INSTRUCTIONS.size() - 1).setPC(PC);
 	}
 	
 	public void addLabel(String line)
 	{
 		INSTRUCTIONS.add(new ISA_LABEL(line));
+		int PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 4);
+		INSTRUCTIONS.get(INSTRUCTIONS.size() - 1).setPC(PC);
 	}
 	
 	public void execute()

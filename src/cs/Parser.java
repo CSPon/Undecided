@@ -23,8 +23,12 @@ public class Parser
 			{
 				String[] instructions = line.split(":");
 				if(instructions.length == 2)
+				{
+					routine.addLabel(instructions[0]);
 					routine.addInstruction(instructions[1]);
-				routine.addLabel(instructions[0]);
+				}
+				else
+					routine.addLabel(instructions[0]);
 			}
 			else
 				routine.addInstruction(line);

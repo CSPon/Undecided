@@ -25,6 +25,6 @@ public class ISA_JUMPREG extends ISA_RType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setPC(internal.getFrom(RS));
+		internal.setPC(internal.getRegisterVal(RS));
 	}
 }

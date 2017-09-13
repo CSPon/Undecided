@@ -18,6 +18,8 @@ public abstract class ISA_OPCODE implements Instruction
 	protected String OPCODE;
 	protected String INSTRUCTION;
 	
+	protected int PC;
+	
 	public ISA_OPCODE(String line)
 	{
 		INSTRUCTION = line;
@@ -28,6 +30,16 @@ public abstract class ISA_OPCODE implements Instruction
 		ADDR = "";
 		
 		CYCLE_COUNT = 1;
+	}
+	
+	public void setPC(int _PC)
+	{
+		PC = _PC;
+	}
+	
+	public int getPC()
+	{
+		return PC;
 	}
 	
 	public abstract void perform(Internal internal);

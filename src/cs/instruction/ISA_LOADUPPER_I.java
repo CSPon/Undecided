@@ -30,6 +30,6 @@ public class ISA_LOADUPPER_I extends ISA_IType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setTo(RT, IMMEDIATE << 16);
+		internal.setRegisterVal(RT, IMMEDIATE << 16);
 	}
 }

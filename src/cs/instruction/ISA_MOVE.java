@@ -35,6 +35,6 @@ public class ISA_MOVE extends ISA_OPCODE
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("move"))
-			internal.setTo(RD, internal.getFrom(RS));
+			internal.setRegisterVal(RD, internal.getRegisterVal(RS));
 	}
 }

@@ -26,8 +26,10 @@ public class ISA_SETLESSTHAN_I extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("slti"))
-			internal.setTo(RT, (internal.getFrom(RS) < IMMEDIATE) ? 1 : 0);
+			internal.setRegisterVal(RT, (internal.getRegisterVal(RS) < IMMEDIATE) ? 1 : 0);
+			//internal.setTo(RT, (internal.getFrom(RS) < IMMEDIATE) ? 1 : 0);
 		else if(OPCODE.equalsIgnoreCase("sltiu"))
-			internal.setTo(RT, (internal.getFrom(RS) < IMMEDIATE) ? 1 : 0);
+			internal.setRegisterVal(RT, (internal.getRegisterVal(RS) < IMMEDIATE) ? 1 : 0);
+			//internal.setTo(RT, (internal.getFrom(RS) < IMMEDIATE) ? 1 : 0);
 	}
 }

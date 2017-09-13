@@ -16,6 +16,6 @@ public class ISA_AND extends ISA_RType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("and"))
-			internal.setTo(RD, internal.getFrom(RS) & internal.getFrom(RT));
+			internal.setRegisterVal(RD, internal.getRegisterVal(RS) & internal.getRegisterVal(RT));
 	}
 }

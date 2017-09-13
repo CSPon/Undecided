@@ -1,5 +1,8 @@
 package cs.architecture;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Architecture
 {
 	/* Registers */
@@ -18,8 +21,17 @@ public class Architecture
 	/* Memory */
 	private int[]		MEM;
 	
+	/* New Version */
+	private HashMap<String, Integer> REGISTERS_ADDR;
+	private HashMap<Integer, Integer> REGISTERS_VALS;
+	private HashMap<Integer, Integer> MEMORY;
+	
 	public Architecture()
-	{	
+	{
+		assignVal();
+		
+		MEMORY = new HashMap<>();
+		
 		VALS = new int[2];
 		ARGS = new int[4];
 		TEMP = new int[10];
@@ -40,86 +52,29 @@ public class Architecture
 		PC = 0;
 	}
 	
-	public void printAll()
+	public int getRegisterAddress(String reg)
 	{
-		System.out.print("$zero: "); System.out.println(0);
-		System.out.println();
-		
-		System.out.print("$at: "); printlnHex(getAT());
-		System.out.println();
-		
-		System.out.print("$v0: "); printlnHex(getVALS(0));
-		System.out.print("$v1: "); printlnHex(getVALS(1));
-		System.out.println();
-		
-		System.out.print("$a0: "); printlnHex(getARGS(0));
-		System.out.print("$a1: "); printlnHex(getARGS(1));
-		System.out.print("$a2: "); printlnHex(getARGS(2));
-		System.out.print("$a3: "); printlnHex(getARGS(3));
-		System.out.println();
-		
-		System.out.print("$t0: "); printlnHex(getTEMP(0));
-		System.out.print("$t1: "); printlnHex(getTEMP(1));
-		System.out.print("$t2: "); printlnHex(getTEMP(2));
-		System.out.print("$t3: "); printlnHex(getTEMP(3));
-		System.out.print("$t4: "); printlnHex(getTEMP(4));
-		System.out.print("$t5: "); printlnHex(getTEMP(5));
-		System.out.print("$t6: "); printlnHex(getTEMP(6));
-		System.out.print("$t7: "); printlnHex(getTEMP(7));
-		System.out.print("$t8: "); printlnHex(getTEMP(8));
-		System.out.print("$t9: "); printlnHex(getTEMP(9));
-		System.out.println();
-		
-		System.out.print("$s0: "); printlnHex(getSEMP(0));
-		System.out.print("$s1: "); printlnHex(getSEMP(1));
-		System.out.print("$s2: "); printlnHex(getSEMP(2));
-		System.out.print("$s3: "); printlnHex(getSEMP(3));
-		System.out.print("$s4: "); printlnHex(getSEMP(4));
-		System.out.print("$s5: "); printlnHex(getSEMP(5));
-		System.out.print("$s6: "); printlnHex(getSEMP(6));
-		System.out.print("$s7: "); printlnHex(getSEMP(7));
-		System.out.println();
-		
-		System.out.print("$k0: "); printlnHex(getROSK(0));
-		System.out.print("$k1: "); printlnHex(getROSK(1));
-		System.out.println();
-		
-		System.out.print("$gp: "); printlnHex(getGLBP());
-		System.out.print("$sp: "); printlnHex(getSTKP());
-		System.out.print("$fp: "); printlnHex(getFRMP());
-		System.out.print("$ra: "); printlnHex(getRTRN());
-		
-		System.out.println();
-		
-		for(int i = 0; i < MEM.length; i++)
-		{
-			printHex(i); System.out.print(" ");
-			printlnHex(MEM[i]);			
-		}
+		return REGISTERS_ADDR.get(reg);
 	}
 	
-	public static void printHex(int val)
+	public int getRegisterVal(String reg)
 	{
-		String t = String.format("0x%04x", val);
-		System.out.print(t);
+		return REGISTERS_VALS.get(REGISTERS_ADDR.get(reg));
 	}
 	
-	public static void printlnHex(int val)
+	public void setRegisterVal(String reg, int val)
 	{
-		String t = String.format("0x%04x", val);
-		System.out.println(t);
+		REGISTERS_VALS.put(REGISTERS_ADDR.get(reg), val);
 	}
 	
-	public static void printBinary(int val)
+	public int getMemoryVal(int addr, int offset)
 	{
-		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
-		System.out.print(t);
+		return MEMORY.get(addr + offset);
 	}
 	
-	public static void printlnBinary(int val)
+	public void setMemoryVal(int addr, int offset, int val)
 	{
-		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
-		System.out.println(t);
+		MEMORY.put(addr + offset, val);
 	}
 	
 	public int getHI()
@@ -299,6 +254,127 @@ public class Architecture
 		}
 	}
 	
+	private void assignVal()
+	{
+		int i = 0;
+		REGISTERS_ADDR = new HashMap<>();
+		REGISTERS_ADDR.put("$zero", i);
+		
+		REGISTERS_ADDR.put("$at", ++i);
+		
+		REGISTERS_ADDR.put("$v0", ++i);
+		REGISTERS_ADDR.put("$v1", ++i);
+		
+		REGISTERS_ADDR.put("$a0", ++i);
+		REGISTERS_ADDR.put("$a1", ++i);
+		REGISTERS_ADDR.put("$a2", ++i);
+		REGISTERS_ADDR.put("$a3", ++i);
+		
+		REGISTERS_ADDR.put("$t0", ++i);
+		REGISTERS_ADDR.put("$t1", ++i);
+		REGISTERS_ADDR.put("$t2", ++i);
+		REGISTERS_ADDR.put("$t3", ++i);
+		REGISTERS_ADDR.put("$t4", ++i);
+		REGISTERS_ADDR.put("$t5", ++i);
+		REGISTERS_ADDR.put("$t6", ++i);
+		REGISTERS_ADDR.put("$t7", ++i);
+		
+		REGISTERS_ADDR.put("$t0", ++i);
+		REGISTERS_ADDR.put("$t1", ++i);
+		REGISTERS_ADDR.put("$t2", ++i);
+		REGISTERS_ADDR.put("$t3", ++i);
+		REGISTERS_ADDR.put("$t4", ++i);
+		REGISTERS_ADDR.put("$t5", ++i);
+		REGISTERS_ADDR.put("$t6", ++i);
+		REGISTERS_ADDR.put("$t7", ++i);
+		
+		REGISTERS_ADDR.put("$s0", ++i);
+		REGISTERS_ADDR.put("$s1", ++i);
+		REGISTERS_ADDR.put("$s2", ++i);
+		REGISTERS_ADDR.put("$s3", ++i);
+		REGISTERS_ADDR.put("$s4", ++i);
+		REGISTERS_ADDR.put("$s5", ++i);
+		REGISTERS_ADDR.put("$s6", ++i);
+		REGISTERS_ADDR.put("$s7", ++i);
+		
+		REGISTERS_ADDR.put("$t8", ++i);
+		REGISTERS_ADDR.put("$t9", ++i);
+		
+		REGISTERS_ADDR.put("$k0", ++i);
+		REGISTERS_ADDR.put("$k1", ++i);
+		
+		REGISTERS_ADDR.put("$gp", ++i);
+		REGISTERS_ADDR.put("$sp", ++i);
+		REGISTERS_ADDR.put("$fp", ++i);
+		REGISTERS_ADDR.put("$ra", ++i);
+		
+		REGISTERS_VALS = new HashMap<>();
+		for(Map.Entry<String, Integer> entry : REGISTERS_ADDR.entrySet())
+		{
+			REGISTERS_VALS.put(entry.getValue(), 0);
+		}
+		
+		MEMORY = new HashMap<>();
+	}
+	
+	public void printAll()
+	{
+		System.out.print("$zero: "); System.out.println(0);
+		System.out.println();
+		
+		System.out.print("$at: "); printlnHex(getAT());
+		System.out.println();
+		
+		System.out.print("$v0: "); printlnHex(getVALS(0));
+		System.out.print("$v1: "); printlnHex(getVALS(1));
+		System.out.println();
+		
+		System.out.print("$a0: "); printlnHex(getARGS(0));
+		System.out.print("$a1: "); printlnHex(getARGS(1));
+		System.out.print("$a2: "); printlnHex(getARGS(2));
+		System.out.print("$a3: "); printlnHex(getARGS(3));
+		System.out.println();
+		
+		System.out.print("$t0: "); printlnHex(getTEMP(0));
+		System.out.print("$t1: "); printlnHex(getTEMP(1));
+		System.out.print("$t2: "); printlnHex(getTEMP(2));
+		System.out.print("$t3: "); printlnHex(getTEMP(3));
+		System.out.print("$t4: "); printlnHex(getTEMP(4));
+		System.out.print("$t5: "); printlnHex(getTEMP(5));
+		System.out.print("$t6: "); printlnHex(getTEMP(6));
+		System.out.print("$t7: "); printlnHex(getTEMP(7));
+		System.out.print("$t8: "); printlnHex(getTEMP(8));
+		System.out.print("$t9: "); printlnHex(getTEMP(9));
+		System.out.println();
+		
+		System.out.print("$s0: "); printlnHex(getSEMP(0));
+		System.out.print("$s1: "); printlnHex(getSEMP(1));
+		System.out.print("$s2: "); printlnHex(getSEMP(2));
+		System.out.print("$s3: "); printlnHex(getSEMP(3));
+		System.out.print("$s4: "); printlnHex(getSEMP(4));
+		System.out.print("$s5: "); printlnHex(getSEMP(5));
+		System.out.print("$s6: "); printlnHex(getSEMP(6));
+		System.out.print("$s7: "); printlnHex(getSEMP(7));
+		System.out.println();
+		
+		System.out.print("$k0: "); printlnHex(getROSK(0));
+		System.out.print("$k1: "); printlnHex(getROSK(1));
+		System.out.println();
+		
+		System.out.print("$gp: "); printlnHex(getGLBP());
+		System.out.print("$sp: "); printlnHex(getSTKP());
+		System.out.print("$fp: "); printlnHex(getFRMP());
+		System.out.print("$ra: "); printlnHex(getRTRN());
+		
+		System.out.println();
+		
+		for(int i = 0; i < MEM.length; i++)
+		{
+			printHex(i); System.out.print(" ");
+			printlnHex(MEM[i]);			
+		}
+	}
+	
 	public int getAddress(String reg)
 	{
 		if(reg.contains("$zero"))
@@ -366,5 +442,29 @@ public class Architecture
 		else if(reg.contains("$ra"))
 			return 31;
 		else return 0xFF;
+	}
+	
+	public static void printHex(int val)
+	{
+		String t = String.format("0x%04x", val);
+		System.out.print(t);
+	}
+	
+	public static void printlnHex(int val)
+	{
+		String t = String.format("0x%04x", val);
+		System.out.println(t);
+	}
+	
+	public static void printBinary(int val)
+	{
+		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
+		System.out.print(t);
+	}
+	
+	public static void printlnBinary(int val)
+	{
+		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
+		System.out.println(t);
 	}
 }

@@ -41,6 +41,6 @@ public class ISA_LOADIMM extends ISA_OPCODE
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("li"))
-			internal.setTo(RD, IMMEDIATE);
+			internal.setRegisterVal(RD, IMMEDIATE);
 	}
 }

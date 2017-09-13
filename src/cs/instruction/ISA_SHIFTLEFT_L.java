@@ -27,7 +27,8 @@ public class ISA_SHIFTLEFT_L extends ISA_RType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("sll"))
-			internal.setTo(RD, internal.getFrom(RT) << SHAMT);
+			internal.setRegisterVal(RD, internal.getRegisterVal(RT) << SHAMT);
+			//internal.setTo(RD, internal.getFrom(RT) << SHAMT);
 	}
 
 }

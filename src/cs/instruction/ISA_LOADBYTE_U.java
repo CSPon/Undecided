@@ -27,7 +27,7 @@ public class ISA_LOADBYTE_U extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("lbu"))
-			internal.setTo(RT, internal.getFromMem(internal.getFrom(RS), IMMEDIATE) & 0xFF);
+			internal.setRegisterVal(RT, internal.getMemoryVal(internal.getRegisterVal(RS), IMMEDIATE) & 0xFF);
 	}
 
 }

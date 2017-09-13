@@ -259,4 +259,9 @@ public class Parser
 		}
 		return prompt;
 	}
+	
+	public void parseInstructions()
+	{
+		String line = "(add $t0, $t1, $t2)";
+	}
 }

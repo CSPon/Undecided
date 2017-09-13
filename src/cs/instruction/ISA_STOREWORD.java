@@ -26,6 +26,7 @@ public class ISA_STOREWORD extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("sw"))
-			internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT));
+			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT));
+			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT));
 	}
 }

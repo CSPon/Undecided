@@ -1,0 +1,4 @@
+# Opcode list
+# Use this to add OPCODE
+
+add:(add $rd, $rs, $rt)

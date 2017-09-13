@@ -71,7 +71,6 @@ public class Routine
 	
 	/**
 	 * Step Execution
-	 * @param pc
 	 */
 	public void execute(int pc)
 	{
@@ -79,7 +78,6 @@ public class Routine
 		{
 			CYCLE_COUNTS = 0;
 			internal.setPC(0);
-			
 		}
 		else
 		{

@@ -16,6 +16,6 @@ public class ISA_AND_I extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("andi"))
-			internal.setTo(RT, internal.getFrom(RS) & IMMEDIATE);
+			internal.setRegisterVal(RT, internal.getRegisterVal(RS) & IMMEDIATE);
 	}
 }

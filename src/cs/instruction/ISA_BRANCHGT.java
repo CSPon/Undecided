@@ -33,7 +33,7 @@ public class ISA_BRANCHGT extends ISA_OPCODE
 	@Override
 	public void perform(Internal internal)
 	{
-		if(internal.getFrom(RS) > internal.getFrom(RT))
+		if(internal.getRegisterVal(RS) > internal.getRegisterVal(RT))
 			internal.setPC(TARGET_ADDR);
 	}
 }

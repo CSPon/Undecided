@@ -16,8 +16,8 @@ public class ISA_ADD extends ISA_RType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("add"))
-			internal.setTo(RD, internal.getFrom(RS) + internal.getFrom(RT));
+			internal.setRegisterVal(RD, internal.getRegisterVal(RS) + internal.getRegisterVal(RT));
 		else if(OPCODE.equalsIgnoreCase("addu"))
-			internal.setTo(RD, internal.getFrom(RS) + internal.getFrom(RT));
+			internal.setRegisterVal(RD, internal.getRegisterVal(RS) + internal.getRegisterVal(RT));
 	}
 }

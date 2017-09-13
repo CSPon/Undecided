@@ -37,6 +37,41 @@ public class Internal
 		arc.setPC(addr);
 	}
 	
+	public int getRegisterVal(String reg)
+	{
+		return arc.getRegisterVal(reg);
+	}
+	
+	public String getRegisterValHex(String reg)
+	{
+		return Integer.toHexString(arc.getRegisterVal(reg));
+	}
+	
+	public int getRegisterAddr(String reg)
+	{
+		return arc.getRegisterAddress(reg);
+	}
+	
+	public String getRegisterAddrHex(String reg)
+	{
+		return Integer.toHexString(arc.getRegisterAddress(reg));
+	}
+	
+	public void setRegisterVal(String reg, int val)
+	{
+		arc.setRegisterVal(reg, val);
+	}
+	
+	public int getMemoryVal(int addr, int offset)
+	{
+		return arc.getMemoryVal(addr, offset);
+	}
+	
+	public void setMemoryVal(int addr, int offset, int val)
+	{
+		arc.setMemoryVal(addr, offset, val);
+	}
+	
 	public int getFrom(String NAME)
 	{
 		NAME = NAME.toUpperCase();

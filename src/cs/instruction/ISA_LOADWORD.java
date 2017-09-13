@@ -26,6 +26,6 @@ public class ISA_LOADWORD extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("lw"))
-			internal.setTo(RT, internal.getFromMem(internal.getFrom(RS), IMMEDIATE));
+			internal.setRegisterVal(RT, internal.getMemoryVal(internal.getRegisterVal(RS), IMMEDIATE));
 	}
 }

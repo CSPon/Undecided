@@ -16,8 +16,10 @@ public class ISA_SETLESSTHAN extends ISA_RType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("slt"))
-			internal.setTo(RD, (internal.getFrom(RS) < internal.getFrom(RT)) ? 1 : 0);
+			internal.setRegisterVal(RD, (internal.getRegisterVal(RS) < internal.getRegisterVal(RT)) ? 1 : 0);
+			//internal.setTo(RD, (internal.getFrom(RS) < internal.getFrom(RT)) ? 1 : 0);
 		else if(OPCODE.equalsIgnoreCase("sltu"))
-			internal.setTo(RD, (internal.getFrom(RS) < internal.getFrom(RT)) ? 1 : 0);
+			internal.setRegisterVal(RD, (internal.getRegisterVal(RS) < internal.getRegisterVal(RT)) ? 1 : 0);
+			//internal.setTo(RD, (internal.getFrom(RS) < internal.getFrom(RT)) ? 1 : 0);
 	}
 }

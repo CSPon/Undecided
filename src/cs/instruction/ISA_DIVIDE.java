@@ -28,13 +28,13 @@ public class ISA_DIVIDE extends ISA_RType
 	{
 		if(OPCODE.equalsIgnoreCase("div"))
 		{
-			internal.setTo("$LO", internal.getFrom(RS) / internal.getFrom(RT));
-			internal.setTo("$HI", internal.getFrom(RS) % internal.getFrom(RT));
+			internal.setRegisterVal("$LO", internal.getRegisterVal(RS) / internal.getRegisterVal(RT));
+			internal.setRegisterVal("$HI", internal.getRegisterVal(RS) % internal.getRegisterVal(RT));
 		}
 		else if(OPCODE.equalsIgnoreCase("divu"))
 		{
-			internal.setTo("$LO", internal.getFrom(RS) / internal.getFrom(RT));
-			internal.setTo("$HI", internal.getFrom(RS) % internal.getFrom(RT));
+			internal.setRegisterVal("$LO", internal.getRegisterVal(RS) / internal.getRegisterVal(RT));
+			internal.setRegisterVal("$HI", internal.getRegisterVal(RS) % internal.getRegisterVal(RT));
 		}
 	}
 }

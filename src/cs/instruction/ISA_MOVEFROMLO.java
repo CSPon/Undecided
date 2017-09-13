@@ -26,6 +26,6 @@ public class ISA_MOVEFROMLO extends ISA_RType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("mflo"))
-			internal.setTo(RD, internal.getFrom("$LO"));
+			internal.setRegisterVal(RD, internal.getRegisterVal("$LO"));
 	}
 }

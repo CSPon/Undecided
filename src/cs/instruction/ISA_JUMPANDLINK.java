@@ -23,7 +23,7 @@ public class ISA_JUMPANDLINK extends ISA_JType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setTo("$ra", SELF_ADDR);
+		internal.setRegisterVal("$ra", SELF_ADDR);
 		internal.setPC(TARGET_ADDR);
 	}
 }

@@ -26,6 +26,7 @@ public class ISA_STOREBYTE extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("sb"))
-			internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT) & 0xFF);
+			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT) & 0xFF);
+			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT) & 0xFF);
 	}
 }

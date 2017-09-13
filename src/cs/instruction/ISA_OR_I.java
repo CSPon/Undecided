@@ -26,6 +26,6 @@ public class ISA_OR_I extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(OPCODE.equalsIgnoreCase("ori"))
-			internal.setTo(RD, internal.getFrom(RS) | internal.getFrom(RT));
+			internal.setRegisterVal(RD, internal.getRegisterVal(RS) | IMMEDIATE);
 	}
 }

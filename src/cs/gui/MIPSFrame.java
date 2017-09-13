@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import cs.Parser;
 import cs.References;
 import cs.architecture.Internal;
+import cs.instruction.types.ISA_OPCODE;
 import cs.routine.Routine;
 
 /**
@@ -854,11 +855,17 @@ public class MIPSFrame extends javax.swing.JFrame {
     	DefaultListModel<String> pcList = new DefaultListModel<String>();
     	DefaultListModel<String> regList = new DefaultListModel<String>();
     	
-    	for(int i = 0; i < routine.getInstructionsCount(); i++)
+    	for(Map.Entry<Integer, ISA_OPCODE> entry : routine.getInstructions().entrySet())
     	{
-    		pcList.addElement(String.format("0x%08X", routine.getInstructionPC(i)));
-    		regList.addElement(routine.getOPCODE(i) + " " + routine.getREGS(i));
+    		pcList.addElement(String.format("0x%08X", entry.getKey()));
+    		regList.addElement(entry.getValue().getOPCODE() + " " + entry.getValue().getREGS());
     	}
+    	
+//    	for(int i = 0; i < routine.getInstructionsCount(); i++)
+//    	{
+//    		pcList.addElement(String.format("0x%08X", routine.getInstructionPC(i)));
+//    		regList.addElement(routine.getOPCODE(i) + " " + routine.getREGS(i));
+//    	}
     	
     	listPCAddress.setModel(pcList);
     	listOPCODE.setModel(regList);

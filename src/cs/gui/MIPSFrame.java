@@ -8,6 +8,7 @@ package cs.gui;
 import java.io.File;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -581,7 +582,7 @@ public class MIPSFrame extends javax.swing.JFrame {
             File file = instChooser.getSelectedFile();
             if(file.exists() && file.toString().contains(".mips"))
             {
-            	ArrayList<String> lines = parser.parseOnly(file);
+            	ArrayList<String> lines = parser.readInstructionFromFile(file);
                 
                 textAreaPrompt.setText("");
                 textAreaInsturction.setText("");
@@ -608,7 +609,7 @@ public class MIPSFrame extends javax.swing.JFrame {
             if(file.toString().contains(".mem"))
             {
             	internal.resetMEM();
-                parser.loadMemory(file, internal);
+                parser.loadMemoryFromFile(file, internal);
                 
                 updateMemoryList();
             }
@@ -627,7 +628,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         	File file = saveChooser.getSelectedFile();
         	if(!file.exists())
         		file = new File(file.toString() + ".mips");
-            parser.writeToFile(file, textAreaInsturction.getText());
+            parser.saveInstructionToFile(file, textAreaInsturction.getText());
         }
     }
     
@@ -700,7 +701,7 @@ public class MIPSFrame extends javax.swing.JFrame {
             	textAreaPrompt.setText(prompt);
             	
             	internal.resetMEM();
-                parser.loadMemory(file, internal);
+                parser.loadMemoryFromFile(file, internal);
                 
                 updateMemoryList();
             }
@@ -719,7 +720,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	
     	File file = new File("asm/questions/question_" + String.format("%02d", number) + ".mipsq");
     	internal.resetMEM();
-        parser.loadMemory(file, internal);
+        parser.loadMemoryFromFile(file, internal);
         
         updateMemoryList();
     }
@@ -832,14 +833,20 @@ public class MIPSFrame extends javax.swing.JFrame {
     public void updateMemoryList()
     {
         DefaultListModel<String> memoryList = new DefaultListModel<String>();
-        for(int i = 0; i <= 0xFF; i++)
+        
+        for(Map.Entry<Integer, Integer> entry : internal.getMemory().entrySet())
         {
-        	String line;
-        	int value = internal.getFromMem(i, 0);
-        	line = String.format("0x%02X: 0x%04X (%-3d)", i, value, value);
-        	
-        	memoryList.addElement(line);
+        	memoryList.addElement(String.format("0x%08X: 0x%08X", entry.getKey(), entry.getValue()));
         }
+        
+//        for(int i = 0; i <= 0xFF; i++)
+//        {
+//        	String line;
+//        	int value = internal.getFromMem(i, 0);
+//        	line = String.format("0x%02X: 0x%04X (%-3d)", i, value, value);
+//        	
+//        	memoryList.addElement(line);
+//        }
         listMemory.setModel(memoryList);
     }
     
@@ -883,51 +890,14 @@ public class MIPSFrame extends javax.swing.JFrame {
     	fieldRA.setText(format);
     }
     
-    private void updateRegisterViewer()
+    public void updateRegisterViewer()
     {
-    	int i = 0;
     	DefaultListModel<String> regList = new DefaultListModel<String>();
     	
-    	String format = "";
-    	format = toFormatString("$zero");
-    	regList.addElement(format);
-    	format = toFormatString("$at");
-    	regList.addElement(format);
-    	
-    	for(i = 0; i < 2; i++)
+    	for(Map.Entry<String, Integer> entry : internal.getRegisterAddrs().entrySet())
     	{
-    		format = toFormatString("$v" + i);
-        	regList.addElement(format);
+    		regList.addElement(toFormatString(entry.getKey()));
     	}
-    	for(i = 0; i < 4; i++)
-    	{
-    		format = toFormatString("$a" + i);
-        	regList.addElement(format);
-    	}
-    	for(i = 0; i < 10; i++)
-    	{
-    		format = toFormatString("$t" + i);
-        	regList.addElement(format);
-    	}
-    	for(i = 0; i < 8; i++)
-    	{
-    		format = toFormatString("$s" + i);
-        	regList.addElement(format);
-    	}
-    	for(i = 0; i < 2; i++)
-    	{
-    		format = toFormatString("$k" + i);
-        	regList.addElement(format);
-    	}
-    	
-    	format = toFormatString("$gp");
-    	regList.addElement(format);
-    	format = toFormatString("$sp");
-    	regList.addElement(format);
-    	format = toFormatString("$fp");
-    	regList.addElement(format);
-    	format = toFormatString("$ra");
-    	regList.addElement(format);
     	
     	listRegister.setModel(regList);
     }
@@ -935,7 +905,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     private String toFormatString(String reg)
     {
     	String format = "";
-    	int value = internal.getFrom(reg);
+    	int value = internal.getRegisterVal(reg);
     	format = String.format("%-5s: 0x%08X ", reg, value);
     	format += String.format("0b%032d", new BigInteger(Integer.toBinaryString(value)));
     	format += String.format(" (%-10d)", value);

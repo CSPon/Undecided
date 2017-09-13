@@ -16,22 +16,48 @@ public class Parser
 {
 	public void parseSingle(String line, Routine routine)
 	{
-		String[] parsed = line.split("#");
-		if(!parsed[0].isEmpty())
+		line = line.replaceAll("#.{1,}", "");
+		if(!line.isEmpty())
 		{
-			if(parsed[0].contains(":"))
+			if(line.contains(":"))
 			{
-				String[] instruction = parsed[0].split(":");
-				if(instruction.length == 2)
-					routine.addInstruction(instruction[1]);
-				routine.addLabel(instruction[0]);
+				String[] instructions = line.split(":");
+				if(instructions.length == 2)
+					routine.addInstruction(instructions[1]);
+				routine.addLabel(instructions[0]);
 			}
 			else
 				routine.addInstruction(line);
 		}
 	}
 	
-	public ArrayList<String> parseOnly(File file)
+	public void parseInstructionFromFile(String dir, Routine routine)
+	{
+		try
+		{
+			BufferedReader br = new BufferedReader(new FileReader(dir));
+			
+			String line = br.readLine();
+			while(line != null)
+			{
+				parseSingle(line, routine);
+				
+				line = br.readLine();
+			}
+			
+			br.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<String> readInstructionFromFile(File file)
 	{
 		ArrayList<String> lines = new ArrayList<String>();
 		
@@ -55,39 +81,6 @@ public class Parser
 		}
 		
 		return lines;
-	}
-	
-	public void parse(String dir, Routine routine)
-	{
-		try
-		{
-			BufferedReader br = new BufferedReader(new FileReader(dir));
-			
-			String line = br.readLine();
-			while(line != null)
-			{
-				String[] parsed = line.split("#");
-				if(!parsed[0].isEmpty())
-				{
-					if(parsed[0].contains(":"))
-						routine.addLabel(line);
-					else
-						routine.addInstruction(line);
-				}
-				
-				line = br.readLine();
-			}
-			
-			br.close();
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 	
 	public void loadMemory(String dir, Internal internal)
@@ -147,7 +140,7 @@ public class Parser
 		}
 	}
 	
-	public void loadMemory(File file, Internal internal)
+	public void loadMemoryFromFile(File file, Internal internal)
 	{
 		try
 		{
@@ -160,33 +153,31 @@ public class Parser
 			line = br.readLine();
 			while(line != null)
 			{
-				
-				String[] parsed = line.split("#");
-				if(!parsed[0].isEmpty())
+				line = line.replaceAll("#.{1,}", "");				
+				if(!line.isEmpty())
 				{
-					String combined = parsed[0];
-					combined = combined.trim();
-					combined = combined.replaceAll("\\s{1,}", "");
-					parsed = combined.split(":");
+					line = line.trim();
+					line = line.replaceAll("\\s{1,}", "");
+					String[] memory = line.split(":");
 					// Hex check for input
-					parsed[0] = parsed[0].replaceAll("0x", "");
+					memory[0] = memory[0].replaceAll("0x", "");
 					
-					int address = (int) Long.parseLong(parsed[0], 16);
+					int address = (int) Long.parseLong(memory[0], 16);
 					int value = 0;
 					
-					if(parsed[1].startsWith("0x"))
+					if(memory[1].startsWith("0x"))
 					{
-						parsed[1] = parsed[1].replaceAll("0x", "");
-						value = (int) Long.parseLong(parsed[1], 16);
+						memory[1] = memory[1].replaceAll("0x", "");
+						value = (int) Long.parseLong(memory[1], 16);
 					}
-					else if(parsed[1].matches("[^0-9]"))
+					else if(memory[1].matches("[^0-9]"))
 					{
-						value = parsed[1].charAt(0);
+						value = memory[1].charAt(0);
 					}
 					else
-						value = Integer.parseInt(parsed[1]);
+						value = Integer.parseInt(memory[1]);
 					
-					internal.setToMem(address, 0, value);
+					internal.setMemoryVal(address, 0, value);
 				}
 				
 				line = br.readLine();
@@ -204,7 +195,7 @@ public class Parser
 		}
 	}
 	
-	public void writeToFile(File file, String line)
+	public void saveInstructionToFile(File file, String line)
 	{
 		try
 		{
@@ -233,8 +224,9 @@ public class Parser
 			String line = br.readLine();
 			while(line != null)
 			{
+				line = line.replaceAll("#.{1,}", "");
 				String[] parsed = line.split("#");
-				if(!parsed[0].isEmpty())
+				if(!line.isEmpty())
 				{
 					if(parsed[0].contains("PROMPT:")) ;
 					else if(parsed[0].contains("MEMORY:"))
@@ -247,6 +239,7 @@ public class Parser
 						prompt += line + "\n";
 					}
 				}
+				
 				line = br.readLine();
 			}
 			

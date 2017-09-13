@@ -1,5 +1,8 @@
 package cs.architecture;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import cs.instruction.*;
 import cs.instruction.types.ISA_OPCODE;
 
@@ -10,6 +13,21 @@ public class Internal
 	public Internal()
 	{
 		this.arc = new Architecture();
+	}
+	
+	public LinkedHashMap<Integer, Integer> getRegisterVals()
+	{
+		return arc.getRegisterVals();
+	}
+	
+	public LinkedHashMap<String, Integer> getRegisterAddrs()
+	{
+		return arc.getRegisterAddrs();
+	}
+	
+	public LinkedHashMap<Integer, Integer> getMemory()
+	{
+		return arc.getMemory();
 	}
 	
 	public int getAddress(String reg)

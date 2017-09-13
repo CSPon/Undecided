@@ -16,5 +16,6 @@ public class Main
 		gui.init(); gui.start();
 		
 		gui.updateMemoryList();
+		gui.updateRegisterViewer();
 	}
 }

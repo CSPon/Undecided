@@ -1,6 +1,7 @@
 package cs.architecture;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Architecture
@@ -22,15 +23,13 @@ public class Architecture
 	private int[]		MEM;
 	
 	/* New Version */
-	private HashMap<String, Integer> REGISTERS_ADDR;
-	private HashMap<Integer, Integer> REGISTERS_VALS;
-	private HashMap<Integer, Integer> MEMORY;
+	private LinkedHashMap<String, Integer> REGISTERS_ADDR;
+	private LinkedHashMap<Integer, Integer> REGISTERS_VALS;
+	private LinkedHashMap<Integer, Integer> MEMORY;
 	
 	public Architecture()
 	{
 		assignVal();
-		
-		MEMORY = new HashMap<>();
 		
 		VALS = new int[2];
 		ARGS = new int[4];
@@ -50,6 +49,21 @@ public class Architecture
 		MEM = new int[0xFF + 1];
 		
 		PC = 0;
+	}
+	
+	public LinkedHashMap<Integer, Integer> getRegisterVals()
+	{
+		return REGISTERS_VALS;
+	}
+	
+	public LinkedHashMap<String, Integer> getRegisterAddrs()
+	{
+		return REGISTERS_ADDR;
+	}
+	
+	public LinkedHashMap<Integer, Integer> getMemory()
+	{
+		return MEMORY;
 	}
 	
 	public int getRegisterAddress(String reg)
@@ -257,7 +271,7 @@ public class Architecture
 	private void assignVal()
 	{
 		int i = 0;
-		REGISTERS_ADDR = new HashMap<>();
+		REGISTERS_ADDR = new LinkedHashMap<>();
 		REGISTERS_ADDR.put("$zero", i);
 		
 		REGISTERS_ADDR.put("$at", ++i);
@@ -308,13 +322,13 @@ public class Architecture
 		REGISTERS_ADDR.put("$fp", ++i);
 		REGISTERS_ADDR.put("$ra", ++i);
 		
-		REGISTERS_VALS = new HashMap<>();
+		REGISTERS_VALS = new LinkedHashMap<>();
 		for(Map.Entry<String, Integer> entry : REGISTERS_ADDR.entrySet())
 		{
 			REGISTERS_VALS.put(entry.getValue(), 0);
 		}
 		
-		MEMORY = new HashMap<>();
+		MEMORY = new LinkedHashMap<>();
 	}
 	
 	public void printAll()

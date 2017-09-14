@@ -35,16 +35,19 @@ public class Routine
 		return CYCLE_COUNTS;
 	}
 	
+	public void resetCYCLE()
+	{
+		CYCLE_COUNTS = 0;
+	}
+	
 	public String getOPCODE(int i)
 	{
 		return _INSTRUCTIONS.get(i).getOPCODE();
-//		return INSTRUCTIONS.get(i).getOPCODE();
 	}
 	
 	public String getREGS(int i)
 	{
 		return _INSTRUCTIONS.get(i).getREGS();
-//		return INSTRUCTIONS.get(i).getREGS();
 	}
 	
 	public LinkedHashMap<Integer, ISA_OPCODE> getInstructions()
@@ -55,20 +58,16 @@ public class Routine
 	public int getInstructionsCount()
 	{
 		return _INSTRUCTIONS.size();
-//		return INSTRUCTIONS.size();
 	}
 	
 	public int getInstructionPC(int i)
 	{
 		return _INSTRUCTIONS.get(i).getPC();
-//		return INSTRUCTIONS.get(i).getPC();
 	}
 	
 	public void clearInstruction()
 	{
 		_INSTRUCTIONS.clear();
-//		INSTRUCTIONS.clear();
-//		INSTRUCTIONS.trimToSize();
 	}
 	
 	public void addInstruction(String line)
@@ -76,10 +75,6 @@ public class Routine
 		int PC = Architecture.$PC + (_INSTRUCTIONS.size() * 0x04);
 		_INSTRUCTIONS.put(PC, internal.getType(line));
 		LAST_PC = PC;
-		
-//		INSTRUCTIONS.add(internal.getType(line));
-//		PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 0x04);
-//		INSTRUCTIONS.get(INSTRUCTIONS.size() - 1).setPC(PC);
 	}
 	
 	public void addLabel(String line)
@@ -87,10 +82,6 @@ public class Routine
 		int PC = Architecture.$PC + (_INSTRUCTIONS.size() * 0x04);
 		_INSTRUCTIONS.put(PC, new ISA_LABEL(line));
 		LAST_PC = PC;
-		
-//		INSTRUCTIONS.add(new ISA_LABEL(line));
-//		PC = Architecture.$PC + ((INSTRUCTIONS.size() - 1) * 0x04);
-//		INSTRUCTIONS.get(INSTRUCTIONS.size() - 1).setPC(PC);
 	}
 	
 	public void execute()
@@ -112,9 +103,10 @@ public class Routine
 	 */
 	public void execute(int pc)
 	{
-		if(internal.getPC() >= LAST_PC)
+		if(pc >= LAST_PC)
 		{
 			CYCLE_COUNTS = 0;
+			compile();
 			internal.setPC(Architecture.$PC);
 		}
 		else
@@ -146,26 +138,6 @@ public class Routine
 			else if(entry.getValue() instanceof ISA_BRANCHGE)
 				entry.getValue().parseJump(this, entry.getValue().getPC());
 		}
-		
-//		for(int i = 0; i < INSTRUCTIONS.size(); i++)
-//		{
-//			if(INSTRUCTIONS.get(i) instanceof ISA_JUMP)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//			else if(INSTRUCTIONS.get(i) instanceof ISA_JUMPANDLINK)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHEQ)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHNE)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHLT)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHGT)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHLE)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//			else if(INSTRUCTIONS.get(i) instanceof ISA_BRANCHGE)
-//				INSTRUCTIONS.get(i).parseJump(this, i);
-//		}
 	}
 	
 	public int getLabelAddr(String ADDR, int currentPos)
@@ -173,8 +145,8 @@ public class Routine
 		for(Map.Entry<Integer, ISA_OPCODE> entry : _INSTRUCTIONS.entrySet())
 		{
 			if(entry.getValue() instanceof ISA_LABEL)
-				if(entry.getValue().getADDR().compareTo(ADDR) == 0)
-					return entry.getValue().getPC();
+				if(entry.getValue().getADDR_SELF().compareTo(ADDR) == 0)
+					return entry.getKey();
 		}
 		
 		return currentPos;

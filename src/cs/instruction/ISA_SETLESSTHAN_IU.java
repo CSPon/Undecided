@@ -7,5 +7,8 @@ public class ISA_SETLESSTHAN_IU extends ISA_SETLESSTHAN_I
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x0B;
+		HEX_FUNCT = 0x00;
 	}
 }

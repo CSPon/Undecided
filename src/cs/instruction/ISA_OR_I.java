@@ -10,6 +10,9 @@ public class ISA_OR_I extends ISA_IType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x0D;
+		HEX_FUNCT = 0x00;
 	}
 	
 	@Override

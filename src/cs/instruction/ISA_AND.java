@@ -10,6 +10,9 @@ public class ISA_AND extends ISA_RType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x24;
 	}
 
 	@Override

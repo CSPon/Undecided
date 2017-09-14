@@ -10,6 +10,9 @@ public class ISA_STOREWORD extends ISA_IType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x2B;
+		HEX_FUNCT = 0x00;
 	}
 	
 	@Override

@@ -259,6 +259,6 @@ public class Parser
 	
 	public void parseInstructions()
 	{
-		String line = "(add $t0, $t1, $t2)";
+//		String line = "(add $t0, $t1, $t2)";
 	}
 }

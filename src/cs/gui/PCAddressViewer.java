@@ -1,6 +1,12 @@
 package cs.gui;
 
+import java.util.Map;
+
+import javax.swing.DefaultListModel;
+import javax.swing.text.Position;
+
 import cs.architecture.Internal;
+import cs.instruction.types.ISA_OPCODE;
 import cs.routine.Routine;
 
 /**
@@ -101,17 +107,56 @@ public class PCAddressViewer extends javax.swing.JFrame
 
     private void listPCValueChanged(javax.swing.event.ListSelectionEvent evt)
     {
-        // TODO add your handling code here:
+    	int index = listPC.getSelectedIndex();
+    	listPC.setSelectedIndex(index);
+    	listPC.ensureIndexIsVisible(index);
+    	listOPCODE.setSelectedIndex(index);
+    	listOPCODE.ensureIndexIsVisible(index);
     }
 
     private void listOPCODEValueChanged(javax.swing.event.ListSelectionEvent evt)
     {
-        // TODO add your handling code here:
+    	int index = listOPCODE.getSelectedIndex();
+    	listPC.setSelectedIndex(index);
+    	listPC.ensureIndexIsVisible(index);
+    	listOPCODE.setSelectedIndex(index);
+    	listOPCODE.ensureIndexIsVisible(index);
     }
 
     private void listHEXValueChanged(javax.swing.event.ListSelectionEvent evt)
     {
-        // TODO add your handling code here:
+    	int index = listHEX.getSelectedIndex();
+    	listPC.setSelectedIndex(index);
+    	listPC.ensureIndexIsVisible(index);
+    	listOPCODE.setSelectedIndex(index);
+    	listOPCODE.ensureIndexIsVisible(index);
+    }
+    
+    public void updateViewers()
+    {
+    	DefaultListModel<String> addressList = new DefaultListModel<String>();
+    	DefaultListModel<String> opcodeList = new DefaultListModel<String>();
+//    	DefaultListModel parseList = new DefaultListModel<String>();
+    	
+    	for(Map.Entry<Integer, ISA_OPCODE> entry : routine.getInstructions().entrySet())
+    	{
+    		addressList.addElement(String.format("0x%08X", entry.getKey()));
+    		opcodeList.addElement(entry.getValue().getOPCODE() + " " + entry.getValue().getREGS());
+    	}
+    	
+    	listPC.setModel(addressList);
+    	listOPCODE.setModel(opcodeList);
+    }
+    
+    public void updatePositions()
+    {
+    	String address = String.format("0x%08X", internal.getPC());
+    	int index = listPC.getNextMatch(address, 0, Position.Bias.Forward);
+    	
+    	listPC.setSelectedIndex(index);
+    	listPC.ensureIndexIsVisible(index);
+    	listOPCODE.setSelectedIndex(index);
+    	listOPCODE.ensureIndexIsVisible(index);
     }
 
     public void init()

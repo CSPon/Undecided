@@ -10,6 +10,9 @@ public class ISA_MULTIPLY extends ISA_RType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x18;
 	}
 	
 	@Override

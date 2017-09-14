@@ -10,6 +10,9 @@ public class ISA_JUMPREG extends ISA_RType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x08;
 	}
 	
 	@Override

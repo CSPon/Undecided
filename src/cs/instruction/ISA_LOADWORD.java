@@ -10,6 +10,9 @@ public class ISA_LOADWORD extends ISA_IType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x23;
+		HEX_FUNCT = 0x00;
 	}
 	
 	@Override

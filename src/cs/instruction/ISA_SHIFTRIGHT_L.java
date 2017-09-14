@@ -5,12 +5,14 @@ import cs.instruction.types.ISA_RType;
 
 public class ISA_SHIFTRIGHT_L extends ISA_RType
 {
-
 	public ISA_SHIFTRIGHT_L(String line)
 	{
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x02;
 	}
 	
 	@Override

@@ -10,6 +10,9 @@ public class ISA_BRANCHEQ extends ISA_IType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x04;
+		HEX_FUNCT = 0x00;
 	}
 	
 	@Override

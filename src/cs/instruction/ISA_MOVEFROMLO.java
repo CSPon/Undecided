@@ -10,6 +10,9 @@ public class ISA_MOVEFROMLO extends ISA_RType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x12;
 	}
 	
 	@Override

@@ -12,6 +12,10 @@ public class ISA_BRANCHLT extends ISA_OPCODE
 		parseReg();
 		
 		CYCLE_COUNT = 2;
+		
+		// TODO Modify BLT
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x22;
 	}
 
 	@Override

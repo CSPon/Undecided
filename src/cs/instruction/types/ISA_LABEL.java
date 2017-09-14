@@ -28,4 +28,10 @@ public class ISA_LABEL extends ISA_JType
 	{
 		// Do nothing. Its just label
 	}
+
+	@Override
+	public String toString(Internal internal)
+	{
+		return "";
+	}
 }

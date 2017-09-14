@@ -5,12 +5,14 @@ import cs.instruction.types.ISA_IType;
 
 public class ISA_LOADBYTE_U extends ISA_IType
 {
-
 	public ISA_LOADBYTE_U(String line)
 	{
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x24;
+		HEX_FUNCT = 0x00;
 	}
 	
 	@Override

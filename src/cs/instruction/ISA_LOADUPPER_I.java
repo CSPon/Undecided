@@ -10,6 +10,9 @@ public class ISA_LOADUPPER_I extends ISA_IType
 		super(line);
 		parseFull();
 		parseReg();
+		
+		HEX_OPCODE = 0x0F;
+		HEX_FUNCT = 0x00;
 	}
 	
 	@Override

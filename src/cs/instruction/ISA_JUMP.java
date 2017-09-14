@@ -9,6 +9,9 @@ public class ISA_JUMP extends ISA_JType
 	{
 		super(line);
 		parseFull();
+		
+		HEX_OPCODE = 0x02;
+		HEX_FUNCT = 0x00;
 	}
 
 	@Override

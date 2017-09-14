@@ -11,7 +11,11 @@ public class ISA_LOADIMM extends ISA_OPCODE
 		parseFull();
 		parseReg();
 		
-		CYCLE_COUNT = 2;
+		// TODO Modify LI
+		CYCLE_COUNT = 1;
+		
+		HEX_OPCODE = 0x08;
+		HEX_FUNCT = 0x00;
 	}
 	
 	@Override

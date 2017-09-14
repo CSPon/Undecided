@@ -11,7 +11,11 @@ public class ISA_MOVE extends ISA_OPCODE
 		parseFull();
 		parseReg();
 		
-		CYCLE_COUNT = 2;
+		// TODO Modify MOVE
+		CYCLE_COUNT = 1;
+		
+		HEX_OPCODE = 0x08;
+		HEX_FUNCT = 0x00;
 	}
 
 	@Override

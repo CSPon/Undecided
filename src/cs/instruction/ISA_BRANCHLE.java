@@ -11,7 +11,11 @@ public class ISA_BRANCHLE extends ISA_OPCODE
 		parseFull();
 		parseReg();
 		
-		CYCLE_COUNT = 3;
+		CYCLE_COUNT = 2;
+		
+		// TODO Modify BLE
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x22;
 	}
 
 	@Override

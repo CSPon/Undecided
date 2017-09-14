@@ -1,6 +1,5 @@
 package cs.routine;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import cs.instruction.types.ISA_OPCODE;
 public class Routine
 {
 	private Internal internal;
-	private ArrayList<ISA_OPCODE> INSTRUCTIONS;
 	
 	private LinkedHashMap<Integer, ISA_OPCODE> _INSTRUCTIONS;
 	
@@ -24,7 +22,6 @@ public class Routine
 	public Routine(Internal _internal)
 	{
 		this.internal = _internal;
-		INSTRUCTIONS = new ArrayList<ISA_OPCODE>();
 		_INSTRUCTIONS = new LinkedHashMap<>();
 		
 		CYCLE_COUNTS = 0;

@@ -799,7 +799,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
-    	
     	updatePCAddressPosition();
     }
 
@@ -819,6 +818,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
+    	updatePCAddressPosition();
     	
     	routine.execute();
     	
@@ -830,6 +830,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
+    	updatePCAddressPosition();
     }
 
     private void buttonStepActionPerformed(java.awt.event.ActionEvent evt)
@@ -847,7 +848,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
-    	
     	updatePCAddressPosition();
     }
 
@@ -864,6 +864,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
+    	updatePCAddressPosition();
     	
     	textAreaCompilerWindow.setText("");
     }
@@ -902,6 +903,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listPCAddress.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
+    	
+    	pcav.updatePositions();
     }
     
     public void updateMemoryList()
@@ -928,6 +931,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     	
     	listPCAddress.setModel(pcList);
     	listOPCODE.setModel(regList);
+    	
+    	pcav.updateViewers();
     }
     
     private void updateDebugger()

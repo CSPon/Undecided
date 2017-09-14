@@ -8,8 +8,14 @@ public class ISA_BRANCHGT extends ISA_OPCODE
 	public ISA_BRANCHGT(String line)
 	{
 		super(line);
+		parseFull();
+		parseReg();
 		
 		CYCLE_COUNT = 2;
+		
+		// TODO Modify BGT
+		HEX_OPCODE = 0x00;
+		HEX_FUNCT = 0x22;
 	}
 
 	@Override

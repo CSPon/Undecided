@@ -6,8 +6,10 @@ import cs.routine.Routine;
 public abstract class ISA_OPCODE implements Instruction
 {
 	/* Common */
-	protected String RS, RT, RD, FUNCT;
+	protected String RS, RT, RD;
+	
 	/* OPCODE specific */
+	protected String FUNCT;
 	protected int IMMEDIATE, SHAMT;
 	
 	/* PC Searching */
@@ -36,6 +38,9 @@ public abstract class ISA_OPCODE implements Instruction
 		ADDR_SELF = "";
 		
 		CYCLE_COUNT = 1;
+		
+		IMMEDIATE = 0;
+		SHAMT = 0;
 	}
 	
 	public void setPC(int _PC)
@@ -111,4 +116,6 @@ public abstract class ISA_OPCODE implements Instruction
 	{
 		return REGS;
 	}
+	
+	public abstract String toString(Internal internal);
 }

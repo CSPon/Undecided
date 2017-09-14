@@ -5,10 +5,16 @@ import cs.routine.Routine;
 
 public abstract class ISA_OPCODE implements Instruction
 {
-	protected String RS, RT, RD, FUNCT, ADDR;
-	protected int IMMEDIATE, SHAMT, ADDRESS, TARGET_ADDR;
-	protected int SELF_ADDR;
+	/* Common */
+	protected String RS, RT, RD, FUNCT;
+	/* OPCODE specific */
+	protected int IMMEDIATE, SHAMT;
 	
+	/* PC Searching */
+	protected String ADDR_SELF, ADDR_JUMP;
+	protected int ADDRESS_SELF, ADDRESS_JUMP;
+	
+	/* For debugging */
 	protected int HEX_OPCODE;
 	protected int HEX_FUNCT;
 	
@@ -27,7 +33,7 @@ public abstract class ISA_OPCODE implements Instruction
 		RT = "";
 		RD = "";
 		FUNCT = "";
-		ADDR = "";
+		ADDR_SELF = "";
 		
 		CYCLE_COUNT = 1;
 	}
@@ -70,15 +76,30 @@ public abstract class ISA_OPCODE implements Instruction
 		return reg;
 	}
 	
-	public String getADDR()
-	{
-		return ADDR;
-	}
-	
 	public void parseJump(Routine routine, int currentPos)
 	{
-		TARGET_ADDR = routine.getLabelAddr(ADDR, currentPos);
-		SELF_ADDR = currentPos;
+		ADDRESS_JUMP = routine.getLabelAddr(ADDR_JUMP, currentPos);
+		ADDRESS_SELF = currentPos;
+	}
+	
+	public String getADDR_SELF()
+	{
+		return ADDR_SELF;
+	}
+	
+	public String getADDR_JUMP()
+	{
+		return ADDR_JUMP;
+	}
+	
+	public int getADDRESS_SELF()
+	{
+		return ADDRESS_SELF;
+	}
+	
+	public int getADDRESS_JUMP()
+	{
+		return ADDRESS_JUMP;
 	}
 
 	public String getOPCODE()

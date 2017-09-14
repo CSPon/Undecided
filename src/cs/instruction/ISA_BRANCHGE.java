@@ -29,13 +29,13 @@ public class ISA_BRANCHGE extends ISA_OPCODE
 		
 		RS = parsed[0];
 		RT = parsed[1];
-		ADDR = parsed[2];
+		ADDR_JUMP = parsed[2];
 	}
 
 	@Override
 	public void perform(Internal internal)
 	{
 		if(internal.getRegisterVal(RS) <= internal.getRegisterVal(RT))
-			internal.setPC(TARGET_ADDR);
+			internal.setPC(ADDRESS_JUMP);
 	}
 }

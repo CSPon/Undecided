@@ -16,14 +16,14 @@ public class ISA_JUMPANDLINK extends ISA_JType
 	{
 		String[] parsed = INSTRUCTION.split(" ");
 		OPCODE = parsed[0];
-		ADDR = parsed[1];
+		ADDR_JUMP = parsed[1];
 		REGS = parsed[1];
 	}
 
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setRegisterVal("$ra", SELF_ADDR);
-		internal.setPC(TARGET_ADDR);
+		internal.setRegisterVal("$ra", ADDRESS_SELF);
+		internal.setPC(ADDRESS_JUMP);
 	}
 }

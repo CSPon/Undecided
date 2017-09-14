@@ -15,7 +15,7 @@ public class ISA_LABEL extends ISA_JType
 	{
 		OPCODE = "LABEL";
 		REGS = INSTRUCTION;
-		ADDR = INSTRUCTION;
+		ADDR_SELF = INSTRUCTION;
 	}
 	
 	@Override

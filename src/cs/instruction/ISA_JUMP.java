@@ -16,13 +16,13 @@ public class ISA_JUMP extends ISA_JType
 	{
 		String[] parsed = INSTRUCTION.split(" ");
 		OPCODE = parsed[0];
-		ADDR = parsed[1];
+		ADDR_JUMP = parsed[1];
 		REGS = parsed[1];
 	}
 
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setPC(TARGET_ADDR);
+		internal.setPC(ADDRESS_JUMP);
 	}
 }

@@ -19,13 +19,13 @@ public class ISA_BRANCHNE extends ISA_IType
 		
 		RS = checkReg(parsed[0]);
 		RT = checkReg(parsed[1]);
-		ADDR = parsed[2];
+		ADDR_JUMP = parsed[2];
 	}
 
 	@Override
 	public void perform(Internal internal)
 	{
 		if(internal.getRegisterVal(RS) != internal.getRegisterVal(RT))
-			internal.setPC(TARGET_ADDR);
+			internal.setPC(ADDRESS_JUMP);
 	}
 }

@@ -85,6 +85,8 @@ public abstract class ISA_OPCODE implements Instruction
 	{
 		ADDRESS_JUMP = routine.getLabelAddr(ADDR_JUMP, currentPos);
 		ADDRESS_SELF = currentPos;
+		
+		IMMEDIATE = ADDRESS_JUMP;
 	}
 	
 	public String getADDR_SELF()

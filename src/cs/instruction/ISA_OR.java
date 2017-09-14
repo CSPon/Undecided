@@ -20,6 +20,5 @@ public class ISA_OR extends ISA_RType
 	{
 		if(OPCODE.equalsIgnoreCase("or"))
 			internal.setRegisterVal(RD, internal.getRegisterVal(RS) | internal.getRegisterVal(RT));
-			//internal.setTo(RD, internal.getFrom(RS) | internal.getFrom(RT));
 	}
 }

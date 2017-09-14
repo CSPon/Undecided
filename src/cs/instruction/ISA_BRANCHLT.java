@@ -42,4 +42,10 @@ public class ISA_BRANCHLT extends ISA_OPCODE
 		if(internal.getRegisterVal(RS) < internal.getRegisterVal(RT))
 			internal.setPC(ADDRESS_JUMP);
 	}
+
+	@Override
+	public String toString(Internal internal)
+	{
+		return "PSEUDOINST";
+	}
 }

@@ -21,6 +21,15 @@ public abstract class ISA_JType extends ISA_OPCODE
 	public void parseReg()
 	{
 	}
+	
+	public String toString(Internal internal)
+	{
+		int HEX = 0x00;
+		HEX |= HEX_OPCODE; HEX = HEX << 26;
+		HEX |= ADDRESS_JUMP;
+		
+		return String.format("0x%08X", HEX);
+	}
 
 	@Override
 	public abstract void perform(Internal internal);

@@ -22,17 +22,4 @@ public class ISA_SUB extends ISA_RType
 		else if(OPCODE.equalsIgnoreCase("subu"))
 			internal.setRegisterVal(RD, internal.getRegisterVal(RS) - internal.getRegisterVal(RT));
 	}
-	
-	public String toString(Internal internal)
-	{
-		int HEX = 0x00;
-		HEX |= HEX_OPCODE; HEX = HEX << 6;
-		HEX |= internal.getRegisterAddr(RS); HEX = HEX << 5;
-		HEX |= internal.getRegisterAddr(RT); HEX = HEX << 5;
-		HEX |= internal.getRegisterAddr(RD); HEX = HEX << 5;
-		HEX |= SHAMT; HEX = HEX << 5;
-		HEX |= HEX_FUNCT;
-		
-		return String.format("0x%08X", HEX);
-	}
 }

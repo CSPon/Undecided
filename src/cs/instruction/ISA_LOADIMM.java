@@ -47,4 +47,10 @@ public class ISA_LOADIMM extends ISA_OPCODE
 		if(OPCODE.equalsIgnoreCase("li"))
 			internal.setRegisterVal(RD, IMMEDIATE);
 	}
+
+	@Override
+	public String toString(Internal internal)
+	{
+		return "PSEUDOINST";
+	}
 }

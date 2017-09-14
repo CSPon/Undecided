@@ -41,4 +41,10 @@ public class ISA_MOVE extends ISA_OPCODE
 		if(OPCODE.equalsIgnoreCase("move"))
 			internal.setRegisterVal(RD, internal.getRegisterVal(RS));
 	}
+
+	@Override
+	public String toString(Internal internal)
+	{
+		return "PSEUDOINST";
+	}
 }

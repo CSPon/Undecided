@@ -34,6 +34,34 @@ public abstract class ISA_IType extends ISA_OPCODE
 		else
 			IMMEDIATE = Integer.parseInt(parsed[2]);
 	}
+	
+	@Override
+	public String toString(Internal internal)
+	{
+		// Need to shift IMMEDIATE by 16 (Or mask out, whatever we want)
+		int IMM = IMMEDIATE; IMM &= 0x0000FFFF;
+		int HEX = 0x00;
+		HEX |= HEX_OPCODE; HEX = HEX << 6;
+		if(RS.isEmpty())
+		{
+			HEX |= 0x00; HEX = HEX << 5;
+		}
+		else
+		{
+			HEX |= internal.getRegisterAddr(RS); HEX = HEX << 5;
+		}
+		if(RT.isEmpty())
+		{
+			HEX |= 0x00; HEX = HEX << 5;
+		}
+		else
+		{
+			HEX |= internal.getRegisterAddr(RT); HEX = HEX << 5;
+		}
+		HEX |= IMM;
+		
+		return String.format("0x%08X", HEX);
+	}
 
 	@Override
 	public abstract void perform(Internal internal);

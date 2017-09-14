@@ -112,6 +112,8 @@ public class PCAddressViewer extends javax.swing.JFrame
     	listPC.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
+    	listHEX.setSelectedIndex(index);
+    	listHEX.ensureIndexIsVisible(index);
     }
 
     private void listOPCODEValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -121,6 +123,8 @@ public class PCAddressViewer extends javax.swing.JFrame
     	listPC.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
+    	listHEX.setSelectedIndex(index);
+    	listHEX.ensureIndexIsVisible(index);
     }
 
     private void listHEXValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -130,22 +134,26 @@ public class PCAddressViewer extends javax.swing.JFrame
     	listPC.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
+    	listHEX.setSelectedIndex(index);
+    	listHEX.ensureIndexIsVisible(index);
     }
     
     public void updateViewers()
     {
     	DefaultListModel<String> addressList = new DefaultListModel<String>();
     	DefaultListModel<String> opcodeList = new DefaultListModel<String>();
-//    	DefaultListModel parseList = new DefaultListModel<String>();
+    	DefaultListModel<String> parseList = new DefaultListModel<String>();
     	
     	for(Map.Entry<Integer, ISA_OPCODE> entry : routine.getInstructions().entrySet())
     	{
     		addressList.addElement(String.format("0x%08X", entry.getKey()));
     		opcodeList.addElement(entry.getValue().getOPCODE() + " " + entry.getValue().getREGS());
+    		parseList.addElement(entry.getValue().toString(internal));
     	}
     	
     	listPC.setModel(addressList);
     	listOPCODE.setModel(opcodeList);
+    	listHEX.setModel(parseList);
     }
     
     public void updatePositions()
@@ -157,6 +165,8 @@ public class PCAddressViewer extends javax.swing.JFrame
     	listPC.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
+    	listHEX.setSelectedIndex(index);
+    	listHEX.ensureIndexIsVisible(index);
     }
 
     public void init()

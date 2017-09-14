@@ -134,6 +134,9 @@ public class Routine
 				entry.getValue().parseJump(this, entry.getValue().getPC());
 			else if(entry.getValue() instanceof ISA_BRANCHGE)
 				entry.getValue().parseJump(this, entry.getValue().getPC());
+			
+			if(entry.getValue() instanceof ISA_LABEL)
+				entry.getValue().setPC(entry.getKey());
 		}
 	}
 	

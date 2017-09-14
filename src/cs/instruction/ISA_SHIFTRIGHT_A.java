@@ -38,11 +38,8 @@ public class ISA_SHIFTRIGHT_A extends ISA_RType
 		// 1001 0101 1010 1100
 		// 1100 1001 0101 1010
 		
-		//int temp = internal.getFrom(RT) << (32 - SHAMT);
 		int temp = internal.getRegisterVal(RT) << (32 - SHAMT);
-		//int _RT = internal.getFrom(RT) >> SHAMT;
 		int _RT = internal.getRegisterVal(RT) >> SHAMT;
 		internal.setRegisterVal(RD, temp | _RT);
-		//internal.setTo(RD, temp | _RT);
 	}
 }

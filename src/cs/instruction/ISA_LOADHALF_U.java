@@ -31,5 +31,4 @@ public class ISA_LOADHALF_U extends ISA_IType
 		if(OPCODE.equalsIgnoreCase("lhu"))
 			internal.setRegisterVal(RT, internal.getMemoryVal(internal.getRegisterVal(RS), IMMEDIATE) & 0xFFFF);
 	}
-
 }

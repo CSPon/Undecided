@@ -32,6 +32,6 @@ public class ISA_LABEL extends ISA_JType
 	@Override
 	public String toString(Internal internal)
 	{
-		return "";
+		return String.format("0x%08X", PC);
 	}
 }

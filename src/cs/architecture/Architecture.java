@@ -95,6 +95,16 @@ public class Architecture
 		MEMORY.clear();
 	}
 	
+	public void resetRegisters()
+	{
+		for(Map.Entry<String, Integer> entry : REGISTERS_ADDR.entrySet())
+			setRegisterVal(entry.getKey(), 0);
+		
+		PC = $PC;
+		setRegisterVal("$sp", $SP);
+		setRegisterVal("$gp", $GP);
+	}
+	
 	public int getRegisterAddress(String reg)
 	{
 		return REGISTERS_ADDR.get(reg);

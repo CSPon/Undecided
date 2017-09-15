@@ -54,6 +54,11 @@ public class Internal
 		arc.resetMemory();
 	}
 	
+	public void resetRegisters()
+	{
+		arc.resetRegisters();
+	}
+	
 	public int getAddress(String reg)
 	{
 		return arc.getAddress(reg);

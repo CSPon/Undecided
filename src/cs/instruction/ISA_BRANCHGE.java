@@ -12,7 +12,6 @@ public class ISA_BRANCHGE extends ISA_OPCODE
 		parseFull();
 		parseReg();
 		
-		// TODO Modify BGE
 		CYCLE_COUNT = 2;
 		
 		HEX_OPCODE = 0x00;

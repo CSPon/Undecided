@@ -14,7 +14,6 @@ public class ISA_BRANCHLE extends ISA_OPCODE
 		
 		CYCLE_COUNT = 2;
 		
-		// TODO Modify BLE
 		HEX_OPCODE = 0x00;
 		HEX_FUNCT = 0x22;
 	}

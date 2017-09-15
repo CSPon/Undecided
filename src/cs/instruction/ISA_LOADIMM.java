@@ -3,6 +3,7 @@ package cs.instruction;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_OPCODE;
 
+@Deprecated
 public class ISA_LOADIMM extends ISA_OPCODE
 {
 	public ISA_LOADIMM(String line)
@@ -11,7 +12,6 @@ public class ISA_LOADIMM extends ISA_OPCODE
 		parseFull();
 		parseReg();
 		
-		// TODO Modify LI
 		CYCLE_COUNT = 1;
 		
 		HEX_OPCODE = 0x08;

@@ -29,13 +29,13 @@ public class ISA_MULTIPLY extends ISA_RType
 	{
 		if(OPCODE.equalsIgnoreCase("mult"))
 		{
-			internal.setRegisterVal("$HI", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) >> 8);
-			internal.setRegisterVal("$LO", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) & 0xFF);
+			internal.setTo("$hi", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) >> 16);
+			internal.setTo("$lo", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) & 0xFFFF);
 		}
 		else if(OPCODE.equalsIgnoreCase("multu"))
 		{
-			internal.setRegisterVal("$HI", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) >> 8);
-			internal.setRegisterVal("$LO", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) & 0xFF);
+			internal.setTo("$hi", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) >> 16);
+			internal.setTo("$lo", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) & 0xFFFF);
 		}
 	}
 }

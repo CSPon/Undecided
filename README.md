@@ -69,6 +69,12 @@ I have no clue with Mac and Linux, so for those two, will have to run through Ec
 
 Memory value can be changed via Memory.mem, under asm folder.
 
+.mips is file extension for assembly code file
+
+.mipsq is file extension for prompt file
+
+.mem is file extension for memory preset file
+
 ---
 
 ### For Reference

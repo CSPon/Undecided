@@ -28,8 +28,8 @@ public class PCAddressViewer extends javax.swing.JFrame
         initComponents();
     }
     
-    private void initComponents()
-    {
+	private void initComponents() {
+
         jSplitPane1 = new javax.swing.JSplitPane();
         jLabel1 = new javax.swing.JLabel();
         jSplitPane2 = new javax.swing.JSplitPane();
@@ -42,7 +42,6 @@ public class PCAddressViewer extends javax.swing.JFrame
         listHEX = new javax.swing.JList<>();
 
         setTitle("MIPS Simulator - PC Address Viewer");
-        setResizable(false);
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -194,7 +193,7 @@ public class PCAddressViewer extends javax.swing.JFrame
         this.setVisible(true);
     }
 
-    // Variables declaration - do not modify                     
+ // Variables declaration - do not modify                     
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

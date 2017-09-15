@@ -46,7 +46,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	
         initComponents();
         
-        internal.resetMEM();
+        internal.resetMemory();
         parser.loadMemoryFromFile(new File("asm/Memory.mem"), internal);
         
         ArrayList<String> lines = parser.readInstructionFromFile(new File("asm/Example.mips"));
@@ -77,18 +77,11 @@ public class MIPSFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         fieldLO = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        fieldAT = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        fieldRA = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         buttonCompileOnly = new javax.swing.JButton();
         buttonRun = new javax.swing.JButton();
         buttonStep = new javax.swing.JButton();
         buttonStop = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        textAreaCompilerWindow = new javax.swing.JTextArea();
         jSplitPane3 = new javax.swing.JSplitPane();
         jLabel14 = new javax.swing.JLabel();
         jSplitPane7 = new javax.swing.JSplitPane();
@@ -169,14 +162,14 @@ public class MIPSFrame extends javax.swing.JFrame {
         jSplitPane6.setTopComponent(jLabel5);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("PC");
+        jLabel6.setText("PC POS");
 
         fieldPC.setEditable(false);
 
         fieldHI.setEditable(false);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("HI");
+        jLabel7.setText("$HI");
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Registers");
@@ -184,29 +177,19 @@ public class MIPSFrame extends javax.swing.JFrame {
         fieldLO.setEditable(false);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("LO");
-
-        fieldAT.setEditable(false);
-
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("$at");
-
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("$ra");
-
-        fieldRA.setEditable(false);
+        jLabel9.setText("$LO");
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Compiler/Debugger");
 
-        buttonCompileOnly.setText("Compile Only");
+        buttonCompileOnly.setText("Assemble Only");
         buttonCompileOnly.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCompileOnlyActionPerformed(evt);
             }
         });
 
-        buttonRun.setText("Compile & Run");
+        buttonRun.setText("Assemble & Run");
         buttonRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRunActionPerformed(evt);
@@ -226,15 +209,6 @@ public class MIPSFrame extends javax.swing.JFrame {
                 buttonStopActionPerformed(evt);
             }
         });
-
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Compiler Window");
-
-        textAreaCompilerWindow.setEditable(false);
-        textAreaCompilerWindow.setColumns(20);
-        textAreaCompilerWindow.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        textAreaCompilerWindow.setRows(5);
-        jScrollPane7.setViewportView(textAreaCompilerWindow);
 
         jSplitPane3.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -279,21 +253,15 @@ public class MIPSFrame extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldPC, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fieldHI, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fieldLO)
-                            .addComponent(fieldAT, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fieldRA)))
+                            .addComponent(fieldLO)))
                     .addComponent(buttonRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7)
                     .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(buttonCompileOnly, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
@@ -321,14 +289,6 @@ public class MIPSFrame extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(fieldLO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(fieldAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(fieldRA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -338,12 +298,7 @@ public class MIPSFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRun)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
         );
 
         jSplitPane6.setRightComponent(jPanel1);
@@ -358,8 +313,7 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         listOPCODES.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         listOPCODES.setModel(new javax.swing.AbstractListModel<String>() {
-			private static final long serialVersionUID = 1L;
-			String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
+            String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -621,7 +575,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }
 
     private void menuLoadInstFileActionPerformed(java.awt.event.ActionEvent evt)
     {                                                 
@@ -657,7 +611,7 @@ public class MIPSFrame extends javax.swing.JFrame {
             
             if(file.toString().contains(".mem"))
             {
-            	internal.resetMEM();
+            	internal.resetMemory();
                 parser.loadMemoryFromFile(file, internal);
                 
                 updateMemoryList();
@@ -749,7 +703,7 @@ public class MIPSFrame extends javax.swing.JFrame {
             	String prompt = parser.parsePrompt(file.toString());
             	textAreaPrompt.setText(prompt);
             	
-            	internal.resetMEM();
+            	internal.resetMemory();
                 parser.loadMemoryFromFile(file, internal);
                 
                 updateMemoryList();
@@ -778,7 +732,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	textAreaInstruction.setText("");
     	
     	File file = new File("asm/questions/question_" + String.format("%02d", number) + ".mipsq");
-    	internal.resetMEM();
+    	internal.resetMemory();
         parser.loadMemoryFromFile(file, internal);
         
         updateMemoryList();
@@ -793,7 +747,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     		parser.parseSingle(instruction, routine);
     	}
     	routine.compile();
-    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
+    	// Moved to Full Debugger Window
+//    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
     	updateDebugger();
     	updateMemoryList();
@@ -805,14 +760,11 @@ public class MIPSFrame extends javax.swing.JFrame {
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt)
     {
     	routine.clearInstruction();
-    	String[] instructions = textAreaInstruction.getText().split("\n");
-    	for(String instruction : instructions)
-    	{
-    		parser.parseSingle(instruction, routine);
-    	}
+    	assemble();
     	
     	routine.compile();
-    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
+    	// Moved to Full Debugger Window
+//    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
     	updateDebugger();
     	updateMemoryList();
@@ -822,7 +774,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     	
     	routine.execute();
     	
-    	textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
+    	// Moved to Full Debugger Window
+//    	textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
     	
     	routine.resetCYCLE();
     	
@@ -835,14 +788,38 @@ public class MIPSFrame extends javax.swing.JFrame {
 
     private void buttonStepActionPerformed(java.awt.event.ActionEvent evt)
     {
-    	routine.compile();
+    	// Check if previous execution was done
+    	if(internal.getPC() > routine.getInstructionEnd())
+    	{
+    		routine.clearInstruction(); // To ensure clean state
+    		assemble();
+    		routine.compile();
+    		internal.setPC(Architecture.$PC);
+    		
+    		updateDebugger();
+        	updateMemoryList();
+        	updatePCAddressList();
+        	updateRegisterViewer();
+        	updatePCAddressPosition();
+    	}
+    	else
+    	{
+    		routine.execute(internal.getPC());
+        	internal.setPC(internal.getPC() + 0x04);
+    	}
     	
-    	routine.execute(internal.getPC());
-    	internal.setPC(internal.getPC() + 0x04);
-    	
-    	textAreaCompilerWindow.setText("");
-    	if(internal.getPC() >= routine.getInstructionsCount())
-    		textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
+    	if(internal.getPC() > routine.getInstructionEnd())
+    	{	
+    		listPCAddress.setSelectedIndex(-1);
+    		listOPCODE.setSelectedIndex(-1);
+    		
+    		// Moved to Full Debugger Window
+//    		textAreaCompilerWindow.setText("");
+//        	if(internal.getPC() >= routine.getInstructionsCount())
+//        		textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
+    		
+    		routine.resetCYCLE();
+    	}
     	
     	updateDebugger();
     	updateMemoryList();
@@ -866,7 +843,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     	updateRegisterViewer();
     	updatePCAddressPosition();
     	
-    	textAreaCompilerWindow.setText("");
+    	// Moved to Full Debugger Window
+//    	textAreaCompilerWindow.setText("");
     }
     
     private void listPCAddressValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -892,6 +870,15 @@ public class MIPSFrame extends javax.swing.JFrame {
         String key = listOPCODES.getSelectedValue();
         String value = refs.getReference(key);
         textAreaReference.setText(value);
+    }
+    
+    private void assemble()
+    {
+    	String[] instructions = textAreaInstruction.getText().split("\n");
+    	for(String instruction : instructions)
+    	{
+    		parser.parseSingle(instruction, routine);
+    	}
     }
     
     public void updatePCAddressPosition()
@@ -948,14 +935,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	format = "0x";
     	format += String.format("%04X", internal.getFrom("$LO"));
     	fieldLO.setText(format);
-    	
-    	format = "0x";
-    	format += String.format("%04X", internal.getFrom("$AT"));
-    	fieldAT.setText(format);
-    	
-    	format = "0x";
-    	format += String.format("%04X", internal.getFrom("$RA"));
-    	fieldRA.setText(format);
     }
     
     public void updateRegisterViewer()
@@ -1010,17 +989,12 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonRun;
     private javax.swing.JButton buttonStep;
     private javax.swing.JButton buttonStop;
-    private javax.swing.JTextField fieldAT;
     private javax.swing.JTextField fieldHI;
     private javax.swing.JTextField fieldLO;
     private javax.swing.JTextField fieldPC;
-    private javax.swing.JTextField fieldRA;
     private javax.swing.JFileChooser instChooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -1042,7 +1016,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPane1;
@@ -1078,7 +1051,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuPCAParser;
     private javax.swing.JMenuItem menuSave;
     private javax.swing.JFileChooser saveChooser;
-    private javax.swing.JTextArea textAreaCompilerWindow;
     private javax.swing.JTextArea textAreaInstruction;
     private javax.swing.JTextArea textAreaPrompt;
     private javax.swing.JTextArea textAreaReference;

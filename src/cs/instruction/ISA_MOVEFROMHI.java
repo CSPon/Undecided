@@ -26,7 +26,6 @@ public class ISA_MOVEFROMHI extends ISA_RType
 	@Override
 	public void perform(Internal internal)
 	{
-		if(OPCODE.equalsIgnoreCase("mfhi"))
-			internal.setRegisterVal(RD, internal.getRegisterVal("$HI"));
+		internal.setTo(RD, internal.getFrom("$hi"));
 	}
 }

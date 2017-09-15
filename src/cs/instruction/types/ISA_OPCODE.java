@@ -70,18 +70,18 @@ public abstract class ISA_OPCODE implements Instruction
 		
 		ADDRESS_SELF = PC;
 		
-		if(HEX_OPCODE != 0x02 || HEX_OPCODE != 0x03)
+		if(HEX_OPCODE != 0x02 && HEX_OPCODE != 0x03)
 		{
 			// For branch instructions
+			ADDRESS_JUMP = ADDRESS_JUMP & Architecture.$LOWER_16; // Keep LOWER 16 bits
 			ADDRESS_JUMP = ADDRESS_JUMP >> 2;
-			ADDRESS_JUMP = ADDRESS_JUMP & 0x0000FFFF; // Only keep LOWER 16 bits
 			IMMEDIATE = ADDRESS_JUMP;
 		}
-		else
+		else if(HEX_OPCODE == 0x02 || HEX_OPCODE == 0x03)
 		{
 			// For regular jump instructions
+			ADDRESS_JUMP = ADDRESS_JUMP & Architecture.$LOWER_26; // Keep LOWER 26 bits
 			ADDRESS_JUMP = ADDRESS_JUMP >> 2;
-			ADDRESS_JUMP = ADDRESS_JUMP & 0x03FFFFFF;
 			IMMEDIATE = ADDRESS_JUMP;
 		}
 	}

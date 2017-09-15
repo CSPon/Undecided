@@ -45,12 +45,12 @@ Available function(s) (Checked and working ones only)
 * mult (mult $s, $t)
 * _multu_
 * sra (sra $rd, $rt, shamt)
-* blt (blt $rs, $rt, LABEL)
-* bgt (bgt $rs, $rt, LABEL)
-* ble (ble $rs, $rt, LABEL)
-* bge (bge $rs, $rt, LABEL)
-* li (blt $rd, imm)
-* move (move $rd, $rs)
+* blt (blt $rs, $rt, LABEL) __Deprecated__
+* bgt (bgt $rs, $rt, LABEL) __Deprecated__
+* ble (ble $rs, $rt, LABEL) __Deprecated__
+* bge (bge $rs, $rt, LABEL) __Deprecated__
+* li (blt $rd, imm) __Deprecated__
+* move (move $rd, $rs) __Deprecated__
 ---
 
 ### To use
@@ -94,6 +94,8 @@ __Does not simulate actual memory allocation!__
 1. More Instructions!
 
 2. Implement $gp, $sp, $fp
+
+3. Organize Routine and Architecture
 
 ---
 

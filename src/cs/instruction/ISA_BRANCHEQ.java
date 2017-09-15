@@ -1,5 +1,6 @@
 package cs.instruction;
 
+import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_IType;
 
@@ -32,8 +33,7 @@ public class ISA_BRANCHEQ extends ISA_IType
 		{
 			// BEQ and BNE will take UPPER 16-bits from PC
 			// LOWER 16-bits are acquired from target PC >> 2
-			int UPPER = internal.getPC() >> 16;
-			int JUMP_ADDRESS = (UPPER << 16) | (IMMEDIATE << 2);
+			int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_16) | (IMMEDIATE << 2);
 			// Shouldn't be stopping on actual LABEL but to show step execution
 			JUMP_ADDRESS -= 0x04;
 			internal.setPC(JUMP_ADDRESS);

@@ -31,7 +31,7 @@ public class ISA_JUMPANDLINK extends ISA_JType
 		int SELF_ADDRESS = (ADDRESS_SELF & Architecture.$LOWER_26) >> 2;
 		internal.setRegisterVal("$ra", SELF_ADDRESS);
 		
-		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (ADDRESS_JUMP << 2);
+		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (IMMEDIATE << 2);
 		// Shouldn't be stopping on actual LABEL but to show step execution
 		JUMP_ADDRESS -= 0x04;
 		internal.setPC(JUMP_ADDRESS);

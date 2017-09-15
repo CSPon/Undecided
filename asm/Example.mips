@@ -5,7 +5,6 @@ addi	$s0, $zero, 0x00
 addi	$s1, $zero, 0x01
 lw	$t0, $s0
 lw	$t1, $s1
-j	LOOP
 LOOP:
 slt $t2, $t0, $t1
 beq $t2, $zero, END

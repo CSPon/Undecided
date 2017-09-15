@@ -3,6 +3,7 @@ package cs.instruction;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_OPCODE;
 
+@Deprecated
 public class ISA_BRANCHGE extends ISA_OPCODE
 {
 	public ISA_BRANCHGE(String line)

@@ -1,0 +1,17 @@
+# Single for loop
+
+addi	$s0, $zero, 0x01
+addi	$s1, $zero, 0x00
+addi	$t0, $zero, 0
+addi	$t1, $zero, 0
+lw	$t0, $s0
+lw	$t3, $s1
+LOOP:
+slt	$t2, $t1, $t0
+beq	$t2, $zero, END
+# Do something in loop
+sll	$t3, $t3, 1
+# Then increment
+add	$t1, $t1, $t2
+j	LOOP
+END:

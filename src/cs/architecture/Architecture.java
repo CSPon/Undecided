@@ -107,7 +107,7 @@ public class Architecture
 	
 	public void setRegisterVal(String reg, int val)
 	{
-		REGISTERS_VALS.put(REGISTERS_ADDR.get(reg), val);
+		REGISTERS_VALS.replace(REGISTERS_ADDR.get(reg), val);
 	}
 	
 	public int getMemoryVal(int addr, int offset)

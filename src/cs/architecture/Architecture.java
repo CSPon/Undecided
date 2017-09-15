@@ -7,6 +7,9 @@ public class Architecture
 {
 	/* Constants */
 	public static final int $PC			= 0x00400000;
+	public static final int $SP			= 0x7FFFFFFC;
+	public static final int $GP			= 0x10008000;
+	
 	public static final int $LOWER_26	= 0x03FFFFFF;
 	public static final int $LOWER_16	= 0x0000FFFF;
 	public static final int $UPPER_4	= 0xF0000000;
@@ -48,6 +51,8 @@ public class Architecture
 		RTRN = 0;
 		
 		PC = $PC;
+		setRegisterVal("$sp", $SP);
+		setRegisterVal("$gp", $GP);
 	}
 	
 	public boolean hasSymbol(String LABEL)

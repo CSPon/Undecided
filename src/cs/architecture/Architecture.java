@@ -273,55 +273,46 @@ public class Architecture
 	{
 		int i = 0;
 		REGISTERS_ADDR = new LinkedHashMap<>();
-		REGISTERS_ADDR.put("$zero", i);
+		REGISTERS_ADDR.put("$zero", 0);
 		
-		REGISTERS_ADDR.put("$at", ++i);
+		REGISTERS_ADDR.put("$at", 1);
 		
-		REGISTERS_ADDR.put("$v0", ++i);
-		REGISTERS_ADDR.put("$v1", ++i);
+		REGISTERS_ADDR.put("$v0", 2);
+		REGISTERS_ADDR.put("$v1", 3);
 		
-		REGISTERS_ADDR.put("$a0", ++i);
-		REGISTERS_ADDR.put("$a1", ++i);
-		REGISTERS_ADDR.put("$a2", ++i);
-		REGISTERS_ADDR.put("$a3", ++i);
+		REGISTERS_ADDR.put("$a0", 4);
+		REGISTERS_ADDR.put("$a1", 5);
+		REGISTERS_ADDR.put("$a2", 6);
+		REGISTERS_ADDR.put("$a3", 7);
 		
-		REGISTERS_ADDR.put("$t0", ++i);
-		REGISTERS_ADDR.put("$t1", ++i);
-		REGISTERS_ADDR.put("$t2", ++i);
-		REGISTERS_ADDR.put("$t3", ++i);
-		REGISTERS_ADDR.put("$t4", ++i);
-		REGISTERS_ADDR.put("$t5", ++i);
-		REGISTERS_ADDR.put("$t6", ++i);
-		REGISTERS_ADDR.put("$t7", ++i);
+		REGISTERS_ADDR.put("$t0", 8);
+		REGISTERS_ADDR.put("$t1", 9);
+		REGISTERS_ADDR.put("$t2", 10);
+		REGISTERS_ADDR.put("$t3", 11);
+		REGISTERS_ADDR.put("$t4", 12);
+		REGISTERS_ADDR.put("$t5", 13);
+		REGISTERS_ADDR.put("$t6", 14);
+		REGISTERS_ADDR.put("$t7", 15);
 		
-		REGISTERS_ADDR.put("$t0", ++i);
-		REGISTERS_ADDR.put("$t1", ++i);
-		REGISTERS_ADDR.put("$t2", ++i);
-		REGISTERS_ADDR.put("$t3", ++i);
-		REGISTERS_ADDR.put("$t4", ++i);
-		REGISTERS_ADDR.put("$t5", ++i);
-		REGISTERS_ADDR.put("$t6", ++i);
-		REGISTERS_ADDR.put("$t7", ++i);
+		REGISTERS_ADDR.put("$s0", 16);
+		REGISTERS_ADDR.put("$s1", 17);
+		REGISTERS_ADDR.put("$s2", 18);
+		REGISTERS_ADDR.put("$s3", 19);
+		REGISTERS_ADDR.put("$s4", 20);
+		REGISTERS_ADDR.put("$s5", 21);
+		REGISTERS_ADDR.put("$s6", 22);
+		REGISTERS_ADDR.put("$s7", 23);
 		
-		REGISTERS_ADDR.put("$s0", ++i);
-		REGISTERS_ADDR.put("$s1", ++i);
-		REGISTERS_ADDR.put("$s2", ++i);
-		REGISTERS_ADDR.put("$s3", ++i);
-		REGISTERS_ADDR.put("$s4", ++i);
-		REGISTERS_ADDR.put("$s5", ++i);
-		REGISTERS_ADDR.put("$s6", ++i);
-		REGISTERS_ADDR.put("$s7", ++i);
+		REGISTERS_ADDR.put("$t8", 24);
+		REGISTERS_ADDR.put("$t9", 25);
 		
-		REGISTERS_ADDR.put("$t8", ++i);
-		REGISTERS_ADDR.put("$t9", ++i);
+		REGISTERS_ADDR.put("$k0", 26);
+		REGISTERS_ADDR.put("$k1", 27);
 		
-		REGISTERS_ADDR.put("$k0", ++i);
-		REGISTERS_ADDR.put("$k1", ++i);
-		
-		REGISTERS_ADDR.put("$gp", ++i);
-		REGISTERS_ADDR.put("$sp", ++i);
-		REGISTERS_ADDR.put("$fp", ++i);
-		REGISTERS_ADDR.put("$ra", ++i);
+		REGISTERS_ADDR.put("$gp", 28);
+		REGISTERS_ADDR.put("$sp", 29);
+		REGISTERS_ADDR.put("$fp", 30);
+		REGISTERS_ADDR.put("$ra", 31);
 		
 		REGISTERS_VALS = new LinkedHashMap<>();
 		for(Map.Entry<String, Integer> entry : REGISTERS_ADDR.entrySet())

@@ -31,11 +31,11 @@ public abstract class ISA_OPCODE implements Instruction
 	public ISA_OPCODE(String line)
 	{
 		INSTRUCTION = line;
-		RS = "";
-		RT = "";
-		RD = "";
+		RS = "$zero";
+		RT = "$zero";
+		RD = "$zero";
 		FUNCT = "";
-		ADDR_SELF = "";
+		ADDR_SELF = "$zero";
 		
 		CYCLE_COUNT = 1;
 		

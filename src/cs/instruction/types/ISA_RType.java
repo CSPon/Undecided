@@ -33,32 +33,22 @@ public abstract class ISA_RType extends ISA_OPCODE
 	public String toString(Internal internal)
 	{
 		int HEX = 0x00;
-		HEX |= HEX_OPCODE; HEX = HEX << 6;
-		if(RS.isEmpty())
-		{
-			HEX |= 0x00; HEX = HEX << 5;
-		}
-		else
-		{
-			HEX |= internal.getRegisterAddr(RS); HEX = HEX << 5;
-		}
-		if(RT.isEmpty())
-		{
-			HEX |= 0x00; HEX = HEX << 5;
-		}
-		else
-		{
-			HEX |= internal.getRegisterAddr(RT); HEX = HEX << 5;
-		}
-		if(RD.isEmpty())
-		{
-			HEX |= 0x00; HEX = HEX << 5;			
-		}
-		else
-		{
-			HEX |= internal.getRegisterAddr(RD); HEX = HEX << 5;
-		}
-		HEX |= SHAMT; HEX = HEX << 5;
+		
+		HEX |= HEX_OPCODE;
+		
+		HEX = HEX << 6;
+		HEX |= internal.getRegisterAddr(RS);
+		
+		HEX = HEX << 5;
+		HEX |= internal.getRegisterAddr(RT);
+		
+		HEX = HEX << 5;
+		HEX |= internal.getRegisterAddr(RD);
+		
+		HEX = HEX << 5;
+		HEX |= SHAMT;
+		
+		HEX = HEX << 6;
 		HEX |= HEX_FUNCT;
 		
 		return String.format("0x%08X", HEX);

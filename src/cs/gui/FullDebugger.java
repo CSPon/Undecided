@@ -1,5 +1,6 @@
 package cs.gui;
 
+import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.routine.Routine;
 
@@ -14,9 +15,11 @@ public class FullDebugger extends javax.swing.JFrame
 	
 	private Internal internal;
 	private Routine routine;
+	private MIPSFrame parent;
 	
-    public FullDebugger(Internal _internal, Routine _routine)
+    public FullDebugger(MIPSFrame upper, Internal _internal, Routine _routine)
     {
+    	parent = upper;
     	internal = _internal;
 		routine = _routine;
         initComponents();
@@ -169,33 +172,66 @@ public class FullDebugger extends javax.swing.JFrame
         pack();
     }
 
-    private void buttonAOActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void buttonAOActionPerformed(java.awt.event.ActionEvent evt)
+    {
         // TODO add your handling code here:
-    }                                        
+    }
 
-    private void buttonARActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void buttonARActionPerformed(java.awt.event.ActionEvent evt)
+    {
         // TODO add your handling code here:
-    }                                        
+    }
 
-    private void buttonASEActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void buttonASEActionPerformed(java.awt.event.ActionEvent evt)
+    {
         // TODO add your handling code here:
-    }                                         
+    }
 
-    private void buttonStopActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void buttonStopActionPerformed(java.awt.event.ActionEvent evt)
+    {
         // TODO add your handling code here:
-    }                                          
+    }
 
-    private void buttonCAActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void buttonCAActionPerformed(java.awt.event.ActionEvent evt)
+    {
         // TODO add your handling code here:
-    }                                        
+    }
 
-    private void buttonCMActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
+    private void buttonCMActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        internal.resetMemory();
+        internal.setTo("$sp", Architecture.$SP);
+        internal.setTo("$gp", Architecture.$GP);
+        
+        parent.updateMemoryList();
+        parent.updateRegisterViewer();
+    }
 
-    private void buttonCRActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void buttonCRActionPerformed(java.awt.event.ActionEvent evt)
+    {
         // TODO add your handling code here:
-    }                                        
+    }
+    
+    public void appendMessage(Object error, boolean newline)
+    {
+    	textAreaVerbose.append(error.toString());
+    	if(newline)
+    		textAreaVerbose.append("\n");
+    }
+    
+    public void appendWarning(Object error, boolean newline)
+    {
+    	textAreaVerbose.append(error.toString());
+    	if(newline)
+    		textAreaVerbose.append("\n");
+    }
+    
+    public void appendError(Object error, boolean newline)
+    {
+    	textAreaVerbose.append(error.toString());
+    	if(newline)
+    		textAreaVerbose.append("\n");
+    }
 
     public void init()
     {

@@ -1,5 +1,6 @@
 package cs.instruction;
 
+import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_JType;
 
@@ -26,6 +27,9 @@ public class ISA_JUMP extends ISA_JType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setPC(ADDRESS_JUMP);
+		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (ADDRESS_JUMP << 2);
+		// Shouldn't be stopping on actual LABEL but to show step execution
+		JUMP_ADDRESS -= 0x04;
+		internal.setPC(JUMP_ADDRESS);
 	}
 }

@@ -1,5 +1,6 @@
 package cs.instruction;
 
+import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_JType;
 
@@ -26,7 +27,13 @@ public class ISA_JUMPANDLINK extends ISA_JType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setRegisterVal("$ra", ADDRESS_SELF);
-		internal.setPC(ADDRESS_JUMP);
+		// $ra will have 26-bit address so be sure to shift before jumping from jr!
+		int SELF_ADDRESS = (ADDRESS_SELF & Architecture.$LOWER_26) >> 2;
+		internal.setRegisterVal("$ra", SELF_ADDRESS);
+		
+		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (ADDRESS_JUMP << 2);
+		// Shouldn't be stopping on actual LABEL but to show step execution
+		JUMP_ADDRESS -= 0x04;
+		internal.setPC(JUMP_ADDRESS);
 	}
 }

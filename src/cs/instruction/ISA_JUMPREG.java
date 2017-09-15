@@ -1,5 +1,6 @@
 package cs.instruction;
 
+import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_RType;
 
@@ -19,8 +20,6 @@ public class ISA_JUMPREG extends ISA_RType
 	public void parseReg()
 	{
 		String[] parsed = REGS.split(",");
-		SHAMT = 0;
-		FUNCT = "0";
 		
 		RS = checkReg(parsed[0]);
 	}
@@ -28,6 +27,10 @@ public class ISA_JUMPREG extends ISA_RType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setPC(internal.getRegisterVal(RS));
+		// Preserve UPPER 4 bits from PC, mask with RS (After shifting RS by 2 bits left)
+		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (internal.getRegisterVal(RS) << 2);
+		// Shouldn't be stopping on actual LABEL but to show step execution
+		JUMP_ADDRESS -= 0x04;
+		internal.setPC(JUMP_ADDRESS);
 	}
 }

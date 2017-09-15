@@ -313,7 +313,8 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         listOPCODES.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         listOPCODES.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
+			private static final long serialVersionUID = 1L;
+			String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -741,11 +742,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     private void buttonCompileOnlyActionPerformed(java.awt.event.ActionEvent evt)
     {
     	routine.clearInstruction();
-    	String[] instructions = textAreaInstruction.getText().split("\n");
-    	for(String instruction : instructions)
-    	{
-    		parser.parseSingle(instruction, routine);
-    	}
+    	assemble();
+    	
     	routine.compile();
     	// Moved to Full Debugger Window
 //    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
@@ -806,10 +804,17 @@ public class MIPSFrame extends javax.swing.JFrame {
     	{
     		routine.execute(internal.getPC());
         	internal.setPC(internal.getPC() + 0x04);
+        	
+        	updateDebugger();
+        	updateMemoryList();
+        	updatePCAddressList();
+        	updateRegisterViewer();
+        	updatePCAddressPosition();
     	}
     	
     	if(internal.getPC() > routine.getInstructionEnd())
-    	{	
+    	{
+    		internal.setPC(Architecture.$PC);
     		listPCAddress.setSelectedIndex(-1);
     		listOPCODE.setSelectedIndex(-1);
     		
@@ -819,13 +824,12 @@ public class MIPSFrame extends javax.swing.JFrame {
 //        		textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
     		
     		routine.resetCYCLE();
+    		
+    		updateDebugger();
+        	updateMemoryList();
+        	updateRegisterViewer();
+        	updatePCAddressPosition();
     	}
-    	
-    	updateDebugger();
-    	updateMemoryList();
-    	updatePCAddressList();
-    	updateRegisterViewer();
-    	updatePCAddressPosition();
     }
 
     private void buttonStopActionPerformed(java.awt.event.ActionEvent evt)

@@ -1,5 +1,6 @@
 # For testing and reference
-# Load memory first (Memory.mem)
+MAIN:
+	
 INIT:
 addi	$s0, $zero, 0x00
 addi	$s1, $zero, 0x01

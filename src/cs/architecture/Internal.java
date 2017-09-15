@@ -110,84 +110,30 @@ public class Internal
 	
 	public int getFrom(String NAME)
 	{
-		NAME = NAME.toUpperCase();
 		if(NAME.startsWith("$"))
 		{
 			if(NAME.contains("ZERO"))
 				return arc.getZero();
-			else if(NAME.contains("HI"))
+			else if(NAME.contains("hi"))
 				return arc.getHI();
-			else if(NAME.contains("LO"))
+			else if(NAME.contains("lo"))
 				return arc.getLO();
-			else if(NAME.contains("AT"))
-				return arc.getAT();
-			else if(NAME.contains("GP"))
-				return arc.getGLBP();
-			else if(NAME.contains("SP"))
-				return arc.getSTKP();
-			else if(NAME.contains("FP"))
-				return arc.getFRMP();
-			else if(NAME.contains("RA"))
-				return arc.getRTRN();
-			else if(NAME.contains("A") && NAME.charAt(1) == 'A')
-			{
-				return arc.getARGS((int)(NAME.charAt(2) - 48));
-			}
-			else if(NAME.contains("S") && NAME.charAt(1) == 'S')
-			{
-				return arc.getSEMP((int)(NAME.charAt(2) - 48));
-			}
-			else if(NAME.contains("T") && NAME.charAt(1) == 'T')
-			{
-				return arc.getTEMP((int)(NAME.charAt(2) - 48));
-			}
-			else if(NAME.contains("V") && NAME.charAt(1) == 'V')
-			{
-				return arc.getVALS((int)(NAME.charAt(2) - 48));
-			}
+			else
+				return arc.getRegisterVal(NAME);
 		}
 		return -1;
 	}
 	
 	public void setTo(String NAME, int val)
 	{
-		NAME = NAME.toUpperCase();
 		if(NAME.startsWith("$"))
 		{
-			if(NAME.contains("HI"))
+			if(NAME.contains("hi"))
 				arc.setHI(val);
-			else if(NAME.contains("LO"))
+			else if(NAME.contains("lo"))
 				arc.setLO(val);
-			else if(NAME.contains("AT"))
-				arc.setAT(val);
-			else if(NAME.contains("GP"))
-				arc.setGLBP(val);
-			else if(NAME.contains("SP"))
-				arc.setSTKP(val);
-			else if(NAME.contains("FP"))
-				arc.setFRMP(val);
-			else if(NAME.contains("RA"))
-				arc.setRTRN(val);
-			if(NAME.contains("A") && NAME.charAt(1) == 'A')
-			{
-				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setARGS(addr, val);
-			}
-			else if(NAME.contains("S") && NAME.charAt(1) == 'S')
-			{
-				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setSEMP(addr, val);
-			}
-			else if(NAME.contains("T") && NAME.charAt(1) == 'T')
-			{
-				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setTEMP(addr, val);
-			}
-			else if(NAME.contains("V") && NAME.charAt(1) == 'V')
-			{
-				int addr = (int)(NAME.charAt(2) - 48);
-				arc.setVALS(addr, val);
-			}
+			else
+				arc.setRegisterVal(NAME, val);
 		}
 	}
 	

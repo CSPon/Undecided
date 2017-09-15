@@ -24,19 +24,14 @@ public class Architecture
 	private int[]		MEM;
 	
 	/* New Version */
-	private LinkedHashMap<String, Integer> REGISTERS_ADDR;
-	private LinkedHashMap<Integer, Integer> REGISTERS_VALS;
-	private LinkedHashMap<Integer, Integer> MEMORY;
+	private LinkedHashMap<String, Integer>	REGISTERS_ADDR;
+	private LinkedHashMap<Integer, Integer>	REGISTERS_VALS;
+	private LinkedHashMap<Integer, Integer>	MEMORY;
+	private LinkedHashMap<String, Integer>	SYMBOL_TABLE;
 	
 	public Architecture()
 	{
 		assignVal();
-		
-		VALS = new int[2];
-		ARGS = new int[4];
-		TEMP = new int[10];
-		SEMP = new int[8];
-		ROSK = new int[2];
 		
 		HI = 0;
 		LO = 0;
@@ -47,9 +42,27 @@ public class Architecture
 		FRMP = 0;
 		RTRN = 0;
 		
-		MEM = new int[0xFF + 1];
-		
 		PC = $PC;
+	}
+	
+	public boolean hasSymbol(String LABEL)
+	{
+		return SYMBOL_TABLE.get(LABEL) != null ? true : false;
+	}
+	
+	public int getSymbolAddress(String LABEL)
+	{
+		return SYMBOL_TABLE.get(LABEL);
+	}
+	
+	public LinkedHashMap<String, Integer> getSymbolTable()
+	{
+		return SYMBOL_TABLE;
+	}
+	
+	public void addSymbol(String LABEL, int ADDRESS)
+	{
+		SYMBOL_TABLE.put(LABEL, ADDRESS);
 	}
 	
 	public LinkedHashMap<Integer, Integer> getRegisterVals()
@@ -65,6 +78,11 @@ public class Architecture
 	public LinkedHashMap<Integer, Integer> getMemory()
 	{
 		return MEMORY;
+	}
+	
+	public void resetMemory()
+	{
+		MEMORY.clear();
 	}
 	
 	public int getRegisterAddress(String reg)
@@ -261,58 +279,50 @@ public class Architecture
 		this.PC = _PC;
 	}
 	
-	public void resetMEM()
-	{
-		for(int i = 0; i < MEM.length; i++)
-		{
-			MEM[i] = 0;
-		}
-	}
-	
 	private void assignVal()
 	{
 		int i = 0;
 		REGISTERS_ADDR = new LinkedHashMap<>();
-		REGISTERS_ADDR.put("$zero", 0);
+		REGISTERS_ADDR.put("$zero", i);
 		
-		REGISTERS_ADDR.put("$at", 1);
+		REGISTERS_ADDR.put("$at", ++i);
 		
-		REGISTERS_ADDR.put("$v0", 2);
-		REGISTERS_ADDR.put("$v1", 3);
+		REGISTERS_ADDR.put("$v0", ++i);
+		REGISTERS_ADDR.put("$v1", ++i);
 		
-		REGISTERS_ADDR.put("$a0", 4);
-		REGISTERS_ADDR.put("$a1", 5);
-		REGISTERS_ADDR.put("$a2", 6);
-		REGISTERS_ADDR.put("$a3", 7);
+		REGISTERS_ADDR.put("$a0", ++i);
+		REGISTERS_ADDR.put("$a1", ++i);
+		REGISTERS_ADDR.put("$a2", ++i);
+		REGISTERS_ADDR.put("$a3", ++i);
 		
-		REGISTERS_ADDR.put("$t0", 8);
-		REGISTERS_ADDR.put("$t1", 9);
-		REGISTERS_ADDR.put("$t2", 10);
-		REGISTERS_ADDR.put("$t3", 11);
-		REGISTERS_ADDR.put("$t4", 12);
-		REGISTERS_ADDR.put("$t5", 13);
-		REGISTERS_ADDR.put("$t6", 14);
-		REGISTERS_ADDR.put("$t7", 15);
+		REGISTERS_ADDR.put("$t0", ++i);
+		REGISTERS_ADDR.put("$t1", ++i);
+		REGISTERS_ADDR.put("$t2", ++i);
+		REGISTERS_ADDR.put("$t3", ++i);
+		REGISTERS_ADDR.put("$t4", ++i);
+		REGISTERS_ADDR.put("$t5", ++i);
+		REGISTERS_ADDR.put("$t6", ++i);
+		REGISTERS_ADDR.put("$t7", ++i);
 		
-		REGISTERS_ADDR.put("$s0", 16);
-		REGISTERS_ADDR.put("$s1", 17);
-		REGISTERS_ADDR.put("$s2", 18);
-		REGISTERS_ADDR.put("$s3", 19);
-		REGISTERS_ADDR.put("$s4", 20);
-		REGISTERS_ADDR.put("$s5", 21);
-		REGISTERS_ADDR.put("$s6", 22);
-		REGISTERS_ADDR.put("$s7", 23);
+		REGISTERS_ADDR.put("$s0", ++i);
+		REGISTERS_ADDR.put("$s1", ++i);
+		REGISTERS_ADDR.put("$s2", ++i);
+		REGISTERS_ADDR.put("$s3", ++i);
+		REGISTERS_ADDR.put("$s4", ++i);
+		REGISTERS_ADDR.put("$s5", ++i);
+		REGISTERS_ADDR.put("$s6", ++i);
+		REGISTERS_ADDR.put("$s7", ++i);
 		
-		REGISTERS_ADDR.put("$t8", 24);
-		REGISTERS_ADDR.put("$t9", 25);
+		REGISTERS_ADDR.put("$t8", ++i);
+		REGISTERS_ADDR.put("$t9", ++i);
 		
-		REGISTERS_ADDR.put("$k0", 26);
-		REGISTERS_ADDR.put("$k1", 27);
+		REGISTERS_ADDR.put("$k0", ++i);
+		REGISTERS_ADDR.put("$k1", ++i);
 		
-		REGISTERS_ADDR.put("$gp", 28);
-		REGISTERS_ADDR.put("$sp", 29);
-		REGISTERS_ADDR.put("$fp", 30);
-		REGISTERS_ADDR.put("$ra", 31);
+		REGISTERS_ADDR.put("$gp", ++i);
+		REGISTERS_ADDR.put("$sp", ++i);
+		REGISTERS_ADDR.put("$fp", ++i);
+		REGISTERS_ADDR.put("$ra", ++i);
 		
 		REGISTERS_VALS = new LinkedHashMap<>();
 		for(Map.Entry<String, Integer> entry : REGISTERS_ADDR.entrySet())
@@ -321,64 +331,8 @@ public class Architecture
 		}
 		
 		MEMORY = new LinkedHashMap<>();
-	}
-	
-	public void printAll()
-	{
-		System.out.print("$zero: "); System.out.println(0);
-		System.out.println();
 		
-		System.out.print("$at: "); printlnHex(getAT());
-		System.out.println();
-		
-		System.out.print("$v0: "); printlnHex(getVALS(0));
-		System.out.print("$v1: "); printlnHex(getVALS(1));
-		System.out.println();
-		
-		System.out.print("$a0: "); printlnHex(getARGS(0));
-		System.out.print("$a1: "); printlnHex(getARGS(1));
-		System.out.print("$a2: "); printlnHex(getARGS(2));
-		System.out.print("$a3: "); printlnHex(getARGS(3));
-		System.out.println();
-		
-		System.out.print("$t0: "); printlnHex(getTEMP(0));
-		System.out.print("$t1: "); printlnHex(getTEMP(1));
-		System.out.print("$t2: "); printlnHex(getTEMP(2));
-		System.out.print("$t3: "); printlnHex(getTEMP(3));
-		System.out.print("$t4: "); printlnHex(getTEMP(4));
-		System.out.print("$t5: "); printlnHex(getTEMP(5));
-		System.out.print("$t6: "); printlnHex(getTEMP(6));
-		System.out.print("$t7: "); printlnHex(getTEMP(7));
-		System.out.print("$t8: "); printlnHex(getTEMP(8));
-		System.out.print("$t9: "); printlnHex(getTEMP(9));
-		System.out.println();
-		
-		System.out.print("$s0: "); printlnHex(getSEMP(0));
-		System.out.print("$s1: "); printlnHex(getSEMP(1));
-		System.out.print("$s2: "); printlnHex(getSEMP(2));
-		System.out.print("$s3: "); printlnHex(getSEMP(3));
-		System.out.print("$s4: "); printlnHex(getSEMP(4));
-		System.out.print("$s5: "); printlnHex(getSEMP(5));
-		System.out.print("$s6: "); printlnHex(getSEMP(6));
-		System.out.print("$s7: "); printlnHex(getSEMP(7));
-		System.out.println();
-		
-		System.out.print("$k0: "); printlnHex(getROSK(0));
-		System.out.print("$k1: "); printlnHex(getROSK(1));
-		System.out.println();
-		
-		System.out.print("$gp: "); printlnHex(getGLBP());
-		System.out.print("$sp: "); printlnHex(getSTKP());
-		System.out.print("$fp: "); printlnHex(getFRMP());
-		System.out.print("$ra: "); printlnHex(getRTRN());
-		
-		System.out.println();
-		
-		for(int i = 0; i < MEM.length; i++)
-		{
-			printHex(i); System.out.print(" ");
-			printlnHex(MEM[i]);			
-		}
+		SYMBOL_TABLE = new LinkedHashMap<>();
 	}
 	
 	public int getAddress(String reg)
@@ -450,27 +404,16 @@ public class Architecture
 		else return 0xFF;
 	}
 	
-	public static void printHex(int val)
+	public static String toHex(int val)
 	{
-		String t = String.format("0x%04x", val);
-		System.out.print(t);
+		String t = String.format("0x%08x", val);
+		return t;
 	}
 	
-	public static void printlnHex(int val)
+	public static String toBinary(int val)
 	{
-		String t = String.format("0x%04x", val);
-		System.out.println(t);
-	}
-	
-	public static void printBinary(int val)
-	{
-		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
-		System.out.print(t);
-	}
-	
-	public static void printlnBinary(int val)
-	{
-		String t = String.format("%32s", Integer.toBinaryString(val)).replace(' ', '0');
-		System.out.println(t);
-	}
+		String t = String.format("%32s", Integer.toBinaryString(val));
+		t = t.replace(" ", "0");
+		return t;
+	} 
 }

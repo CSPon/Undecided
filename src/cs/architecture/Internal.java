@@ -14,6 +14,26 @@ public class Internal
 		this.arc = new Architecture();
 	}
 	
+	public boolean hasSymbol(String LABEL)
+	{
+		return arc.hasSymbol(LABEL);
+	}
+	
+	public int getSymbolAddress(String LABEL)
+	{
+		return arc.getSymbolAddress(LABEL);
+	}
+	
+	public LinkedHashMap<String, Integer> getSymbolTable()
+	{
+		return arc.getSymbolTable();
+	}
+	
+	public void addSymbol(String LABEL, int ADDRESS)
+	{
+		arc.addSymbol(LABEL, ADDRESS);
+	}
+	
 	public LinkedHashMap<Integer, Integer> getRegisterVals()
 	{
 		return arc.getRegisterVals();
@@ -29,21 +49,20 @@ public class Internal
 		return arc.getMemory();
 	}
 	
+	public void resetMemory()
+	{
+		arc.resetMemory();
+	}
+	
 	public int getAddress(String reg)
 	{
 		return arc.getAddress(reg);
 	}
 	
-	public void printAll()
-	{
-		arc.printAll();
-	}
-	
-	public void resetMEM()
-	{
-		arc.resetMEM();
-	}
-	
+	/**
+	 * Returns current Program Counter
+	 * @return
+	 */
 	public int getPC()
 	{
 		return arc.getPC();

@@ -13,7 +13,7 @@ public class Routine
 {
 	private Internal internal;
 	
-	private LinkedHashMap<Integer, ISA_OPCODE> _INSTRUCTIONS;
+	private LinkedHashMap<Integer, ISA_OPCODE> INSTRUCTIONS;
 	
 	private int CYCLE_COUNTS;
 	
@@ -22,9 +22,14 @@ public class Routine
 	public Routine(Internal _internal)
 	{
 		this.internal = _internal;
-		_INSTRUCTIONS = new LinkedHashMap<>();
+		INSTRUCTIONS = new LinkedHashMap<>();
 		
 		CYCLE_COUNTS = 0;
+	}
+	
+	public int getInstructionEnd()
+	{
+		return LAST_PC;
 	}
 	
 	public int getCYCLE()
@@ -39,45 +44,46 @@ public class Routine
 	
 	public String getOPCODE(int i)
 	{
-		return _INSTRUCTIONS.get(i).getOPCODE();
+		return INSTRUCTIONS.get(i).getOPCODE();
 	}
 	
 	public String getREGS(int i)
 	{
-		return _INSTRUCTIONS.get(i).getREGS();
+		return INSTRUCTIONS.get(i).getREGS();
 	}
 	
 	public LinkedHashMap<Integer, ISA_OPCODE> getInstructions()
 	{
-		return _INSTRUCTIONS;
+		return INSTRUCTIONS;
 	}
 	
 	public int getInstructionsCount()
 	{
-		return _INSTRUCTIONS.size();
+		return INSTRUCTIONS.size();
 	}
 	
 	public int getInstructionPC(int i)
 	{
-		return _INSTRUCTIONS.get(i).getPC();
+		return INSTRUCTIONS.get(i).getPC();
 	}
 	
 	public void clearInstruction()
 	{
-		_INSTRUCTIONS.clear();
+		INSTRUCTIONS.clear();
 	}
 	
 	public void addInstruction(String line)
 	{
-		int PC = Architecture.$PC + (_INSTRUCTIONS.size() * 0x04);
-		_INSTRUCTIONS.put(PC, internal.getType(line));
+		int PC = Architecture.$PC + (INSTRUCTIONS.size() * 0x04);
+		INSTRUCTIONS.put(PC, internal.getType(line));
 		LAST_PC = PC;
 	}
 	
 	public void addLabel(String line)
 	{
-		int PC = Architecture.$PC + (_INSTRUCTIONS.size() * 0x04);
-		_INSTRUCTIONS.put(PC, new ISA_LABEL(line));
+		int PC = Architecture.$PC + (INSTRUCTIONS.size() * 0x04);
+		INSTRUCTIONS.put(PC, new ISA_LABEL(line));
+		internal.addSymbol(line, PC);
 		LAST_PC = PC;
 	}
 	
@@ -86,7 +92,7 @@ public class Routine
 		CYCLE_COUNTS = 0;
 		internal.setPC(Architecture.$PC);
 		
-		while(_INSTRUCTIONS.get(internal.getPC()) != null)
+		while(INSTRUCTIONS.get(internal.getPC()) != null)
 		{
 			execute(internal.getPC());
 			internal.setPC(internal.getPC() + 0x04);
@@ -100,49 +106,43 @@ public class Routine
 	 */
 	public void execute(int pc)
 	{
-		if(pc >= LAST_PC)
-		{
-			CYCLE_COUNTS = 0;
-			compile();
-			internal.setPC(Architecture.$PC);
-		}
-		else
-		{
-			_INSTRUCTIONS.get(pc).perform(internal);
-			if(!(_INSTRUCTIONS.get(pc) instanceof ISA_LABEL))
-					CYCLE_COUNTS += _INSTRUCTIONS.get(pc).getCYCLE();
-		}
+		INSTRUCTIONS.get(pc).perform(internal);
+		if(!(INSTRUCTIONS.get(pc) instanceof ISA_LABEL))
+				CYCLE_COUNTS += INSTRUCTIONS.get(pc).getCYCLE();
 	}
 	
 	public void compile()
 	{
-		for(Map.Entry<Integer, ISA_OPCODE> entry : _INSTRUCTIONS.entrySet())
+		// Add all LABELs to Symbol Table first
+		for(Map.Entry<Integer, ISA_OPCODE> entry : INSTRUCTIONS.entrySet())
+			if(entry.getValue() instanceof ISA_LABEL)
+				entry.getValue().setPC(internal);
+		
+		// Then link all J-Type and Branches to target LABEL
+		for(Map.Entry<Integer, ISA_OPCODE> entry : INSTRUCTIONS.entrySet())
 		{
 			if(entry.getValue() instanceof ISA_JUMP)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
+				entry.getValue().parseJump(internal, entry.getKey());
 			else if(entry.getValue() instanceof ISA_JUMPANDLINK)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
+				entry.getValue().parseJump(internal, entry.getKey());
 			else if(entry.getValue() instanceof ISA_BRANCHEQ)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
+				entry.getValue().parseJump(internal, entry.getKey());
 			else if(entry.getValue() instanceof ISA_BRANCHNE)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
+				entry.getValue().parseJump(internal, entry.getKey());
 			else if(entry.getValue() instanceof ISA_BRANCHLT)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
+				entry.getValue().parseJump(internal, entry.getKey());
 			else if(entry.getValue() instanceof ISA_BRANCHGT)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
+				entry.getValue().parseJump(internal, entry.getKey());
 			else if(entry.getValue() instanceof ISA_BRANCHLE)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
+				entry.getValue().parseJump(internal, entry.getKey());
 			else if(entry.getValue() instanceof ISA_BRANCHGE)
-				entry.getValue().parseJump(this, entry.getValue().getPC());
-			
-			if(entry.getValue() instanceof ISA_LABEL)
-				entry.getValue().setPC(entry.getKey());
+				entry.getValue().parseJump(internal, entry.getKey());
 		}
 	}
 	
 	public int getLabelAddr(String ADDR, int currentPos)
 	{
-		for(Map.Entry<Integer, ISA_OPCODE> entry : _INSTRUCTIONS.entrySet())
+		for(Map.Entry<Integer, ISA_OPCODE> entry : INSTRUCTIONS.entrySet())
 		{
 			if(entry.getValue() instanceof ISA_LABEL)
 				if(entry.getValue().getADDR_SELF().compareTo(ADDR) == 0)

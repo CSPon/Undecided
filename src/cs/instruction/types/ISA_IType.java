@@ -7,14 +7,13 @@ public abstract class ISA_IType extends ISA_OPCODE
 	public ISA_IType(String line)
 	{
 		super(line);
-		IMMEDIATE = 0;
 	}
 	
 	@Override
 	public void parseFull()
 	{
 		OPCODE = INSTRUCTION.split(" ")[0];
-		REGS = INSTRUCTION.substring(INSTRUCTION.indexOf(" ") + 1);
+		REGS = INSTRUCTION.split(" ")[1];
 		REGS = REGS.replaceAll(" ", "");
 	}
 	

@@ -69,7 +69,10 @@ public class Routine
 	
 	public void clearInstruction()
 	{
-		INSTRUCTIONS.clear();
+		while(!INSTRUCTIONS.isEmpty())
+			INSTRUCTIONS.clear();
+		
+		LAST_PC = Architecture.$PC;
 	}
 	
 	public void addInstruction(String line)

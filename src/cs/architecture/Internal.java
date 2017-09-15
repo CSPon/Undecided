@@ -208,7 +208,7 @@ public class Internal
 		line = line.trim();
 		line = line.replace(", ", ":");
 		line = line.replace(" ", ":");
-		String[] parsed = line.split("\\:");
+		String[] parsed = line.split(":");
 		
 		String INSTRUCTION = parsed[0] + " ";
 		for(int i = 1; i < parsed.length - 1; i++)

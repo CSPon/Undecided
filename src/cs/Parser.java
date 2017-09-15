@@ -17,6 +17,7 @@ public class Parser
 	public void parseSingle(String line, Routine routine)
 	{
 		line = line.replaceAll("#.{1,}", "");
+		line = line.trim();
 		if(!line.isEmpty())
 		{
 			if(line.contains(":"))

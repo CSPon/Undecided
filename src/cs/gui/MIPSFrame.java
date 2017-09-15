@@ -636,62 +636,6 @@ public class MIPSFrame extends javax.swing.JFrame {
         }
     }
     
-    private void menuLoadQ0ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(0);
-    	
-    }
-    
-    private void menuLoadQ1ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(1);
-    }
-
-    private void menuLoadQ2ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(2);
-    }
-
-    private void menuLoadQ3ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(3);
-    }
-
-    private void menuLoadQ4ActionPerformed(java.awt.event.ActionEvent evt) 
-    {
-    	loadQuestion(4);
-    }
-
-    private void menuLoadQ5ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(5);
-    }
-
-    private void menuLoadQ6ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(6);
-    }
-
-    private void menuLoadQ7ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(7);
-    }
-
-    private void menuLoadQ8ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(8);
-    }
-
-    private void menuLoadQ9ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(9);
-    }
-
-    private void menuLoadQ10ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	loadQuestion(10);
-    }
-    
     private void menuLoadCustomQuestionActionPerformed(java.awt.event.ActionEvent evt)
     {                                                       
     	int returnVal = instChooser.showOpenDialog(this);
@@ -748,6 +692,9 @@ public class MIPSFrame extends javax.swing.JFrame {
     	// Moved to Full Debugger Window
 //    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
+    	internal.resetMemory();
+    	internal.resetRegisters();
+    	
     	updateDebugger();
     	updateMemoryList();
     	updatePCAddressList();
@@ -758,6 +705,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt)
     {
     	routine.clearInstruction();
+    	
     	assemble();
     	
     	routine.compile();
@@ -840,6 +788,9 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listPCAddress.ensureIndexIsVisible(internal.getPC());
     	listOPCODE.setSelectedIndex(internal.getPC());
     	listOPCODE.ensureIndexIsVisible(internal.getPC());
+    	
+    	internal.resetMemory();
+    	internal.resetRegisters();
     	
     	updateDebugger();
     	updateMemoryList();
@@ -1007,6 +958,62 @@ public class MIPSFrame extends javax.swing.JFrame {
     	format += String.format(" (%-10d)", value);
     	
     	return format;
+    }
+    
+    private void menuLoadQ0ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(0);
+    	
+    }
+    
+    private void menuLoadQ1ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(1);
+    }
+
+    private void menuLoadQ2ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(2);
+    }
+
+    private void menuLoadQ3ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(3);
+    }
+
+    private void menuLoadQ4ActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+    	loadQuestion(4);
+    }
+
+    private void menuLoadQ5ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(5);
+    }
+
+    private void menuLoadQ6ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(6);
+    }
+
+    private void menuLoadQ7ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(7);
+    }
+
+    private void menuLoadQ8ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(8);
+    }
+
+    private void menuLoadQ9ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(9);
+    }
+
+    private void menuLoadQ10ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    	loadQuestion(10);
     }
 
     public void init() {

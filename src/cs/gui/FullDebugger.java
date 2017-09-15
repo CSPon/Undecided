@@ -209,7 +209,9 @@ public class FullDebugger extends javax.swing.JFrame
 
     private void buttonCRActionPerformed(java.awt.event.ActionEvent evt)
     {
-        // TODO add your handling code here:
+    	internal.resetRegisters();
+    	
+    	parent.updateRegisterViewer();
     }
     
     public void appendMessage(Object error, boolean newline)

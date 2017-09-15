@@ -44,13 +44,13 @@ public abstract class ISA_IType extends ISA_OPCODE
 		int HEX = 0x00;
 		HEX |= HEX_OPCODE;
 		
-		HEX = HEX << 6;
+		HEX = HEX << 5;
 		HEX |= internal.getRegisterAddr(RS);
 		
 		HEX = HEX << 5;
 		HEX |= internal.getRegisterAddr(RT);
 		
-		HEX = HEX << 5;
+		HEX = HEX << 16;
 		HEX |= IMM;
 		
 		return String.format("0x%08X", HEX);

@@ -42,7 +42,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     	refs = new References();
     	
     	pcav = new PCAddressViewer(_internal, _routine);
-    	fd = new FullDebugger(_internal, _routine);
+    	fd = new FullDebugger(this, _internal, _routine);
     	
         initComponents();
         
@@ -891,15 +891,18 @@ public class MIPSFrame extends javax.swing.JFrame {
     
     public void updatePCAddressPosition()
     {
-    	String address = String.format("0x%08X", internal.getPC());
-    	int index = listPCAddress.getNextMatch(address, 0, Position.Bias.Forward);
-    	
-    	listPCAddress.setSelectedIndex(index);
-    	listPCAddress.ensureIndexIsVisible(index);
-    	listOPCODE.setSelectedIndex(index);
-    	listOPCODE.ensureIndexIsVisible(index);
-    	
-    	pcav.updatePositions();
+    	if(listPCAddress.getModel().getSize() > 0)
+    	{
+    		String address = String.format("0x%08X", internal.getPC());
+        	int index = listPCAddress.getNextMatch(address, 0, Position.Bias.Forward);
+        	
+        	listPCAddress.setSelectedIndex(index);
+        	listPCAddress.ensureIndexIsVisible(index);
+        	listOPCODE.setSelectedIndex(index);
+        	listOPCODE.ensureIndexIsVisible(index);
+        	
+        	pcav.updatePositions();
+    	}
     }
     
     public void updateMemoryList()
@@ -911,38 +914,76 @@ public class MIPSFrame extends javax.swing.JFrame {
         	memoryList.addElement(String.format("0x%08X: 0x%08X", entry.getKey(), entry.getValue()));
         }
         listMemory.setModel(memoryList);
+        
+        if(listMemory.getModel().getSize() > 0)
+        {
+        	String address = String.format("0x%08X", internal.getFrom("$sp"));
+        	int index = listMemory.getNextMatch(address, 0, Position.Bias.Forward);
+        	
+        	listMemory.setSelectedIndex(index);
+        	listMemory.ensureIndexIsVisible(index);
+        }
     }
     
     public void updatePCAddressList()
     {
+    	boolean finished = false;
     	DefaultListModel<String> pcList = new DefaultListModel<String>();
     	DefaultListModel<String> regList = new DefaultListModel<String>();
     	
     	for(Map.Entry<Integer, ISA_OPCODE> entry : routine.getInstructions().entrySet())
     	{
-    		pcList.addElement(String.format("0x%08X", entry.getKey()));
-    		regList.addElement(entry.getValue().getOPCODE() + " " + entry.getValue().getREGS());
+    		if(entry.getValue() == null)
+    		{
+    			fd.appendError("Fail to add instruction: OPCODE returned NULL", true);
+    			fd.appendError("Assembler will stop and clear", true);
+    			routine.clearInstruction();
+    			finished = false;
+    			break;
+    		}
+    		else
+    		{
+    			pcList.addElement(String.format("0x%08X", entry.getKey()));
+        		if(entry.getValue().getOPCODE() == null)
+        		{
+        			fd.appendError("Fail to add instruction: OPCODE not found", true);
+        			fd.appendError("Assembler will stop and clear", true);
+        			routine.clearInstruction();
+        			finished = false;
+        			break;
+        		}
+        		else if(entry.getValue().getREGS() == null)
+        		{
+        			fd.appendError("Fail to add instruction: INSTRCUTIONS not found", true);
+        			fd.appendError("Assembler will stop and clear", true);
+        			routine.clearInstruction();
+        			finished = false;
+        			break;
+        		}
+        		else
+        		{
+        			regList.addElement(entry.getValue().getOPCODE() + " " + entry.getValue().getREGS());
+        			finished = true;
+        		}
+    		}
     	}
     	
-    	listPCAddress.setModel(pcList);
-    	listOPCODE.setModel(regList);
-    	
-    	pcav.updateViewers();
+    	if(finished)
+    	{
+    		listPCAddress.setModel(pcList);
+        	listOPCODE.setModel(regList);
+        	
+        	pcav.updateViewers();    		
+    	}
     }
     
     private void updateDebugger()
     {
-    	String format = "0x";
-    	format += String.format("%04X", internal.getPC()).toUpperCase();
-    	fieldPC.setText(format);
+    	fieldPC.setText(String.format("0x%08X", internal.getPC()));
     	
-    	format = "0x";
-    	format += String.format("%04X", internal.getFrom("$HI"));
-    	fieldHI.setText(format);
+    	fieldHI.setText(String.format("0x%08X", internal.getFrom("$hi")));
     	
-    	format = "0x";
-    	format += String.format("%04X", internal.getFrom("$LO"));
-    	fieldLO.setText(format);
+    	fieldLO.setText(String.format("0x%08X", internal.getFrom("$lo")));
     }
     
     public void updateRegisterViewer()

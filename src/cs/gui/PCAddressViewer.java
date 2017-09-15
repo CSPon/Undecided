@@ -160,12 +160,15 @@ public class PCAddressViewer extends javax.swing.JFrame
     	String address = String.format("0x%08X", internal.getPC());
     	int index = listPC.getNextMatch(address, 0, Position.Bias.Forward);
     	
-    	listPC.setSelectedIndex(index);
-    	listPC.ensureIndexIsVisible(index);
-    	listOPCODE.setSelectedIndex(index);
-    	listOPCODE.ensureIndexIsVisible(index);
-    	listHEX.setSelectedIndex(index);
-    	listHEX.ensureIndexIsVisible(index);
+    	if(index != -1)
+    	{
+    		listPC.setSelectedIndex(index);
+        	listPC.ensureIndexIsVisible(index);
+        	listOPCODE.setSelectedIndex(index);
+        	listOPCODE.ensureIndexIsVisible(index);
+        	listHEX.setSelectedIndex(index);
+        	listHEX.ensureIndexIsVisible(index);
+    	}
     }
     
     public void updatePositions(int index)

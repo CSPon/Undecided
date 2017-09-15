@@ -40,7 +40,13 @@ public class ISA_BRANCHLE extends ISA_OPCODE
 	public void perform(Internal internal)
 	{
 		if(internal.getRegisterVal(RS) <= internal.getRegisterVal(RT))
-			internal.setPC(ADDRESS_JUMP);
+		{
+			int UPPER = internal.getPC() >> 28;
+			int JUMP_ADDRESS = (UPPER << 28) | (ADDRESS_JUMP << 2);
+			// Shouldn't be stopping on actual LABEL but to show step execution
+			JUMP_ADDRESS -= 0x04;
+			internal.setPC(JUMP_ADDRESS);
+		}
 	}
 
 	@Override

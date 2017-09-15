@@ -29,6 +29,14 @@ public class ISA_BRANCHNE extends ISA_IType
 	public void perform(Internal internal)
 	{
 		if(internal.getRegisterVal(RS) != internal.getRegisterVal(RT))
-			internal.setPC(ADDRESS_JUMP);
+		{
+			// BEQ and BNE will take UPPER 16-bits from PC
+			// LOWER 16-bits are acquired from target PC >> 2
+			int UPPER = internal.getPC() >> 16;
+			int JUMP_ADDRESS = (UPPER << 16) | (IMMEDIATE << 2);
+			// Shouldn't be stopping on actual LABEL but to show step execution
+			JUMP_ADDRESS -= 0x04;
+			internal.setPC(JUMP_ADDRESS);
+		}
 	}
 }

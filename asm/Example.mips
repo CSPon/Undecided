@@ -1,19 +1,65 @@
 # For testing and reference
 MAIN:
+	# Set argument as 5
+	addi	$a0, $zero, 5
 	
-INIT:
-addi	$s0, $zero, 0x00
-addi	$s1, $zero, 0x01
-lw	$t0, 0($s0)
-lw	$t1, 0($s1)
-L1:
-slt $t3, $t2, $t0
-beq $t3, $zero, L2
-add $t2, $t2, $t3
-j L1
-L2:
-slt $t5, $t4, $t1
-beq $t5, $zero, END
-add $t4, $t4, $t5
-j L2
-END:
+	# Set return var $v0
+	addi	$v0, $zero, 0
+	
+	jal	L1O # Jump to L1O
+	
+	j EXIT
+	
+L1O:
+	# Push stack for $ra
+	addi	$sp, $sp, -4
+	sw	$ra, $sp # MAIN Saved
+	
+	# Initialize temporary
+	addi	$t0, $t0, 0
+	addi	$t1, $t1, 0
+	
+	# Check if $t1 < $a0
+	slt	$t0, $t1, $a0
+	beq	$t0, $zero, L1I
+	
+	# Initialize temporary
+	addi	$t2, $zero, 0
+	addi	$t3, $zero, 0
+	
+	# Jump to L2O
+	jal	L2O
+	
+	# Increment by 1
+	addi	$t1, $t1, 1
+	
+	# Reload the MAIN return addr
+	lw	$ra, $sp
+	# Pop return register
+	addi	$sp, $sp, 4
+	
+	j L1O
+	
+L2O:
+	# Check if $t3 < $a0
+	slt	$t2, $t3, $a0
+	beq	$t2, $zero, L2I
+
+	# Add 1 to $v0
+	addi	$v0, $v0, 1
+	
+	# Add 1 to $t3
+	addi	$t3, $t3, 1
+	
+	j	L2O
+L2I:
+	# Return to jal L2O
+	jr	$ra
+
+L1I:
+	# Return to jal L1O
+	jr	$ra
+	
+EXIT:
+	# Store $v0 to memory
+	sw	$v0, 0($sp)

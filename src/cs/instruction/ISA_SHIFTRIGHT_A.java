@@ -19,8 +19,6 @@ public class ISA_SHIFTRIGHT_A extends ISA_RType
 	public void parseReg()
 	{
 		String[] parsed = REGS.split(",");
-		SHAMT = 0;
-		FUNCT = "0";
 		
 		RD = checkReg(parsed[0]);
 		RT = checkReg(parsed[1]);

@@ -20,10 +20,8 @@ public class ISA_ADD_I extends ISA_IType
 	{
 		if(OPCODE.equalsIgnoreCase("addi"))
 			internal.setRegisterVal(RT, internal.getRegisterVal(RS) + IMMEDIATE);
-			//internal.setTo(RT, internal.getFrom(RS) + IMMEDIATE);
 		else if(OPCODE.equalsIgnoreCase("addiu"))
 			internal.setRegisterVal(RT, internal.getRegisterVal(RS) + IMMEDIATE);
-			//internal.setTo(RT, internal.getFrom(RS) + IMMEDIATE);
 	}
 
 }

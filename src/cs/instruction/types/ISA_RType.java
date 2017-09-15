@@ -21,8 +21,6 @@ public abstract class ISA_RType extends ISA_OPCODE
 	public void parseReg()
 	{
 		String[] parsed = REGS.split(",");
-		SHAMT = 0;
-		FUNCT = "0";
 		
 		RD = checkReg(parsed[0]);
 		RS = checkReg(parsed[1]);

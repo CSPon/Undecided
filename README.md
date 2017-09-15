@@ -95,6 +95,8 @@ __Does not simulate actual memory allocation!__
 
 1. Cycle counter (To see how many cycles it took to execute)
 
+2. Pipeline Simulation (5 stages?)
+
 ---
 
 ### Otherwise...

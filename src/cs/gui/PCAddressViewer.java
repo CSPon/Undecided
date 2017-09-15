@@ -167,6 +167,16 @@ public class PCAddressViewer extends javax.swing.JFrame
     	listHEX.setSelectedIndex(index);
     	listHEX.ensureIndexIsVisible(index);
     }
+    
+    public void updatePositions(int index)
+    {
+    	listPC.setSelectedIndex(index);
+    	listPC.ensureIndexIsVisible(index);
+    	listOPCODE.setSelectedIndex(index);
+    	listOPCODE.ensureIndexIsVisible(index);
+    	listHEX.setSelectedIndex(index);
+    	listHEX.ensureIndexIsVisible(index);
+    }
 
     public void init()
     {

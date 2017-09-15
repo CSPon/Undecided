@@ -854,6 +854,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listPCAddress.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
+    	
+    	pcav.updatePositions(index);
     }
 
     private void listOPCODEValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -863,6 +865,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listPCAddress.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
+    	
+    	pcav.updatePositions(index);
     }
     
     private void listOPCODESValueChanged(javax.swing.event.ListSelectionEvent evt)

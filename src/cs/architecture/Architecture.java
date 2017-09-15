@@ -6,7 +6,12 @@ import java.util.Map;
 public class Architecture
 {
 	/* Constants */
-	public static final int $PC = 0x00400000;
+	public static final int $PC			= 0x00400000;
+	public static final int $LOWER_26	= 0x03FFFFFF;
+	public static final int $LOWER_16	= 0x0000FFFF;
+	public static final int $UPPER_4	= 0xF0000000;
+	public static final int $UPPER_16	= 0xFFFF0000;
+	
 	/* Registers */
 	private final int 	ZERO = 0;
 	private int			AT;

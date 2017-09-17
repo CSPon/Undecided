@@ -25,8 +25,8 @@ public class FullDebugger extends javax.swing.JFrame
         initComponents();
     }
                       
-    private void initComponents()
-    {
+    private void initComponents() {
+
         jSplitPane1 = new javax.swing.JSplitPane();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -41,19 +41,27 @@ public class FullDebugger extends javax.swing.JFrame
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaVerbose = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        fieldPC = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        fieldHI = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        fieldLO = new javax.swing.JTextField();
 
         setTitle("MIPS Simulator - Full Debugger");
-        setResizable(false);
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Debugger");
         jSplitPane1.setTopComponent(jLabel1);
 
+        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Compiler/Debugger");
 
+        buttonAO.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         buttonAO.setText("Assemble Only");
         buttonAO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +69,7 @@ public class FullDebugger extends javax.swing.JFrame
             }
         });
 
+        buttonAR.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         buttonAR.setText("Assemble & Run");
         buttonAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +77,7 @@ public class FullDebugger extends javax.swing.JFrame
             }
         });
 
+        buttonASE.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         buttonASE.setText("Assemble & Step Execute");
         buttonASE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +85,7 @@ public class FullDebugger extends javax.swing.JFrame
             }
         });
 
+        buttonStop.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         buttonStop.setText("Full Stop");
         buttonStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +93,7 @@ public class FullDebugger extends javax.swing.JFrame
             }
         });
 
+        buttonCA.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         buttonCA.setText("Clear Assembled");
         buttonCA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +101,7 @@ public class FullDebugger extends javax.swing.JFrame
             }
         });
 
+        buttonCM.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         buttonCM.setText("Clear Saved Memory Values");
         buttonCM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +109,7 @@ public class FullDebugger extends javax.swing.JFrame
             }
         });
 
+        buttonCR.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         buttonCR.setText("Clear Register Values");
         buttonCR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +117,7 @@ public class FullDebugger extends javax.swing.JFrame
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Verbose Compiler Window");
 
@@ -111,6 +126,27 @@ public class FullDebugger extends javax.swing.JFrame
         textAreaVerbose.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         textAreaVerbose.setRows(5);
         jScrollPane1.setViewportView(textAreaVerbose);
+
+        jLabel4.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("PC POS");
+
+        fieldPC.setEditable(false);
+        fieldPC.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("$HI");
+
+        fieldHI.setEditable(false);
+        fieldHI.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("$LO");
+
+        fieldLO.setEditable(false);
+        fieldLO.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,7 +164,17 @@ public class FullDebugger extends javax.swing.JFrame
                     .addComponent(buttonStop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCM, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                    .addComponent(buttonCR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonCR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldLO)
+                            .addComponent(fieldHI)
+                            .addComponent(fieldPC))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -150,9 +196,21 @@ public class FullDebugger extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonCR)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(fieldPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(fieldHI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(fieldLO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -268,9 +326,15 @@ public class FullDebugger extends javax.swing.JFrame
     private javax.swing.JButton buttonCM;
     private javax.swing.JButton buttonCR;
     private javax.swing.JButton buttonStop;
+    private javax.swing.JTextField fieldHI;
+    private javax.swing.JTextField fieldLO;
+    private javax.swing.JTextField fieldPC;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;

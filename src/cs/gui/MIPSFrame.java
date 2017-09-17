@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.text.Position;
 
 import cs.Parser;
-import cs.References;
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.instruction.types.ISA_OPCODE;
@@ -29,7 +28,6 @@ public class MIPSFrame extends javax.swing.JFrame {
 	private Internal internal;
 	private Routine routine;
 	private Parser parser;
-	private References refs;
 	
 	private PCAddressViewer pcav;
 	private FullDebugger fd;
@@ -39,7 +37,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	internal = _internal;
     	routine = _routine;
     	parser = _parser;
-    	refs = new References();
     	
     	pcav = new PCAddressViewer(_internal, _routine);
     	fd = new FullDebugger(this, _internal, _routine);
@@ -64,9 +61,6 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         instChooser = new javax.swing.JFileChooser();
         saveChooser = new javax.swing.JFileChooser();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textAreaPrompt = new javax.swing.JTextArea();
         jSplitPane6 = new javax.swing.JSplitPane();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -77,11 +71,6 @@ public class MIPSFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         fieldLO = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        buttonCompileOnly = new javax.swing.JButton();
-        buttonRun = new javax.swing.JButton();
-        buttonStep = new javax.swing.JButton();
-        buttonStop = new javax.swing.JButton();
         jSplitPane3 = new javax.swing.JSplitPane();
         jLabel14 = new javax.swing.JLabel();
         jSplitPane7 = new javax.swing.JSplitPane();
@@ -89,13 +78,6 @@ public class MIPSFrame extends javax.swing.JFrame {
         listPCAddress = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
         listOPCODE = new javax.swing.JList<>();
-        jSplitPane8 = new javax.swing.JSplitPane();
-        jLabel15 = new javax.swing.JLabel();
-        jSplitPane9 = new javax.swing.JSplitPane();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        listOPCODES = new javax.swing.JList<>();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        textAreaReference = new javax.swing.JTextArea();
         jSplitPane5 = new javax.swing.JSplitPane();
         jSplitPane10 = new javax.swing.JSplitPane();
         jSplitPane2 = new javax.swing.JSplitPane();
@@ -110,6 +92,17 @@ public class MIPSFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaInstruction = new javax.swing.JTextArea();
+        jSplitPane8 = new javax.swing.JSplitPane();
+        jPanel2 = new javax.swing.JPanel();
+        buttonCompileOnly = new javax.swing.JButton();
+        buttonStep = new javax.swing.JButton();
+        buttonStop = new javax.swing.JButton();
+        buttonRun = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jSplitPane9 = new javax.swing.JSplitPane();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textAreaPrompt = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSave = new javax.swing.JMenuItem();
@@ -144,74 +137,41 @@ public class MIPSFrame extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
 
-        jLabel1.setText("Prompt");
-
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        textAreaPrompt.setEditable(false);
-        textAreaPrompt.setColumns(20);
-        textAreaPrompt.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        textAreaPrompt.setLineWrap(true);
-        textAreaPrompt.setRows(5);
-        jScrollPane1.setViewportView(textAreaPrompt);
-
         jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jLabel5.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Debugger");
         jSplitPane6.setTopComponent(jLabel5);
 
+        jLabel6.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("PC POS");
 
         fieldPC.setEditable(false);
+        fieldPC.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
         fieldHI.setEditable(false);
+        fieldHI.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
+        jLabel7.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("$HI");
 
+        jLabel8.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Registers");
 
         fieldLO.setEditable(false);
+        fieldLO.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
+        jLabel9.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("$LO");
 
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Compiler/Debugger");
-
-        buttonCompileOnly.setText("Assemble Only");
-        buttonCompileOnly.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCompileOnlyActionPerformed(evt);
-            }
-        });
-
-        buttonRun.setText("Assemble & Run");
-        buttonRun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRunActionPerformed(evt);
-            }
-        });
-
-        buttonStep.setText("Step");
-        buttonStep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonStepActionPerformed(evt);
-            }
-        });
-
-        buttonStop.setText("Stop");
-        buttonStop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonStopActionPerformed(evt);
-            }
-        });
-
         jSplitPane3.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jLabel14.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("PC Address Viewer");
         jSplitPane3.setTopComponent(jLabel14);
@@ -249,34 +209,25 @@ public class MIPSFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldPC, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fieldPC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                             .addComponent(fieldHI, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fieldLO)))
-                    .addComponent(buttonRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(buttonCompileOnly, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonStep)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonStop)))
+                    .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(fieldPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,60 +240,16 @@ public class MIPSFrame extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(fieldLO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonCompileOnly)
-                    .addComponent(buttonStep)
-                    .addComponent(buttonStop))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonRun)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
         );
 
         jSplitPane6.setRightComponent(jPanel1);
-
-        jSplitPane8.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("MIPS ISA Reference");
-        jSplitPane8.setTopComponent(jLabel15);
-
-        jSplitPane9.setDividerLocation(100);
-
-        listOPCODES.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        listOPCODES.setModel(new javax.swing.AbstractListModel<String>() {
-			private static final long serialVersionUID = 1L;
-			String[] strings = { "add", "addi", "and", "andi", "beq", "bne", "blt", "bgt", "ble", "bge", "div", "j", "jal", "jr", "li", "lw", "mfhi", "mflo", "move", "mult", "nor", "or", "ori", "slt", "sli", "sll", "srl", "sw", "sub", "sra" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listOPCODES.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listOPCODES.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listOPCODESValueChanged(evt);
-            }
-        });
-        jScrollPane9.setViewportView(listOPCODES);
-
-        jSplitPane9.setLeftComponent(jScrollPane9);
-
-        textAreaReference.setEditable(false);
-        textAreaReference.setColumns(20);
-        textAreaReference.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        textAreaReference.setLineWrap(true);
-        textAreaReference.setRows(5);
-        jScrollPane10.setViewportView(textAreaReference);
-
-        jSplitPane9.setRightComponent(jScrollPane10);
-
-        jSplitPane8.setRightComponent(jSplitPane9);
 
         jSplitPane10.setDividerLocation(300);
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jLabel3.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Memory Viewer");
         jSplitPane2.setTopComponent(jLabel3);
@@ -357,6 +264,7 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         jSplitPane4.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jLabel4.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Register Viewer");
         jSplitPane4.setTopComponent(jLabel4);
@@ -373,6 +281,7 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Instruction Editor");
         jSplitPane1.setTopComponent(jLabel2);
@@ -385,6 +294,94 @@ public class MIPSFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(jScrollPane2);
 
         jSplitPane5.setLeftComponent(jSplitPane1);
+
+        jSplitPane8.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        buttonCompileOnly.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        buttonCompileOnly.setText("Assemble Only");
+        buttonCompileOnly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCompileOnlyActionPerformed(evt);
+            }
+        });
+
+        buttonStep.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        buttonStep.setText("Step");
+        buttonStep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStepActionPerformed(evt);
+            }
+        });
+
+        buttonStop.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        buttonStop.setText("Stop");
+        buttonStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStopActionPerformed(evt);
+            }
+        });
+
+        buttonRun.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        buttonRun.setText("Assemble & Run");
+        buttonRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRunActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(buttonCompileOnly, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonStep)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonStop))
+                    .addComponent(buttonRun, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCompileOnly)
+                    .addComponent(buttonStep)
+                    .addComponent(buttonStop))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonRun)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jSplitPane8.setBottomComponent(jPanel2);
+
+        jLabel10.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Assembler / Debugger");
+        jSplitPane8.setLeftComponent(jLabel10);
+
+        jSplitPane9.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Prompt");
+        jSplitPane9.setTopComponent(jLabel1);
+
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        textAreaPrompt.setEditable(false);
+        textAreaPrompt.setColumns(20);
+        textAreaPrompt.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        textAreaPrompt.setLineWrap(true);
+        textAreaPrompt.setRows(5);
+        jScrollPane1.setViewportView(textAreaPrompt);
+
+        jSplitPane9.setRightComponent(jScrollPane1);
 
         jMenu1.setText("File");
 
@@ -544,35 +541,24 @@ public class MIPSFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSplitPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jSplitPane5))
+                    .addComponent(jSplitPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+                    .addComponent(jSplitPane9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSplitPane6)
+                    .addComponent(jSplitPane8)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSplitPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jSplitPane8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jSplitPane8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSplitPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSplitPane6))
-                .addContainerGap())
+                    .addComponent(jSplitPane6)
+                    .addComponent(jSplitPane5)))
         );
 
         pack();
@@ -824,13 +810,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	pcav.updatePositions(index);
     }
     
-    private void listOPCODESValueChanged(javax.swing.event.ListSelectionEvent evt)
-    {                                         
-        String key = listOPCODES.getSelectedValue();
-        String value = refs.getReference(key);
-        textAreaReference.setText(value);
-    }
-    
     private void assemble()
     {
     	String[] instructions = textAreaInstruction.getText().split("\n");
@@ -1040,7 +1019,7 @@ public class MIPSFrame extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
- // Variables declaration - do not modify                     
+    // Variables declaration - do not modify                     
     private javax.swing.JButton buttonCompileOnly;
     private javax.swing.JButton buttonRun;
     private javax.swing.JButton buttonStep;
@@ -1050,9 +1029,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JTextField fieldPC;
     private javax.swing.JFileChooser instChooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1066,14 +1044,13 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane10;
     private javax.swing.JSplitPane jSplitPane2;
@@ -1086,7 +1063,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane9;
     private javax.swing.JList<String> listMemory;
     private javax.swing.JList<String> listOPCODE;
-    private javax.swing.JList<String> listOPCODES;
     private javax.swing.JList<String> listPCAddress;
     private javax.swing.JList<String> listRegister;
     private javax.swing.JMenuItem menuLoadCustomQuestion;
@@ -1109,6 +1085,5 @@ public class MIPSFrame extends javax.swing.JFrame {
     private javax.swing.JFileChooser saveChooser;
     private javax.swing.JTextArea textAreaInstruction;
     private javax.swing.JTextArea textAreaPrompt;
-    private javax.swing.JTextArea textAreaReference;
     // End of variables declaration                                     
 }

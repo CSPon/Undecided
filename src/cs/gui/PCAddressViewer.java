@@ -45,6 +45,7 @@ public class PCAddressViewer extends javax.swing.JFrame
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PC Address Viewer");
         jSplitPane1.setTopComponent(jLabel1);

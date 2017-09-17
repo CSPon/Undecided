@@ -1,4 +1,4 @@
-![image](https://github.com/CSPon/Undecided/blob/master/imgs/Sample_000.png)
+![image](https://raw.githubusercontent.com/CSPon/Undecided/master/imgs/Sample_000.png)
 
 # Untitled
 

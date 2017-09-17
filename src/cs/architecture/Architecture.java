@@ -296,7 +296,12 @@ public class Architecture
 	
 	public void setPC(int _PC)
 	{
-		this.PC = _PC;
+		if(_PC > $PC)
+			this.PC = 0x00;
+		else if(_PC < 0x00)
+			this.PC = $PC;
+		else
+			this.PC = _PC;
 	}
 	
 	private void assignVal()

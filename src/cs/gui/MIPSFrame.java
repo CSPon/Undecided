@@ -134,7 +134,7 @@ public class MIPSFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MIPS Simulator (WIP)");
-        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(1024, 700));
         setResizable(false);
 
         jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);

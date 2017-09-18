@@ -1,17 +1,50 @@
 # Single for loop
+# Iterates 5 times
 
-addi	$s0, $zero, 0x01
-addi	$s1, $zero, 0x00
-addi	$t0, $zero, 0
-addi	$t1, $zero, 0
-lw	$t0, $s0
-lw	$t3, $s1
+MAIN:
+	# Set argument 0 to 5
+	addi	$a0, $zero, 5
+	
+	# Initialize local variables
+	addi	$t0, $zero, 0
+	addi	$t1, $zero, 0
+	addi	$t2, $zero, 1
+	
+	# Jump and link to LOOP
+	jal	LOOP
+
+	# Save retunred value to mem
+	# We didn't push any stack
+	# pointer so we use $sp
+	# as it is.
+	sw	$v0, 0($sp)
+
+	# Jump to end
+	j	END
+
 LOOP:
-slt	$t2, $t1, $t0
-beq	$t2, $zero, END
-# Do something in loop
-sll	$t3, $t3, 1
-# Then increment
-add	$t1, $t1, $t2
-j	LOOP
+	# Compare $t1 to $a0 and save to
+	# $t0
+	slt	$t0, $t1, $a0
+	
+	# Branch to ENDLOOP if $t0 is 0
+	beq	$t0, $zero, ENDLOOP
+
+	# Otherwise shift $t2 left by 1
+	sll	$t2, $t2, 1
+	
+	# Increment $t1 by 1
+	addi	$t1, $t1, 1
+
+	# Go back to LOOP
+	j	LOOP
+
+ENDLOOP:
+	# Save result to $v0 to return
+	add	$v0, $t2, $zero
+
+	# Jump to return address
+	jr	$ra
+
 END:
+	# End of code

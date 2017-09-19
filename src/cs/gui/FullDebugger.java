@@ -263,6 +263,7 @@ public class FullDebugger extends javax.swing.JFrame
         
         parent.updateMemoryList();
         parent.updateRegisterViewer();
+        parent.updatePCAddressList();
     }
 
     private void buttonCRActionPerformed(java.awt.event.ActionEvent evt)

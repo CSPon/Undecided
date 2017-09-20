@@ -14,8 +14,8 @@ public class ISA_LOAD_IMM extends ISA_IType
 		
 		CYCLE_COUNT = 1;
 		
-		HEX_OPCODE = 0x08;
-		HEX_FUNCT = 0x00;
+		HEX_OPCODE = 0xFF;
+		HEX_FUNCT = 0xFF;
 	}
 	
 	@Override

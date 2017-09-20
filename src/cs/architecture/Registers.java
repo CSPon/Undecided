@@ -1,16 +1,16 @@
 package cs.architecture;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public abstract class Registers implements IRegisters
 {
-	private HashMap<String, Integer> reg_adr;
-	private HashMap<Integer, Integer> reg_val;
+	private LinkedHashMap<String, Integer> reg_adr;
+	private LinkedHashMap<Integer, Integer> reg_val;
 	
 	public Registers()
 	{
-		reg_adr = new HashMap<String, Integer>();
-		reg_val = new HashMap<Integer, Integer>();
+		reg_adr = new LinkedHashMap<String, Integer>();
+		reg_val = new LinkedHashMap<Integer, Integer>();
 	}
 
 	@Override

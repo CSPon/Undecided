@@ -59,13 +59,13 @@ __Currently going through overhaul__
 
 If you are using Eclipse IDE to run...
 
-1. Add file to asm folder with file extesion of .mips
+1. Use open menu to open a file with .mips extension
 
-2. Run Main.java
+If you are running from executable (tested with Windows 10, Lubuntu 17.04)
 
-If you are running the executable in Executable folder, run Run_Jar.bat (For Windows)
+1. Run Run_Jar.bat
 
-I have no clue with Mac and Linux, so for those two, will have to run through Eclipse IDE
+I have no clue with Mac, so you have to run through Eclipse IDE
 
 (Just import the whole repository as project)
 

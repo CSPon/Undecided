@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import cs.architecture.Internal;
 import cs.routine.Routine;
 
+/*
+ * For parsing ###($rd): \d{1,}\(\$\w\d\)
+ */
 public class Parser
 {
 	public void parseSingle(String line, Routine routine)

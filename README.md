@@ -8,6 +8,8 @@ Available function(s) (Checked and working ones only)
 
 (Italics indicates not fully implemented but partially working)
 
+__Currently going through overhaul__
+
 ---
 
 * add (add $rs, $rt, $rd)

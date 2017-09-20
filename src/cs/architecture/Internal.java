@@ -3,7 +3,6 @@ package cs.architecture;
 import java.util.LinkedHashMap;
 
 import cs.instruction.*;
-import cs.instruction.types.ISA_OPCODE;
 import cs.opcode.ISA_ADD;
 import cs.opcode.ISA_ADD_I;
 import cs.opcode.ISA_ADD_IU;

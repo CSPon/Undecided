@@ -2,9 +2,9 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_SHIFTRIGHT_A extends ISA_RType
+public class ISA_SHIFT_RIGHT_ARITH extends ISA_RType
 {
-	public ISA_SHIFTRIGHT_A(String line)
+	public ISA_SHIFT_RIGHT_ARITH(String line)
 	{
 		super(line);
 		parseFull();

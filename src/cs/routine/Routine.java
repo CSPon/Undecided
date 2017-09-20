@@ -6,8 +6,6 @@ import java.util.Map;
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.instruction.*;
-import cs.instruction.types.ISA_LABEL;
-import cs.instruction.types.ISA_OPCODE;
 import cs.opcode.ISA_BRANCHEQ;
 import cs.opcode.ISA_BRANCHGE;
 import cs.opcode.ISA_BRANCHGT;
@@ -16,6 +14,7 @@ import cs.opcode.ISA_BRANCHLT;
 import cs.opcode.ISA_BRANCHNE;
 import cs.opcode.ISA_JUMP;
 import cs.opcode.ISA_JUMPANDLINK;
+import cs.opcode.ISA_LABEL;
 
 public class Routine
 {

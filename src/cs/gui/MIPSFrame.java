@@ -14,7 +14,7 @@ import cs.Parser;
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
 import cs.architecture.Routine;
-import cs.instruction.types.ISA_OPCODE;
+import cs.instruction.ISA_OPCODE;
 
 /**
  * 

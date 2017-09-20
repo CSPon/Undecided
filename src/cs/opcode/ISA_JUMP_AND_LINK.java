@@ -3,11 +3,11 @@ package cs.opcode;
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
 
-public class ISA_JUMPANDLINK extends ISA_JType
+public class ISA_JUMP_AND_LINK extends ISA_JType
 {
-	public ISA_JUMPANDLINK(String line)
+	public ISA_JUMP_AND_LINK(String expression)
 	{
-		super(line);
+		super(expression);
 		parseFull();
 		
 		HEX_OPCODE = 0x03;

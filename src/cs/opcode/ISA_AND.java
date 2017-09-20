@@ -1,23 +1,24 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_AND extends ISA_RType
 {
 	public ISA_AND(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x24;
+		setHex_opcode(0x00);
+		setFunct(0x24);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("and"))
-			internal.setRegisterVal(RD, internal.getRegisterVal(RS) & internal.getRegisterVal(RT));
+		int val_rs = arc.registers().getFrom(getRegister_rs());
+		int val_rt = arc.registers().getFrom(getRegister_rt());
+		
+		arc.registers().setTo(getRegister_rd(), val_rs & val_rt);
 	}
 }

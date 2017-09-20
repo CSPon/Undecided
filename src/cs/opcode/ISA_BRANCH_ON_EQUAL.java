@@ -2,15 +2,15 @@ package cs.opcode;
 
 import cs.architecture.AArchitecture;
 
-public class ISA_DIVIDE extends ISA_RType
+public class ISA_BRANCH_ON_EQUAL extends ISA_IType
 {
-	public ISA_DIVIDE(String line)
+	public ISA_BRANCH_ON_EQUAL(String expression)
 	{
-		super(line);
+		super(expression);
 		assign();
 		
-		setHex_opcode(0x00);
-		setFunct(0x1A);
+		setHex_opcode(0x04);
+		setFunct(0);
 	}
 	
 	@Override
@@ -22,6 +22,7 @@ public class ISA_DIVIDE extends ISA_RType
 		
 		setRegister_rs(regs.split(",")[0]);
 		setRegister_rt(regs.split(",")[1]);
+		setLabel_target(regs.split(",")[2]);
 	}
 
 	@Override
@@ -29,8 +30,14 @@ public class ISA_DIVIDE extends ISA_RType
 	{
 		int val_rs = arc.registers().getFrom(getRegister_rs());
 		int val_rt = arc.registers().getFrom(getRegister_rt());
+		int tgt_adr = getAddress_target();
 		
-		arc.registers().setTo("$lo", val_rs / val_rt);
-		arc.registers().setTo("$hi", val_rs % val_rt);
+		if(val_rs == val_rt)
+		{
+			int upper = arc.registers().getFrom("$pc") & 0xFFFF0000;
+			int jump = upper | (tgt_adr << 2);
+			jump -= 0x04;
+			arc.registers().setTo("$pc", jump);
+		}
 	}
 }

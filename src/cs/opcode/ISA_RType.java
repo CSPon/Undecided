@@ -1,58 +1,52 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
-import cs.instruction.types.ISA_OPCODE;
+import cs.architecture.AArchitecture;
+import cs.instruction.ISA_INSTRUCTION;
 
-public abstract class ISA_RType extends ISA_OPCODE
+public abstract class ISA_RType extends ISA_INSTRUCTION
 {
-	public ISA_RType(String line)
+	public ISA_RType(String expression)
 	{
-		super(line);
+		super(expression);
 	}
-	
+
 	@Override
-	public void parseFull()
+	public void assign()
 	{
-		OPCODE = INSTRUCTION.split(" ")[0];
-		REGS = INSTRUCTION.substring(INSTRUCTION.indexOf(" ") + 1);
-		REGS = REGS.replaceAll(" ", "");
-	}
-	
-	@Override
-	public void parseReg()
-	{
-		String[] parsed = REGS.split(",");
+		// Parses common R-Type Instruction
+		// opcode rd,rs,rt
+		// Override this method to change assign method
+		String regs = getExpression().split(" ")[1];
 		
-		RD = checkReg(parsed[0]);
-		RS = checkReg(parsed[1]);
-		RT = checkReg(parsed[2]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rd(regs.split(",")[0]);
+		setRegister_rs(regs.split(",")[1]);
+		setRegister_rt(regs.split(",")[2]);
 	}
-	
+
 	@Override
-	public String toString(Internal internal)
+	public String toString(AArchitecture arc)
 	{
 		int HEX = 0x00;
 		
-		HEX |= HEX_OPCODE;
+		HEX |= getHex_opcode();
 		
 		HEX = HEX << 6;
-		HEX |= internal.getRegisterAddr(RS);
+		HEX |= arc.registers().getFrom(getRegister_rs());
 		
 		HEX = HEX << 5;
-		HEX |= internal.getRegisterAddr(RT);
+		HEX |= arc.registers().getFrom(getRegister_rt());
 		
 		HEX = HEX << 5;
-		HEX |= internal.getRegisterAddr(RD);
+		HEX |= arc.registers().getFrom(getRegister_rd());
 		
 		HEX = HEX << 5;
-		HEX |= SHAMT;
+		HEX |= getShamt();
 		
 		HEX = HEX << 6;
-		HEX |= HEX_FUNCT;
+		HEX |= getFunct();
 		
 		return String.format("0x%08X", HEX);
 	}
-
-	@Override
-	public abstract void perform(Internal internal);
 }

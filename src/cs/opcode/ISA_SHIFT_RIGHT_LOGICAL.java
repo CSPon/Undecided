@@ -2,16 +2,16 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_SHIFTLEFT_L extends ISA_RType
+public class ISA_SHIFT_RIGHT_LOGICAL extends ISA_RType
 {
-	public ISA_SHIFTLEFT_L(String line)
+	public ISA_SHIFT_RIGHT_LOGICAL(String line)
 	{
 		super(line);
 		parseFull();
 		parseReg();
 		
 		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x00;
+		HEX_FUNCT = 0x02;
 	}
 	
 	@Override
@@ -27,8 +27,9 @@ public class ISA_SHIFTLEFT_L extends ISA_RType
 	@Override
 	public void perform(Internal internal)
 	{
-		if(OPCODE.equalsIgnoreCase("sll"))
-			internal.setRegisterVal(RD, internal.getRegisterVal(RT) << SHAMT);
+		if(OPCODE.equalsIgnoreCase("srl"))
+			internal.setRegisterVal(RD, internal.getRegisterVal(RT) >> SHAMT);
+			//internal.setTo(RD, internal.getFrom(RT) >> SHAMT);
 	}
 
 }

@@ -2,9 +2,9 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_LOADUPPER_I extends ISA_IType
+public class ISA_LOAD_UPPER_I extends ISA_IType
 {
-	public ISA_LOADUPPER_I(String line)
+	public ISA_LOAD_UPPER_I(String line)
 	{
 		super(line);
 		parseFull();

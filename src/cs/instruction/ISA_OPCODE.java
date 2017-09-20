@@ -1,4 +1,4 @@
-package cs.instruction.types;
+package cs.instruction;
 
 import cs.architecture.Architecture;
 import cs.architecture.Internal;

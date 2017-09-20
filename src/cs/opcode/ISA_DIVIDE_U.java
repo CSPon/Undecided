@@ -5,10 +5,9 @@ public class ISA_DIVIDE_U extends ISA_DIVIDE
 	public ISA_DIVIDE_U(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x1B;
+		setHex_opcode(0x00);
+		setFunct(0x1B);
 	}
 }

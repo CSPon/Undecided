@@ -52,5 +52,9 @@ public class Registers_MIPS extends Registers
 		setAddress("$sp", 29);
 		setAddress("$fp", 30);
 		setAddress("$ra", 31);
+		
+		setAddress("$pc", 32);
+		setAddress("$hi", 33);
+		setAddress("$lo", 33);
 	}
 }

@@ -1,8 +1,8 @@
 package cs.opcode;
 
-public class ISA_SETLESSTHAN_U extends ISA_SETLESSTHAN
+public class ISA_SET_LESS_THAN_U extends ISA_SET_LESS_THAN
 {
-	public ISA_SETLESSTHAN_U(String line)
+	public ISA_SET_LESS_THAN_U(String line)
 	{
 		super(line);
 		parseFull();

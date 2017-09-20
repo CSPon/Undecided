@@ -1,26 +1,24 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_ADD_I extends ISA_IType
 {
-	public ISA_ADD_I(String line)
+	public ISA_ADD_I(String expression)
 	{
-		super(line);
-		parseFull();
-		parseReg();
+		super(expression);
+		assign();
 		
-		HEX_OPCODE = 0x08;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x08);
+		setFunct(0x00);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("addi"))
-			internal.setRegisterVal(RT, internal.getRegisterVal(RS) + IMMEDIATE);
-		else if(OPCODE.equalsIgnoreCase("addiu"))
-			internal.setRegisterVal(RT, internal.getRegisterVal(RS) + IMMEDIATE);
+		int val_rs = arc.registers().getFrom(getRegister_rs());
+		int imm = getImmediate();
+		
+		arc.registers().setTo(getRegister_rt(), val_rs + imm);
 	}
-
 }

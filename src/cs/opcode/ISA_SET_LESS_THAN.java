@@ -2,9 +2,9 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_SETLESSTHAN extends ISA_RType
+public class ISA_SET_LESS_THAN extends ISA_RType
 {
-	public ISA_SETLESSTHAN(String line)
+	public ISA_SET_LESS_THAN(String line)
 	{
 		super(line);
 		parseFull();

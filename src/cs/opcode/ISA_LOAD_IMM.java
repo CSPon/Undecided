@@ -1,12 +1,12 @@
 package cs.opcode;
 
 import cs.architecture.Internal;
-import cs.instruction.types.ISA_OPCODE;
+import cs.instruction.ISA_OPCODE;
 
 @Deprecated
-public class ISA_LOADIMM extends ISA_OPCODE
+public class ISA_LOAD_IMM extends ISA_IType
 {
-	public ISA_LOADIMM(String line)
+	public ISA_LOAD_IMM(String line)
 	{
 		super(line);
 		parseFull();

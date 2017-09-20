@@ -2,16 +2,16 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_MOVEFROMLO extends ISA_RType
+public class ISA_MOVE_FROM_HI extends ISA_RType
 {
-	public ISA_MOVEFROMLO(String line)
+	public ISA_MOVE_FROM_HI(String line)
 	{
 		super(line);
 		parseFull();
 		parseReg();
 		
 		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x12;
+		HEX_FUNCT = 0x10;
 	}
 	
 	@Override
@@ -25,6 +25,6 @@ public class ISA_MOVEFROMLO extends ISA_RType
 	@Override
 	public void perform(Internal internal)
 	{
-		internal.setTo(RD, internal.getFrom("$lo"));
+		internal.setTo(RD, internal.getFrom("$hi"));
 	}
 }

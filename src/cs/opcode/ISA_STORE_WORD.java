@@ -2,15 +2,15 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_LOADBYTE_U extends ISA_IType
+public class ISA_STORE_WORD extends ISA_IType
 {
-	public ISA_LOADBYTE_U(String line)
+	public ISA_STORE_WORD(String line)
 	{
 		super(line);
 		parseFull();
 		parseReg();
 		
-		HEX_OPCODE = 0x24;
+		HEX_OPCODE = 0x2B;
 		HEX_FUNCT = 0x00;
 	}
 	
@@ -27,7 +27,8 @@ public class ISA_LOADBYTE_U extends ISA_IType
 	@Override
 	public void perform(Internal internal)
 	{
-		if(OPCODE.equalsIgnoreCase("lbu"))
-			internal.setRegisterVal(RT, internal.getMemoryVal(internal.getRegisterVal(RS), IMMEDIATE) & 0xFF);
+		if(OPCODE.equalsIgnoreCase("sw"))
+			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT));
+			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT));
 	}
 }

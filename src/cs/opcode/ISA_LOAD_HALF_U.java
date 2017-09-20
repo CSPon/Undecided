@@ -2,15 +2,15 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_STOREHALF extends ISA_IType
+public class ISA_LOAD_HALF_U extends ISA_LOAD_WORD
 {
-	public ISA_STOREHALF(String line)
+	public ISA_LOAD_HALF_U(String expression)
 	{
-		super(line);
+		super(expression);
 		parseFull();
 		parseReg();
 		
-		HEX_OPCODE = 0x29;
+		HEX_OPCODE = 0x25;
 		HEX_FUNCT = 0x00;
 	}
 	
@@ -27,8 +27,7 @@ public class ISA_STOREHALF extends ISA_IType
 	@Override
 	public void perform(Internal internal)
 	{
-		if(OPCODE.equalsIgnoreCase("sh"))
-			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT) & 0xFFFF);
-			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT) & 0xFFFF);
+		if(OPCODE.equalsIgnoreCase("lhu"))
+			internal.setRegisterVal(RT, internal.getMemoryVal(internal.getRegisterVal(RS), IMMEDIATE) & 0xFFFF);
 	}
 }

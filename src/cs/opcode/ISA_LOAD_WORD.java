@@ -2,11 +2,11 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_LOADWORD extends ISA_IType
+public class ISA_LOAD_WORD extends ISA_IType
 {
-	public ISA_LOADWORD(String line)
+	public ISA_LOAD_WORD(String expression)
 	{
-		super(line);
+		super(expression);
 		parseFull();
 		parseReg();
 		

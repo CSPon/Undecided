@@ -2,15 +2,15 @@ package cs.opcode;
 
 import cs.architecture.Internal;
 
-public class ISA_STOREBYTE extends ISA_IType
+public class ISA_STORE_HALF extends ISA_STORE_WORD
 {
-	public ISA_STOREBYTE(String line)
+	public ISA_STORE_HALF(String line)
 	{
 		super(line);
 		parseFull();
 		parseReg();
 		
-		HEX_OPCODE = 0x28;
+		HEX_OPCODE = 0x29;
 		HEX_FUNCT = 0x00;
 	}
 	
@@ -27,8 +27,8 @@ public class ISA_STOREBYTE extends ISA_IType
 	@Override
 	public void perform(Internal internal)
 	{
-		if(OPCODE.equalsIgnoreCase("sb"))
-			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT) & 0xFF);
-			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT) & 0xFF);
+		if(OPCODE.equalsIgnoreCase("sh"))
+			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT) & 0xFFFF);
+			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT) & 0xFFFF);
 	}
 }

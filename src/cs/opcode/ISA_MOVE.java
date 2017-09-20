@@ -1,7 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.Internal;
-import cs.instruction.types.ISA_OPCODE;
+import cs.instruction.ISA_OPCODE;
 
 @Deprecated
 public class ISA_MOVE extends ISA_OPCODE

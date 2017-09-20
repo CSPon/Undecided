@@ -3,9 +3,9 @@ package cs.opcode;
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
 
-public class ISA_JUMPREG extends ISA_RType
+public class ISA_JUMP_REG extends ISA_RType
 {
-	public ISA_JUMPREG(String line)
+	public ISA_JUMP_REG(String line)
 	{
 		super(line);
 		parseFull();

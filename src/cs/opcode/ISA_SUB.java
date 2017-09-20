@@ -1,24 +1,24 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_SUB extends ISA_RType
 {
 	public ISA_SUB(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x22;
+		assign();
+		
+		setHex_opcode(0x00);
+		setFunct(0x22);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("sub"))
-			internal.setRegisterVal(RD, internal.getRegisterVal(RS) - internal.getRegisterVal(RT));
-		else if(OPCODE.equalsIgnoreCase("subu"))
-			internal.setRegisterVal(RD, internal.getRegisterVal(RS) - internal.getRegisterVal(RT));
+		int val_rs = arc.registers().getFrom(getRegister_rs());
+		int val_rt = arc.registers().getFrom(getRegister_rt());
+		
+		arc.registers().setTo(getRegister_rd(), val_rs - val_rt);
 	}
 }

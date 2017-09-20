@@ -1,33 +1,35 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_OR_I extends ISA_IType
 {
 	public ISA_OR_I(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x0D;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x0D);
+		setFunct(0x00);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RT = checkReg(parsed[0]);
-		RS = checkReg(parsed[1]);
-		IMMEDIATE = Integer.parseInt(parsed[2]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rt(regs.split(",")[0]);
+		setRegister_rs(regs.split(",")[1]);
+		setImmediate(Integer.parseInt(regs.split(",")[2]));
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("ori"))
-			internal.setRegisterVal(RD, internal.getRegisterVal(RS) | IMMEDIATE);
+		int val_rs = arc.registers().getFrom(getRegister_rs());
+		
+		arc.registers().setTo(getRegister_rt(), val_rs | getImmediate());
 	}
 }

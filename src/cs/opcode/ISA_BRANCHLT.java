@@ -35,6 +35,11 @@ public class ISA_BRANCHLT extends ISA_IType
 		int tgt_adr = getAddress_target();
 		
 		// TODO Create slt $at,$rs,$rt instruction, then perform
+		String slt_is = "slt $at," + getRegister_rs() + "," + getRegister_rt();
+		new ISA_SET_LESS_THAN(slt_is).eval(arc);
+		
 		// TODO Create bnq $at,$zero,target instruction, then perform
+		String bnq_is = "bnq $at,$zero," + getLabel_target();
+		new ISA_BRANCH_ON_NOT_EQUAL(bnq_is);
 	}
 }

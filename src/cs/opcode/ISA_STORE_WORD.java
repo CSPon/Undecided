@@ -1,34 +1,37 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_STORE_WORD extends ISA_IType
 {
 	public ISA_STORE_WORD(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x2B;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x2B);
+		setFunct(0x00);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RT = checkReg(parsed[0]);
-		IMMEDIATE = checkShift(parsed[1]);
-		RS = checkReg(parsed[1]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rt(regs.split(",")[0]);
+		setImmediate(checkShift(regs.split(",")[1]));
+		setRegister_rs(checkReg(regs.split(",")[1]));
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("sw"))
-			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT));
-			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT));
+		int val_rt = arc.registers().getFrom(getRegister_rt());
+		int val_rs = arc.registers().getFrom(getRegister_rs());
+		int offset = getImmediate();
+		
+		arc.memory().writeMemory(val_rs, offset, val_rt);
 	}
 }

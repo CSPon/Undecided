@@ -1,34 +1,36 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_SHIFT_LEFT_LOGICAL extends ISA_RType
 {
 	public ISA_SHIFT_LEFT_LOGICAL(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x00);
+		setFunct(0x00);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RD = checkReg(parsed[0]);
-		RT = checkReg(parsed[1]);
-		SHAMT = Integer.parseInt(parsed[2]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rd(regs.split(",")[0]);
+		setRegister_rt(regs.split(",")[1]);
+		setShamt(Integer.parseInt(regs.split(",")[2]));
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("sll"))
-			internal.setRegisterVal(RD, internal.getRegisterVal(RT) << SHAMT);
+		int val_rt = arc.registers().getFrom(getRegister_rt());
+		int shamt = getShamt();
+		
+		arc.registers().setTo(getRegister_rd(), val_rt << shamt);
 	}
-
 }

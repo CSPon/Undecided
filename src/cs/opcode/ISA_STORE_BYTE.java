@@ -1,34 +1,26 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
+import cs.architecture.Architecture_MIPS;
 
 public class ISA_STORE_BYTE extends ISA_STORE_HALF
 {
 	public ISA_STORE_BYTE(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x28;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x28);
+		setFunct(0x00);
 	}
 	
 	@Override
-	public void parseReg()
+	public void eval(AArchitecture arc)
 	{
-		String[] parsed = REGS.split(",");
+		int val_rt = arc.registers().getFrom(getRegister_rt());
+		int val_rs = arc.registers().getFrom(getRegister_rs());
+		int offset = getImmediate();
 		
-		RT = checkReg(parsed[0]);
-		IMMEDIATE = checkShift(parsed[1]);
-		RS = checkReg(parsed[1]);
-	}
-
-	@Override
-	public void perform(Internal internal)
-	{
-		if(OPCODE.equalsIgnoreCase("sb"))
-			internal.setMemoryVal(internal.getRegisterVal(RS), IMMEDIATE, internal.getRegisterVal(RT) & 0xFF);
-			//internal.setToMem(internal.getFrom(RS), IMMEDIATE, internal.getFrom(RT) & 0xFF);
+		arc.memory().writeMemory(val_rs, offset, val_rt & Architecture_MIPS.$LOWER_4);
 	}
 }

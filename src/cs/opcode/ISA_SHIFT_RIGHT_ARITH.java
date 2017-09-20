@@ -1,31 +1,32 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_SHIFT_RIGHT_ARITH extends ISA_RType
 {
 	public ISA_SHIFT_RIGHT_ARITH(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x03;
+		setHex_opcode(0x00);
+		setFunct(0x03);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RD = checkReg(parsed[0]);
-		RT = checkReg(parsed[1]);
-		SHAMT = Integer.parseInt(parsed[2]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rd(regs.split(",")[0]);
+		setRegister_rt(regs.split(",")[1]);
+		setShamt(Integer.parseInt(regs.split(",")[2]));
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
 		// Copy bottom (32 - SHAMT) bits to separate variable
 		// Shift RT to right by SHAMT
@@ -35,8 +36,12 @@ public class ISA_SHIFT_RIGHT_ARITH extends ISA_RType
 		// 1001 0101 1010 1100
 		// 1100 1001 0101 1010
 		
-		int temp = internal.getRegisterVal(RT) << (32 - SHAMT);
-		int _RT = internal.getRegisterVal(RT) >> SHAMT;
-		internal.setRegisterVal(RD, temp | _RT);
+		int val_rt = arc.registers().getFrom(getRegister_rt());
+		int shamt = getShamt();
+		
+		int temp = val_rt << (32 - shamt);
+		int _rt = val_rt >> shamt;
+		
+		arc.registers().setTo(getRegister_rd(), temp | _rt);
 	}
 }

@@ -13,8 +13,8 @@ import javax.swing.text.Position;
 import cs.Parser;
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
+import cs.architecture.Routine;
 import cs.instruction.types.ISA_OPCODE;
-import cs.routine.Routine;
 
 /**
  * 
@@ -29,17 +29,11 @@ public class MIPSFrame extends javax.swing.JFrame {
 	private Routine routine;
 	private Parser parser;
 	
-	private PCAddressViewer pcav;
-	private FullDebugger fd;
-	
-    public MIPSFrame(Internal _internal, Routine _routine, Parser _parser)
+    public MIPSFrame(Internal _internal, Parser _parser)
     {
+    	routine = new Routine();
     	internal = _internal;
-    	routine = _routine;
     	parser = _parser;
-    	
-    	pcav = new PCAddressViewer(_internal, _routine);
-    	fd = new FullDebugger(this, _internal, _routine);
     	
         initComponents();
         
@@ -648,12 +642,10 @@ public class MIPSFrame extends javax.swing.JFrame {
     
     private void menuOpenFullDebuggerActionPerformed(java.awt.event.ActionEvent evt)
     {
-        fd.start();
     }
     
     private void menuPCAParserActionPerformed(java.awt.event.ActionEvent evt)
     {
-        pcav.start();
     }
     
     private void loadQuestion(int number)
@@ -671,12 +663,7 @@ public class MIPSFrame extends javax.swing.JFrame {
     
     private void buttonCompileOnlyActionPerformed(java.awt.event.ActionEvent evt)
     {
-    	routine.clearInstruction();
     	assemble();
-    	
-    	routine.compile();
-    	// Moved to Full Debugger Window
-//    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
     	internal.resetMemory();
     	internal.resetRegisters();
@@ -690,26 +677,13 @@ public class MIPSFrame extends javax.swing.JFrame {
 
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt)
     {
-    	routine.clearInstruction();
-    	
     	assemble();
-    	
-    	routine.compile();
-    	// Moved to Full Debugger Window
-//    	textAreaCompilerWindow.setText("Compile completed with " + routine.getInstructionsCount() + " instructions.\n(Includes Labels)");
     	
     	updateDebugger();
     	updateMemoryList();
     	updatePCAddressList();
     	updateRegisterViewer();
     	updatePCAddressPosition();
-    	
-    	routine.execute();
-    	
-    	// Moved to Full Debugger Window
-//    	textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
-    	
-    	routine.resetCYCLE();
     	
     	updateDebugger();
     	updateMemoryList();
@@ -720,50 +694,50 @@ public class MIPSFrame extends javax.swing.JFrame {
 
     private void buttonStepActionPerformed(java.awt.event.ActionEvent evt)
     {
-    	// Check if previous execution was done
-    	if(internal.getPC() > routine.getInstructionEnd())
-    	{
-    		routine.clearInstruction(); // To ensure clean state
-    		assemble();
-    		routine.compile();
-    		internal.setPC(Architecture.$PC);
-    		
-    		updateDebugger();
-        	updateMemoryList();
-        	updatePCAddressList();
-        	updateRegisterViewer();
-        	updatePCAddressPosition();
-    	}
-    	else
-    	{
-    		routine.execute(internal.getPC());
-        	internal.setPC(internal.getPC() + 0x04);
-        	
-        	updateDebugger();
-        	updateMemoryList();
-        	updatePCAddressList();
-        	updateRegisterViewer();
-        	updatePCAddressPosition();
-    	}
+//    	// Check if previous execution was done
+//    	if(internal.getPC() > routine.getInstructionEnd())
+//    	{
+//    		routine.clearInstruction(); // To ensure clean state
+//    		assemble();
+//    		routine.compile();
+//    		internal.setPC(Architecture.$PC);
+//    		
+//    		updateDebugger();
+//        	updateMemoryList();
+//        	updatePCAddressList();
+//        	updateRegisterViewer();
+//        	updatePCAddressPosition();
+//    	}
+//    	else
+//    	{
+//    		routine.execute(internal.getPC());
+//        	internal.setPC(internal.getPC() + 0x04);
+//        	
+//        	updateDebugger();
+//        	updateMemoryList();
+//        	updatePCAddressList();
+//        	updateRegisterViewer();
+//        	updatePCAddressPosition();
+//    	}
     	
-    	if(internal.getPC() > routine.getInstructionEnd())
-    	{
-    		internal.setPC(Architecture.$PC);
-    		listPCAddress.setSelectedIndex(-1);
-    		listOPCODE.setSelectedIndex(-1);
-    		
-    		// Moved to Full Debugger Window
+//    	if(internal.getPC() > routine.getInstructionEnd())
+//    	{
+//    		internal.setPC(Architecture.$PC);
+//    		listPCAddress.setSelectedIndex(-1);
+//    		listOPCODE.setSelectedIndex(-1);
+//    		
+//    		// Moved to Full Debugger Window
 //    		textAreaCompilerWindow.setText("");
-//        	if(internal.getPC() >= routine.getInstructionsCount())
-//        		textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
-    		
-    		routine.resetCYCLE();
-    		
-    		updateDebugger();
-        	updateMemoryList();
-        	updateRegisterViewer();
-        	updatePCAddressPosition();
-    	}
+////        	if(internal.getPC() >= routine.getInstructionsCount())
+////        		textAreaCompilerWindow.append("\n Execution completed with total cycle of: " + routine.getCYCLE());
+//    		
+//    		routine.resetCYCLE();
+//    		
+//    		updateDebugger();
+//        	updateMemoryList();
+//        	updateRegisterViewer();
+//        	updatePCAddressPosition();
+//    	}
     }
 
     private void buttonStopActionPerformed(java.awt.event.ActionEvent evt)
@@ -795,8 +769,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listPCAddress.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
-    	
-    	pcav.updatePositions(index);
     }
 
     private void listOPCODEValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -806,8 +778,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	listPCAddress.ensureIndexIsVisible(index);
     	listOPCODE.setSelectedIndex(index);
     	listOPCODE.ensureIndexIsVisible(index);
-    	
-    	pcav.updatePositions(index);
     }
     
     private void assemble()
@@ -815,7 +785,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	String[] instructions = textAreaInstruction.getText().split("\n");
     	for(String instruction : instructions)
     	{
-    		parser.parseSingle(instruction, routine);
     	}
     }
     
@@ -830,8 +799,6 @@ public class MIPSFrame extends javax.swing.JFrame {
         	listPCAddress.ensureIndexIsVisible(index);
         	listOPCODE.setSelectedIndex(index);
         	listOPCODE.ensureIndexIsVisible(index);
-        	
-        	pcav.updatePositions();
     	}
     }
     
@@ -860,51 +827,6 @@ public class MIPSFrame extends javax.swing.JFrame {
     	boolean finished = false;
     	DefaultListModel<String> pcList = new DefaultListModel<String>();
     	DefaultListModel<String> regList = new DefaultListModel<String>();
-    	
-    	for(Map.Entry<Integer, ISA_OPCODE> entry : routine.getInstructions().entrySet())
-    	{
-    		if(entry.getValue() == null)
-    		{
-    			fd.appendError("Fail to add instruction: OPCODE returned NULL", true);
-    			fd.appendError("Assembler will stop and clear", true);
-    			routine.clearInstruction();
-    			finished = false;
-    			break;
-    		}
-    		else
-    		{
-    			pcList.addElement(String.format("0x%08X", entry.getKey()));
-        		if(entry.getValue().getOPCODE() == null)
-        		{
-        			fd.appendError("Fail to add instruction: OPCODE not found", true);
-        			fd.appendError("Assembler will stop and clear", true);
-        			routine.clearInstruction();
-        			finished = false;
-        			break;
-        		}
-        		else if(entry.getValue().getREGS() == null)
-        		{
-        			fd.appendError("Fail to add instruction: INSTRCUTIONS not found", true);
-        			fd.appendError("Assembler will stop and clear", true);
-        			routine.clearInstruction();
-        			finished = false;
-        			break;
-        		}
-        		else
-        		{
-        			regList.addElement(entry.getValue().getOPCODE() + " " + entry.getValue().getREGS());
-        			finished = true;
-        		}
-    		}
-    	}
-    	
-    	if(finished)
-    	{
-    		listPCAddress.setModel(pcList);
-        	listOPCODE.setModel(regList);
-        	
-        	pcav.updateViewers();    		
-    	}
     }
     
     private void updateDebugger()

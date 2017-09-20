@@ -4,6 +4,47 @@ import java.util.LinkedHashMap;
 
 import cs.instruction.*;
 import cs.instruction.types.ISA_OPCODE;
+import cs.opcode.ISA_ADD;
+import cs.opcode.ISA_ADD_I;
+import cs.opcode.ISA_ADD_IU;
+import cs.opcode.ISA_ADD_U;
+import cs.opcode.ISA_AND;
+import cs.opcode.ISA_AND_I;
+import cs.opcode.ISA_BRANCHEQ;
+import cs.opcode.ISA_BRANCHGE;
+import cs.opcode.ISA_BRANCHGT;
+import cs.opcode.ISA_BRANCHLE;
+import cs.opcode.ISA_BRANCHLT;
+import cs.opcode.ISA_BRANCHNE;
+import cs.opcode.ISA_DIVIDE;
+import cs.opcode.ISA_DIVIDE_U;
+import cs.opcode.ISA_JUMP;
+import cs.opcode.ISA_JUMPANDLINK;
+import cs.opcode.ISA_JUMPREG;
+import cs.opcode.ISA_LOADBYTE_U;
+import cs.opcode.ISA_LOADHALF_U;
+import cs.opcode.ISA_LOADIMM;
+import cs.opcode.ISA_LOADUPPER_I;
+import cs.opcode.ISA_LOADWORD;
+import cs.opcode.ISA_MOVE;
+import cs.opcode.ISA_MOVEFROMHI;
+import cs.opcode.ISA_MOVEFROMLO;
+import cs.opcode.ISA_MULTIPLY;
+import cs.opcode.ISA_MULTIPLY_U;
+import cs.opcode.ISA_NOR;
+import cs.opcode.ISA_OR;
+import cs.opcode.ISA_OR_I;
+import cs.opcode.ISA_SETLESSTHAN;
+import cs.opcode.ISA_SETLESSTHAN_I;
+import cs.opcode.ISA_SETLESSTHAN_IU;
+import cs.opcode.ISA_SETLESSTHAN_U;
+import cs.opcode.ISA_SHIFTLEFT_L;
+import cs.opcode.ISA_SHIFTRIGHT_L;
+import cs.opcode.ISA_STOREBYTE;
+import cs.opcode.ISA_STOREHALF;
+import cs.opcode.ISA_STOREWORD;
+import cs.opcode.ISA_SUB;
+import cs.opcode.ISA_SUB_U;
 
 public class Internal
 {

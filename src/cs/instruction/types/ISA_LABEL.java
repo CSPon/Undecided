@@ -1,6 +1,7 @@
 package cs.instruction.types;
 
 import cs.architecture.Internal;
+import cs.opcode.ISA_JType;
 
 public class ISA_LABEL extends ISA_JType
 {

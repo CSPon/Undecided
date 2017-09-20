@@ -1,0 +1,41 @@
+package cs.opcode;
+
+import cs.architecture.Architecture;
+import cs.architecture.Internal;
+
+public class ISA_BRANCHNE extends ISA_IType
+{
+	public ISA_BRANCHNE(String line)
+	{
+		super(line);
+		parseFull();
+		parseReg();
+		
+		HEX_OPCODE = 0x05;
+		HEX_FUNCT = 0x00;
+	}
+	
+	@Override
+	public void parseReg()
+	{
+		String[] parsed = REGS.split(",");
+		
+		RS = checkReg(parsed[0]);
+		RT = checkReg(parsed[1]);
+		ADDR_JUMP = parsed[2];
+	}
+
+	@Override
+	public void perform(Internal internal)
+	{
+		if(internal.getRegisterVal(RS) != internal.getRegisterVal(RT))
+		{
+			// BEQ and BNE will take UPPER 16-bits from PC
+			// LOWER 16-bits are acquired from target PC >> 2
+			int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_16) | (IMMEDIATE << 2);
+			// Shouldn't be stopping on actual LABEL but to show step execution
+			JUMP_ADDRESS -= 0x04;
+			internal.setPC(JUMP_ADDRESS);
+		}
+	}
+}

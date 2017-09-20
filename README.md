@@ -107,6 +107,8 @@ __Does not simulate actual memory allocation!__
 
 2. Pipeline Simulation (5 stages?)
 
+3. ARM ISA
+
 ---
 
 ### Otherwise...

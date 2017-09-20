@@ -81,7 +81,7 @@ Memory value can be changed via Memory.mem, under asm folder.
 
 ### For Reference
 
-Memory address from 0x00 to 0xFF
+Memory address must be assigned before using.
 
 All possible registers are added.
 

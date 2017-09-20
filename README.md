@@ -99,6 +99,8 @@ __Does not simulate actual memory allocation!__
 
 3. Organize Routine and Architecture
 
+4. Pseudocode parser
+
 ---
 
 ### For Future

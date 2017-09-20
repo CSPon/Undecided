@@ -1,6 +1,6 @@
 ![image](https://raw.githubusercontent.com/CSPon/Undecided/master/imgs/Sample_000.png)
 
-# Untitled
+# Untitled (Overhaul in progress)
 
 Untitled MIPS Simulator using JAVA
 

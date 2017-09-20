@@ -1,40 +1,37 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
+import cs.architecture.Architecture_MIPS;
 
 public class ISA_MULTIPLY extends ISA_RType
 {
-	public ISA_MULTIPLY(String line)
+	public ISA_MULTIPLY(String expression)
 	{
-		super(line);
-		parseFull();
-		parseReg();
+		super(expression);
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x18;
+		setHex_opcode(0x00);
+		setFunct(0x18);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RS = checkReg(parsed[0]);
-		RT = checkReg(parsed[1]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rs(regs.split(",")[0]);
+		setRegister_rt(regs.split(",")[1]);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("mult"))
-		{
-			internal.setTo("$hi", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) >> 16);
-			internal.setTo("$lo", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) & 0xFFFF);
-		}
-		else if(OPCODE.equalsIgnoreCase("multu"))
-		{
-			internal.setTo("$hi", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) >> 16);
-			internal.setTo("$lo", (internal.getRegisterVal(RS) * internal.getRegisterVal(RT)) & 0xFFFF);
-		}
+		int val_rs = arc.registers().getFrom(getRegister_rs());
+		int val_rt = arc.registers().getFrom(getRegister_rt());
+		
+		arc.registers().setTo("$hi", (val_rs * val_rt) >> 16);
+		arc.registers().setTo("$lo", (val_rs * val_rt) & Architecture_MIPS.$LOWER_16);
 	}
 }

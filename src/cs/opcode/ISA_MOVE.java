@@ -1,50 +1,32 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
-import cs.instruction.ISA_OPCODE;
+import cs.architecture.AArchitecture;
 
-@Deprecated
-public class ISA_MOVE extends ISA_OPCODE
+public class ISA_MOVE extends ISA_RType
 {
 	public ISA_MOVE(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
+
+		setHex_opcode(0xFF);
+		setFunct(0xFF);
+	}
+
+	@Override
+	public void assign()
+	{
+		String regs = getExpression().split(" ")[1];
 		
-		CYCLE_COUNT = 1;
+		setOpcode(getExpression().split(" ")[0]);
 		
-		HEX_OPCODE = 0x08;
-		HEX_FUNCT = 0x00;
+		setRegister_rs(regs.split(",")[0]);
+		setRegister_rt(regs.split(",")[1]);
 	}
 
 	@Override
-	public void parseFull()
+	public void eval(AArchitecture arc)
 	{
-		OPCODE = INSTRUCTION.split(" ")[0];
-		REGS = INSTRUCTION.substring(INSTRUCTION.indexOf(" ") + 1);
-		REGS = REGS.replaceAll(" ", "");
-	}
-
-	@Override
-	public void parseReg()
-	{
-		String[] parsed = REGS.split(",");
-		
-		RD = checkReg(parsed[0]);
-		RS = checkReg(parsed[1]);
-	}
-
-	@Override
-	public void perform(Internal internal)
-	{
-		if(OPCODE.equalsIgnoreCase("move"))
-			internal.setRegisterVal(RD, internal.getRegisterVal(RS));
-	}
-
-	@Override
-	public String toString(Internal internal)
-	{
-		return "PSEUDOINST";
+		// TODO Generate add $rs, $rt, $zero and eval
 	}
 }

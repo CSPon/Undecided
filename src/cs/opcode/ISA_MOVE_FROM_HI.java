@@ -1,30 +1,32 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_MOVE_FROM_HI extends ISA_RType
 {
 	public ISA_MOVE_FROM_HI(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x10;
+		setHex_opcode(0x00);
+		setFunct(0x10);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RD = checkReg(parsed[0]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rd(regs);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		internal.setTo(RD, internal.getFrom("$hi"));
+		int val_hi = arc.registers().getFrom("$hi");
+		arc.registers().setTo(getRegister_rd(), val_hi);
 	}
 }

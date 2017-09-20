@@ -1,56 +1,44 @@
 package cs.opcode;
 
+import cs.architecture.AArchitecture;
+import cs.architecture.Architecture_MIPS;
 import cs.architecture.Internal;
 import cs.instruction.ISA_OPCODE;
 
-@Deprecated
 public class ISA_LOAD_IMM extends ISA_IType
 {
 	public ISA_LOAD_IMM(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
-		
-		CYCLE_COUNT = 1;
-		
-		HEX_OPCODE = 0xFF;
-		HEX_FUNCT = 0xFF;
+		assign();
+
+		setHex_opcode(0xFF);
+		setFunct(0xFF);
 	}
 	
 	@Override
-	public void parseFull()
+	public void assign()
 	{
-		OPCODE = INSTRUCTION.split(" ")[0];
-		REGS = INSTRUCTION.substring(INSTRUCTION.indexOf(" ") + 1);
-		REGS = REGS.replaceAll(" ", "");
-	}
-	
-	@Override
-	public void parseReg()
-	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RD = checkReg(parsed[0]);
-		if(parsed[1].startsWith("0x"))
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rd(regs.split(",")[0]);
+		if(regs.split(",")[1].startsWith("0x"))
 		{
-			parsed[1] = parsed[1].replaceAll("0x", "");
-			IMMEDIATE = (int) Long.parseLong(parsed[1], 16);
+			String val = regs.split(",")[1].replaceAll("0x", "");
+			setImmediate((int) Long.parseLong(val, 16));
 		}
-		else
-			IMMEDIATE = Integer.parseInt(parsed[1]);
+		else setImmediate(Integer.parseInt(regs.split(",")[1]));
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		if(OPCODE.equalsIgnoreCase("li"))
-			internal.setRegisterVal(RD, IMMEDIATE);
-	}
-
-	@Override
-	public String toString(Internal internal)
-	{
-		return "PSEUDOINST";
+		int upper = (getImmediate() & Architecture_MIPS.$UPPER_16) >> 16;
+		int lower = (getImmediate() & Architecture_MIPS.$LOWER_16);
+		
+		// TODO Generate lui $rd, upper and eval
+		// TODO generate ori $rd, $rd, lower and eval
 	}
 }

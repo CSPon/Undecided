@@ -1,38 +1,38 @@
 package cs.opcode;
 
-import cs.architecture.Architecture;
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
+import cs.architecture.Architecture_MIPS;
 
 public class ISA_JUMP_AND_LINK extends ISA_JType
 {
 	public ISA_JUMP_AND_LINK(String expression)
 	{
 		super(expression);
-		parseFull();
+		assign();
 		
-		HEX_OPCODE = 0x03;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x03);
+		setFunct(0x00);
 	}
 	
 	@Override
-	public void parseFull()
+	public void assign()
 	{
-		String[] parsed = INSTRUCTION.split(" ");
-		OPCODE = parsed[0];
-		ADDR_JUMP = parsed[1];
-		REGS = parsed[1];
+		String regs = getExpression().split(" ")[1];
+		
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setLabel_target(regs);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		// $ra will have 26-bit address so be sure to shift before jumping from jr!
-		int SELF_ADDRESS = (ADDRESS_SELF & Architecture.$LOWER_26) >> 2;
-		internal.setRegisterVal("$ra", SELF_ADDRESS);
+		int SELF_ADDR = (getAddress_self() & Architecture_MIPS.$LOWER_26) >> 2;
+		int JUMP_ADDR = (arc.registers().getFrom("$pc") & Architecture_MIPS.$UPPER_4) | (getAddress_target() << 2);
+		// TODO Shouldn't be stopping on label but to show step execution
+		JUMP_ADDR -= 0x04;
 		
-		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (IMMEDIATE << 2);
-		// Shouldn't be stopping on actual LABEL but to show step execution
-		JUMP_ADDRESS -= 0x04;
-		internal.setPC(JUMP_ADDRESS);
+		arc.registers().setTo("$ra", SELF_ADDR);
+		arc.registers().setTo("$pc", JUMP_ADDR);
 	}
 }

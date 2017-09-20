@@ -5,10 +5,9 @@ public class ISA_MULTIPLY_U extends ISA_MULTIPLY
 	public ISA_MULTIPLY_U(String line)
 	{
 		super(line);
-		parseFull();
-		parseReg();
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x19;
+		setHex_opcode(0x00);
+		setFunct(0x19);
 	}
 }

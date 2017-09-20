@@ -11,15 +11,15 @@ public class Memory
 		memory = new HashMap<Integer, Integer>();
 	}
 	
-	public int readMemory(int address)
+	public int readMemory(int address, int offset)
 	{
-		return memory.get(address);
+		return memory.get(address + offset);
 	}
 	
-	public int writeMemory(int address, int value)
+	public int writeMemory(int address, int offset, int value)
 	{
-		memory.put(address, value);
-		return memory.get(address);
+		memory.put(address + offset, value);
+		return memory.get(address + offset);
 	}
 	
 	public void resetAll()

@@ -1,35 +1,35 @@
 package cs.opcode;
 
-import cs.architecture.Architecture;
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
+import cs.architecture.Architecture_MIPS;
 
 public class ISA_JUMP_REG extends ISA_RType
 {
-	public ISA_JUMP_REG(String line)
+	public ISA_JUMP_REG(String expression)
 	{
-		super(line);
-		parseFull();
-		parseReg();
+		super(expression);
+		assign();
 		
-		HEX_OPCODE = 0x00;
-		HEX_FUNCT = 0x08;
+		setHex_opcode(0x00);
+		setFunct(0x08);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RS = checkReg(parsed[0]);
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rs(regs);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		// Preserve UPPER 4 bits from PC, mask with RS (After shifting RS by 2 bits left)
-		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (internal.getRegisterVal(RS) << 2);
-		// Shouldn't be stopping on actual LABEL but to show step execution
-//		JUMP_ADDRESS -= 0x04;
-		internal.setPC(JUMP_ADDRESS);
+		int JUMP_ADDR = (arc.registers().getFrom("$pc") & Architecture_MIPS.$UPPER_4) | (arc.registers().getFrom(getRegister_rs()) << 2);
+		// TODO Shouldn't be stopping on label but to show step execution
+		JUMP_ADDR -= 0x04;
+		arc.registers().setTo("$pc", JUMP_ADDR);
 	}
 }

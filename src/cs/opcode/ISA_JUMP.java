@@ -1,34 +1,35 @@
 package cs.opcode;
 
-import cs.architecture.Architecture;
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
+import cs.architecture.Architecture_MIPS;
 
 public class ISA_JUMP extends ISA_JType
 {
-	public ISA_JUMP(String line)
+	public ISA_JUMP(String expression)
 	{
-		super(line);
-		parseFull();
+		super(expression);
+		assign();
 		
-		HEX_OPCODE = 0x02;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x02);
+		setFunct(0x00);
 	}
 
 	@Override
-	public void parseFull()
+	public void assign()
 	{
-		String[] parsed = INSTRUCTION.split(" ");
-		OPCODE = parsed[0];
-		ADDR_JUMP = parsed[1];
-		REGS = parsed[1];
+		String regs = getExpression().split(" ")[1];
+		
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setLabel_target(regs);
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		int JUMP_ADDRESS = (internal.getPC() & Architecture.$UPPER_4) | (IMMEDIATE << 2);
-		// Shouldn't be stopping on actual LABEL but to show step execution
-		JUMP_ADDRESS -= 0x04;
-		internal.setPC(JUMP_ADDRESS);
+		int JUMP_ADDR = (arc.registers().getFrom("$pc") & Architecture_MIPS.$UPPER_4) | (getAddress_target() << 2);
+		// TODO Shouldn't be stopping on label but to show step execution
+		JUMP_ADDR -= 0x04;
+		arc.registers().setTo("$pc", JUMP_ADDR);
 	}
 }

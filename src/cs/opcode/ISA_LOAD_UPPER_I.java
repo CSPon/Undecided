@@ -1,37 +1,38 @@
 package cs.opcode;
 
-import cs.architecture.Internal;
+import cs.architecture.AArchitecture;
 
 public class ISA_LOAD_UPPER_I extends ISA_IType
 {
-	public ISA_LOAD_UPPER_I(String line)
+	public ISA_LOAD_UPPER_I(String expression)
 	{
-		super(line);
-		parseFull();
-		parseReg();
+		super(expression);
+		assign();
 		
-		HEX_OPCODE = 0x0F;
-		HEX_FUNCT = 0x00;
+		setHex_opcode(0x0F);
+		setFunct(0x00);
 	}
 	
 	@Override
-	public void parseReg()
+	public void assign()
 	{
-		String[] parsed = REGS.split(",");
+		String regs = getExpression().split(" ")[1];
 		
-		RT = checkReg(parsed[0]);
-		if(parsed[1].startsWith("0x"))
+		setOpcode(getExpression().split(" ")[0]);
+		
+		setRegister_rt(regs.split(",")[0]);
+		if(regs.split(",")[1].startsWith("0x"))
 		{
-			parsed[1] = parsed[1].replaceAll("0x", "");
-			IMMEDIATE = (int) Long.parseLong(parsed[1], 16);
+			String val = regs.split(",")[1].replaceAll("0x", "");
+			setImmediate((int) Long.parseLong(val, 16));
 		}
-		else
-			IMMEDIATE = Integer.parseInt(parsed[1]);
+		else setImmediate(Integer.parseInt(regs.split(",")[1]));
 	}
 
 	@Override
-	public void perform(Internal internal)
+	public void eval(AArchitecture arc)
 	{
-		internal.setRegisterVal(RT, IMMEDIATE << 16);
+		int imm = getImmediate() << 16;
+		arc.registers().setTo(getRegister_rt(), imm);
 	}
 }

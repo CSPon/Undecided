@@ -1,10 +1,10 @@
 package cs.instruction;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 
 public interface Instruction
 {
-	public void eval(AArchitecture arc);
+	public void eval(IArchitecture arc);
 	
 	public void assign();
 
@@ -12,5 +12,5 @@ public interface Instruction
 	
 	public String checkReg(String reg);
 	
-	public String toString(AArchitecture arc);
+	public String toString(IArchitecture arc);
 }

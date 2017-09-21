@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 
 public class ISA_SHIFT_RIGHT_ARITH extends ISA_RType
 {
@@ -26,7 +26,7 @@ public class ISA_SHIFT_RIGHT_ARITH extends ISA_RType
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		// Copy bottom (32 - SHAMT) bits to separate variable
 		// Shift RT to right by SHAMT

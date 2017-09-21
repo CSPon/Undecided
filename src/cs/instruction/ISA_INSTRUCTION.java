@@ -1,6 +1,6 @@
 package cs.instruction;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 
 public abstract class ISA_INSTRUCTION implements Instruction
 {
@@ -42,7 +42,7 @@ public abstract class ISA_INSTRUCTION implements Instruction
 		cycle_count = 1;
 	}
 	
-	public abstract void eval(AArchitecture arc);
+	public abstract void eval(IArchitecture arc);
 	public abstract void assign();
 
 	public String getExpression() {

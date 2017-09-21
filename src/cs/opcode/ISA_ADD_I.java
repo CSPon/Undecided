@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 
 public class ISA_ADD_I extends ISA_IType
 {
@@ -14,7 +14,7 @@ public class ISA_ADD_I extends ISA_IType
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int val_rs = arc.registers().getFrom(getRegister_rs());
 		int imm = getImmediate();

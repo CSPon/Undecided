@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.instruction.ISA_INSTRUCTION;
 
 public abstract class ISA_JType extends ISA_INSTRUCTION
@@ -21,7 +21,7 @@ public abstract class ISA_JType extends ISA_INSTRUCTION
 	}
 
 	@Override
-	public String toString(AArchitecture arc)
+	public String toString(IArchitecture arc)
 	{
 		int HEX = 0x00;
 		HEX |= getHex_opcode(); HEX = HEX << 26;

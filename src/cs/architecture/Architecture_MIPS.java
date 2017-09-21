@@ -1,6 +1,11 @@
 package cs.architecture;
 
-public class Architecture_MIPS extends AArchitecture
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import cs.instruction.ISA_INSTRUCTION;
+
+public class Architecture_MIPS implements IArchitecture
 {
 	public static final int $LOWER_26	= 0x03FFFFFF;
 	public static final int $LOWER_16	= 0x0000FFFF;
@@ -14,6 +19,11 @@ public class Architecture_MIPS extends AArchitecture
 	public static final int $gp = 0x10008000;
 	public static final int $pc = 0x00400000;
 	public static final int $fp = 0x7FFFFFFC;
+	
+	protected Memory memory;
+	protected Registers registers;
+	protected LinkedHashMap<Integer, ISA_INSTRUCTION> symboltable;
+	protected LinkedHashMap<Integer, ISA_INSTRUCTION> texttable;
 	
 	public Architecture_MIPS()
 	{
@@ -31,5 +41,28 @@ public class Architecture_MIPS extends AArchitecture
 	public Memory memory()
 	{
 		return memory;
+	}
+
+	@Override
+	public LinkedHashMap<Integer, ISA_INSTRUCTION> symbolTable()
+	{
+		return symboltable;
+	}
+
+	@Override
+	public LinkedHashMap<Integer, ISA_INSTRUCTION> textTable()
+	{
+		return texttable;
+	}
+
+	@Override
+	public int searchSymbol(String symbol)
+	{
+		for(Map.Entry<Integer, ISA_INSTRUCTION> entry : symboltable.entrySet())
+		{
+			if(entry.getValue().getLabel_self().compareTo(symbol) == 0)
+				return entry.getKey();
+		}
+		return -1;
 	}
 }

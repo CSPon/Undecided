@@ -1,9 +1,7 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.architecture.Architecture_MIPS;
-import cs.architecture.Internal;
-import cs.instruction.ISA_OPCODE;
 
 public class ISA_LOAD_IMM extends ISA_IType
 {
@@ -33,12 +31,17 @@ public class ISA_LOAD_IMM extends ISA_IType
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int upper = (getImmediate() & Architecture_MIPS.$UPPER_16) >> 16;
 		int lower = (getImmediate() & Architecture_MIPS.$LOWER_16);
 		
 		// TODO Generate lui $rd, upper and eval
+		String expression = "lui " + getRegister_rd() + "," + upper;
+		new ISA_LOAD_UPPER_I(expression).eval(arc);
+		
 		// TODO generate ori $rd, $rd, lower and eval
+		expression = "ori " + getRegister_rd() + "," + getRegister_rd() + "," + lower;
+		new ISA_OR_I("").eval(arc);
 	}
 }

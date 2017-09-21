@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.architecture.Architecture_MIPS;
 
 public class ISA_MULTIPLY extends ISA_RType
@@ -26,7 +26,7 @@ public class ISA_MULTIPLY extends ISA_RType
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int val_rs = arc.registers().getFrom(getRegister_rs());
 		int val_rt = arc.registers().getFrom(getRegister_rt());

@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.instruction.ISA_INSTRUCTION;
 
 public abstract class ISA_IType extends ISA_INSTRUCTION
@@ -27,7 +27,7 @@ public abstract class ISA_IType extends ISA_INSTRUCTION
 	}
 
 	@Override
-	public String toString(AArchitecture arc)
+	public String toString(IArchitecture arc)
 	{
 		// Need to shift IMMEDIATE by 16 (Or mask out, whatever we want)
 		int IMM = getImmediate();

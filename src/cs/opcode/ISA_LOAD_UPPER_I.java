@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 
 public class ISA_LOAD_UPPER_I extends ISA_IType
 {
@@ -30,7 +30,7 @@ public class ISA_LOAD_UPPER_I extends ISA_IType
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int imm = getImmediate() << 16;
 		arc.registers().setTo(getRegister_rt(), imm);

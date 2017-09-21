@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.architecture.Architecture_MIPS;
 
 public class ISA_STORE_BYTE extends ISA_STORE_HALF
@@ -15,7 +15,7 @@ public class ISA_STORE_BYTE extends ISA_STORE_HALF
 	}
 	
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int val_rt = arc.registers().getFrom(getRegister_rt());
 		int val_rs = arc.registers().getFrom(getRegister_rs());

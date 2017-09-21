@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.instruction.ISA_INSTRUCTION;
 
 public class ISA_LABEL extends ISA_INSTRUCTION
@@ -11,13 +11,13 @@ public class ISA_LABEL extends ISA_INSTRUCTION
 	}
 
 	@Override
-	public String toString(AArchitecture arc)
+	public String toString(IArchitecture arc)
 	{
 		return String.format("0x%08X", getAddress_self());
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		// Label has nothing to do
 	}

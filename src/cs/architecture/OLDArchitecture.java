@@ -3,7 +3,7 @@ package cs.architecture;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Architecture
+public class OLDArchitecture
 {
 	/* Constants */
 	public static final int $PC			= 0x00400000;

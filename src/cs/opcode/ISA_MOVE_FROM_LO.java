@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 
 public class ISA_MOVE_FROM_LO extends ISA_RType
 {
@@ -24,7 +24,7 @@ public class ISA_MOVE_FROM_LO extends ISA_RType
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int val_lo = arc.registers().getFrom("$lo");
 		arc.registers().setTo(getRegister_rd(), val_lo);

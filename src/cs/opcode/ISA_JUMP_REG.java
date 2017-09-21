@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.architecture.Architecture_MIPS;
 
 public class ISA_JUMP_REG extends ISA_RType
@@ -25,7 +25,7 @@ public class ISA_JUMP_REG extends ISA_RType
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int JUMP_ADDR = (arc.registers().getFrom("$pc") & Architecture_MIPS.$UPPER_4) | (arc.registers().getFrom(getRegister_rs()) << 2);
 		// TODO Shouldn't be stopping on label but to show step execution

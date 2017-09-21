@@ -1,6 +1,6 @@
 package cs.opcode;
 
-import cs.architecture.AArchitecture;
+import cs.architecture.IArchitecture;
 import cs.architecture.Architecture_MIPS;
 
 public class ISA_LOAD_HALF_U extends ISA_LOAD_WORD
@@ -15,7 +15,7 @@ public class ISA_LOAD_HALF_U extends ISA_LOAD_WORD
 	}
 
 	@Override
-	public void eval(AArchitecture arc)
+	public void eval(IArchitecture arc)
 	{
 		int val_rs = arc.registers().getFrom(getRegister_rs());
 		int offset = getImmediate();

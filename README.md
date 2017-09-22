@@ -16,8 +16,8 @@ __Currently going through overhaul__
 
 * add (add $rs, $rt, $rd)
 * addi (addi $rs, $rt, imm)
-* _addiu_
-* _addu_
+* _addiu (Implemented as addi)_
+* _addu (Implemented as add)_
 * and (and $rd, $rs, $rt)
 * andi (andi $rt, $rs, imm)
 * beq (beq $rs, $st, LABEL)
@@ -33,21 +33,21 @@ __Currently going through overhaul__
 * ori (ori $rs, $rt, imm)
 * slt (slt $rd, $rs, $rt)
 * slti (slti $rt, $rs, imm)
-* _sltiu_
-* _sltu_
+* _sltiu (Implemented as slti)_
+* _sltu (Implemented as slt)_
 * sll (sll $rd, $rt, shamt)
 * srl (srl $rd, $rt, shamt)
 * sb (sb $rt, offset($rs))
 * sh (sh $rt, offset($rs))
 * sw (sw $rt, offset($rs))
 * sub (sub $rd, $rs, $rt)
-* _subu_
+* _subu (Implemented as sub)_
 * div (div $s, $t)
-* _divu_
+* _divu (Implemented as div)_
 * mfhi (mfhi $d)
 * mflo (mflo $d)
 * mult (mult $s, $t)
-* _multu_
+* _multu (Implemented as mult)_
 * sra (sra $rd, $rt, shamt)
 * blt (blt $rs, $rt, LABEL) __Deprecated__
 * bgt (bgt $rs, $rt, LABEL) __Deprecated__

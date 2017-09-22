@@ -2,7 +2,6 @@ package cs.architecture;
 
 import java.util.LinkedList;
 
-// Timestamp testing
 public class Assembler_MIPS implements IAssembler
 {
 	@Override

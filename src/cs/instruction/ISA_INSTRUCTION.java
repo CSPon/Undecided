@@ -1,5 +1,7 @@
 package cs.instruction;
 
+import java.util.Map;
+
 import cs.architecture.IArchitecture;
 
 public abstract class ISA_INSTRUCTION implements Instruction
@@ -129,6 +131,22 @@ public abstract class ISA_INSTRUCTION implements Instruction
 	}
 	public void setCycle_count(int cycle_count) {
 		this.cycle_count = cycle_count;
+	}
+	
+	@Override
+	public int searchSymbol(IArchitecture arc, String symbol)
+	{
+		for(Map.Entry<Integer, ISA_INSTRUCTION> entry : arc.symbolTable().entrySet())
+		{
+			if(entry.getValue().getLabel_self().compareTo(getLabel_self()) == 0)
+				setAddress_self(entry.getKey());
+			if(entry.getValue().getLabel_self().compareTo(symbol) == 0)
+			{
+				setAddress_target(entry.getKey());
+				return entry.getKey();
+			}
+		}
+		return -1;
 	}
 	
 	@Override

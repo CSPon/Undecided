@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_RType;
 
 public class ISA_SHIFT_LEFT_LOGICAL extends ISA_RType
 {

@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_IType;
 import cs.architecture.Architecture_MIPS;
 
 public class ISA_LOAD_IMM extends ISA_IType

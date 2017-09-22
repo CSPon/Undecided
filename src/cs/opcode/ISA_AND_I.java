@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_IType;
 
 public class ISA_AND_I extends ISA_IType
 {

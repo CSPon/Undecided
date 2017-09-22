@@ -1,7 +1,6 @@
-package cs.opcode;
+package cs.instruction;
 
 import cs.architecture.IArchitecture;
-import cs.instruction.ISA_INSTRUCTION;
 
 public abstract class ISA_JType extends ISA_INSTRUCTION
 {	
@@ -17,6 +16,7 @@ public abstract class ISA_JType extends ISA_INSTRUCTION
 		// opcode address
 		// Override assign method to create class-spesific method
 		setOpcode(getExpression().split(" ")[0]);
+		setLabel_self(getExpression().split(" ")[0]);
 		setLabel_target(getExpression().split(" ")[1]);
 	}
 

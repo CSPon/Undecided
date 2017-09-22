@@ -6,8 +6,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.text.Position;
 
 import cs.architecture.Internal;
+import cs.architecture.routine.Routine;
 import cs.instruction.ISA_OPCODE;
-import cs.routine.Routine;
 
 /**
  * 
@@ -18,12 +18,10 @@ public class PCAddressViewer extends javax.swing.JFrame
 {
 	private static final long serialVersionUID = -1485329096512117768L;
 	
-	private Internal internal;
 	private Routine routine;
 	
-	public PCAddressViewer(Internal _internal, Routine _routine)
-    {
-		internal = _internal;
+	public PCAddressViewer(Routine _routine)
+	{
 		routine = _routine;
         initComponents();
     }

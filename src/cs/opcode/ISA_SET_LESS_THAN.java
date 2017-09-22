@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_RType;
 
 public class ISA_SET_LESS_THAN extends ISA_RType
 {

@@ -12,5 +12,7 @@ public interface Instruction
 	
 	public String checkReg(String reg);
 	
+	public int searchSymbol(IArchitecture arc, String symbol);
+	
 	public String toString(IArchitecture arc);
 }

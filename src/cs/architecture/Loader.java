@@ -2,14 +2,14 @@ package cs.architecture;
 
 public class Loader
 {
-	private Architecture arc;
+	private IArchitecture arc;
 	
 	public Loader()
 	{
 		arc = new Architecture_MIPS();
 	}
 	
-	public Architecture architecture()
+	public IArchitecture architecture()
 	{
 		return arc;
 	}

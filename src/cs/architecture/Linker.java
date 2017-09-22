@@ -45,7 +45,7 @@ import cs.opcode.ISA_SUB_U;
 
 public class Linker
 {
-	public ISA_INSTRUCTION checkOpcode(String name, String line)
+	public ISA_INSTRUCTION getInstruction(String name, String line)
 	{
 		name = name.toLowerCase();
 		if(name.matches("\\badd\\b"))

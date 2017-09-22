@@ -1,4 +1,4 @@
-package cs.architecture;
+package cs.architecture.registers;
 
 public class Registers_MIPS extends Registers
 {

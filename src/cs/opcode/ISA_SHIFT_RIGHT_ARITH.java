@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_RType;
 
 public class ISA_SHIFT_RIGHT_ARITH extends ISA_RType
 {

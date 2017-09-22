@@ -13,7 +13,7 @@ import javax.swing.text.Position;
 import cs.Parser;
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
-import cs.architecture.Routine;
+import cs.architecture.routine.Routine;
 import cs.instruction.ISA_OPCODE;
 
 /**
@@ -25,30 +25,17 @@ public class MIPSFrame extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Internal internal;
-	private Routine routine;
-	private Parser parser;
+	private PCAddressViewer pcav;
+	private FullDebugger fd;
 	
-    public MIPSFrame(Internal _internal, Parser _parser)
+	private Routine routine;
+	
+    public MIPSFrame()
     {
-    	routine = new Routine();
-    	internal = _internal;
-    	parser = _parser;
-    	
         initComponents();
         
-        internal.resetMemory();
-        parser.loadMemoryFromFile(new File("asm/Memory.mem"), internal);
-        
-        ArrayList<String> lines = parser.readInstructionFromFile(new File("asm/Example.mips"));
-        
-        textAreaPrompt.setText("");
-        textAreaInstruction.setText("");
-        for(String line : lines)
-        {
-        	line += "\n";
-        	textAreaInstruction.append(line);
-        }
+        pcav = new PCAddressViewer(routine);
+        fd = new FullDebugger(this, routine);
     }
                         
     private void initComponents() {

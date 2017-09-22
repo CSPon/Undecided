@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_JType;
 import cs.architecture.Architecture_MIPS;
 
 public class ISA_JUMP extends ISA_JType

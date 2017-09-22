@@ -1,4 +1,4 @@
-package cs.routine;
+package cs.architecture.routine;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,7 +16,8 @@ import cs.opcode.ISA_JUMP;
 import cs.opcode.ISA_JUMPANDLINK;
 import cs.opcode.ISA_LABEL;
 
-public class Routine
+@Deprecated
+public class OLDRoutine
 {
 	private Internal internal;
 	
@@ -26,7 +27,7 @@ public class Routine
 	
 	private int LAST_PC;
 	
-	public Routine(Internal _internal)
+	public OLDRoutine(Internal _internal)
 	{
 		this.internal = _internal;
 		INSTRUCTIONS = new LinkedHashMap<>();

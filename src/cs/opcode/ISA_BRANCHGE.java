@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_IType;
 
 public class ISA_BRANCHGE extends ISA_IType
 {

@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_RType;
 import cs.architecture.Architecture_MIPS;
 
 public class ISA_MULTIPLY extends ISA_RType

@@ -1,4 +1,4 @@
-package cs.architecture;
+package cs.architecture.registers;
 
 import java.util.LinkedHashMap;
 

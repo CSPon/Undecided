@@ -1,8 +1,8 @@
 package cs.instruction;
 
-import cs.architecture.Architecture;
 import cs.architecture.Internal;
 
+@Deprecated
 public abstract class ISA_OPCODE implements Instruction
 {
 	/* Common */

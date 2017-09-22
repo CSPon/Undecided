@@ -8,215 +8,114 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import cs.architecture.Internal;
-import cs.routine.Routine;
+import cs.architecture.routine.Routine;
 
 /*
  * For parsing ###($rd): \d{1,}\(\$\w\d\)
  */
 public class Parser
 {
-	public void parseSingle(String line, Routine routine)
+	private FileHandler binary; 
+	
+	public Parser()
 	{
+		binary = new FileHandler();
+	}
+	
+	public String parseSingle(String line)
+	{
+		// Remove comment
 		line = line.replaceAll("#.{1,}", "");
+		
+		// Trim leading and trailing whitespace
 		line = line.trim();
-		if(!line.isEmpty())
-		{
-			if(line.contains(":"))
-			{
-				String[] instructions = line.split(":");
-				if(instructions.length == 2)
-				{
-					routine.addLabel(instructions[0]);
-					routine.addInstruction(instructions[1]);
-				}
-				else
-					routine.addLabel(instructions[0]);
-			}
-			else
-				routine.addInstruction(line);
-		}
-	}
-	
-	public void parseInstructionFromFile(String dir, Routine routine)
-	{
-		try
-		{
-			BufferedReader br = new BufferedReader(new FileReader(dir));
-			
-			String line = br.readLine();
-			while(line != null)
-			{
-				parseSingle(line, routine);
-				
-				line = br.readLine();
-			}
-			
-			br.close();
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public ArrayList<String> readInstructionFromFile(File file)
-	{
-		ArrayList<String> lines = new ArrayList<String>();
 		
-		try
+		return line;
+	}
+	
+	public ArrayList<String> parseInstructionFile(String dir)
+	{
+		ArrayList<String> expressions = new ArrayList<String>();
+		
+		if(binary.openFile(dir))
 		{
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			
-			String line = br.readLine();
+			String line = binary.readLine();
 			while(line != null)
 			{
-				lines.add(line);
-				line = br.readLine();
+				expressions.add(line);
+				line = binary.readLine();
 			}
 			
-			br.close();
-		}
-		catch(Exception err)
-		{
-			err.printStackTrace();
-			return lines;
+			binary.closeReader();
+			
+			return expressions;
 		}
 		
-		return lines;
+		return expressions;
 	}
 	
-	public void loadMemory(String dir, Internal internal)
+	public LinkedHashMap<Integer, Integer> loadMemory(String dir, Internal internal)
 	{
-		try
+		LinkedHashMap<Integer, Integer> memoryList = new LinkedHashMap<Integer, Integer>();
+		if(binary.openFile(dir))
 		{
-			BufferedReader br = new BufferedReader(new FileReader(dir));
+			String line = binary.readLine();
+			while(!line.contains("MEMORY:") && line != null)
+				line = binary.readLine();
 			
-			String line = br.readLine();
-			while(!line.contains("MEMORY:"))
-				line = br.readLine();
-			
-			line = br.readLine();
+			line = binary.readLine();
 			while(line != null)
 			{
+				line = binary.readLine();
 				
-				String[] parsed = line.split("#");
-				if(!parsed[0].isEmpty())
-				{
-					String combined = parsed[0];
-					combined = combined.trim();
-					combined = combined.replaceAll("\\s{1,}", "");
-					parsed = combined.split(":");
-					// Hex check for input
-					parsed[0] = parsed[0].replaceAll("0x", "");
-					
-					int address = (int) Long.parseLong(parsed[0], 16);
-					int value = 0;
-					
-					if(parsed[1].startsWith("0x"))
-					{
-						parsed[1] = parsed[1].replaceAll("0x", "");
-						value = (int) Long.parseLong(parsed[1], 16);
-					}
-					else if(parsed[1].matches("[^0-9]"))
-					{
-						value = parsed[1].charAt(0);
-					}
-					else
-						value = Integer.parseInt(parsed[1]);
-					
-					internal.setToMem(address, 0, value);
-				}
+				// Remove comment
+				line = line.replaceAll("#.{1,}", "");
 				
-				line = br.readLine();
-			}
-			
-			br.close();
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public void loadMemoryFromFile(File file, Internal internal)
-	{
-		try
-		{
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			
-			String line = br.readLine();
-			while(!line.contains("MEMORY:"))
-				line = br.readLine();
-			
-			line = br.readLine();
-			while(line != null)
-			{
-				line = line.replaceAll("#.{1,}", "");				
-				if(!line.isEmpty())
+				// Trim leading and trailing whitespace
+				line = line.trim();
+				
+				if(!line.isEmpty()) // If line is not empty, start parsing
 				{
-					line = line.trim();
 					line = line.replaceAll("\\s{1,}", "");
 					String[] memory = line.split(":");
+					
 					// Hex check for input
 					memory[0] = memory[0].replaceAll("0x", "");
-					
 					int address = (int) Long.parseLong(memory[0], 16);
-					int value = 0;
 					
+					// Hex check for input
+					int value = 0;
 					if(memory[1].startsWith("0x"))
 					{
 						memory[1] = memory[1].replaceAll("0x", "");
 						value = (int) Long.parseLong(memory[1], 16);
 					}
 					else if(memory[1].matches("[^0-9]"))
-					{
 						value = memory[1].charAt(0);
-					}
 					else
 						value = Integer.parseInt(memory[1]);
 					
-					internal.setMemoryVal(address, 0, value);
+					memoryList.put(address, value);
 				}
 				
-				line = br.readLine();
+				line = binary.readLine();
 			}
 			
-			br.close();
+			binary.closeReader();
 		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		
+		return memoryList;
 	}
 	
 	public void saveInstructionToFile(File file, String line)
 	{
-		try
+		if(binary.writeFile(file))
 		{
-			file.createNewFile();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-			
-			bw.write(line);
-			
-			bw.close();
-		}
-		catch(Exception err)
-		{
-			err.printStackTrace();
+			binary.writeLine(line);
+			binary.closeWriter();
 		}
 	}
 	
@@ -225,6 +124,11 @@ public class Parser
 		String prompt = "";
 		try
 		{
+			
+			if(binary.openFile(dir))
+			{
+				
+			}
 			File file = new File(dir);
 			
 			BufferedReader br = new BufferedReader(new FileReader(file));

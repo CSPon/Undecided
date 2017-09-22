@@ -1,6 +1,7 @@
 package cs.opcode;
 
 import cs.architecture.IArchitecture;
+import cs.instruction.ISA_RType;
 
 public class ISA_MOVE_FROM_LO extends ISA_RType
 {

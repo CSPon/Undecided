@@ -1,7 +1,6 @@
-package cs.opcode;
+package cs.instruction;
 
 import cs.architecture.IArchitecture;
-import cs.instruction.ISA_INSTRUCTION;
 
 public abstract class ISA_RType extends ISA_INSTRUCTION
 {
@@ -19,6 +18,7 @@ public abstract class ISA_RType extends ISA_INSTRUCTION
 		String regs = getExpression().split(" ")[1];
 		
 		setOpcode(getExpression().split(" ")[0]);
+		setLabel_self(getExpression().split(" ")[0]);
 		
 		setRegister_rd(regs.split(",")[0]);
 		setRegister_rs(regs.split(",")[1]);

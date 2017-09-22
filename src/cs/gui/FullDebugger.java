@@ -2,7 +2,7 @@ package cs.gui;
 
 import cs.architecture.Architecture;
 import cs.architecture.Internal;
-import cs.routine.Routine;
+import cs.architecture.routine.Routine;
 
 /**
  * 
@@ -13,15 +13,14 @@ public class FullDebugger extends javax.swing.JFrame
 {
 	private static final long serialVersionUID = 6487222431766214751L;
 	
-	private Internal internal;
-	private Routine routine;
 	private MIPSFrame parent;
+	private Routine routine;
 	
-    public FullDebugger(MIPSFrame upper, Internal _internal, Routine _routine)
+    public FullDebugger(MIPSFrame upper, Routine _routine)
     {
     	parent = upper;
-    	internal = _internal;
 		routine = _routine;
+		
         initComponents();
     }
                       

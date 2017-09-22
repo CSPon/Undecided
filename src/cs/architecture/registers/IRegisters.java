@@ -1,4 +1,4 @@
-package cs.architecture;
+package cs.architecture.registers;
 
 public interface IRegisters
 {

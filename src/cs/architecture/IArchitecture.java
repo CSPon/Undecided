@@ -2,6 +2,7 @@ package cs.architecture;
 
 import java.util.LinkedHashMap;
 
+import cs.architecture.registers.Registers;
 import cs.instruction.ISA_INSTRUCTION;
 
 public interface IArchitecture
@@ -11,6 +12,4 @@ public interface IArchitecture
 	
 	public LinkedHashMap<Integer, ISA_INSTRUCTION> symbolTable();
 	public LinkedHashMap<Integer, ISA_INSTRUCTION> textTable();
-	
-	public int searchSymbol(String symbol);
 }

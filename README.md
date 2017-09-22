@@ -4,6 +4,8 @@
 
 Untitled MIPS Simulator using JAVA
 
+Planning on removing assemble & run so you can see step-by-step execution only.
+
 Available function(s) (Checked and working ones only)
 
 (Italics indicates not fully implemented but partially working)
@@ -93,13 +95,11 @@ __Does not simulate actual memory allocation!__
 
 ### To do
 
-1. More Instructions!
+1. Implement $gp, $sp, $fp
 
-2. Implement $gp, $sp, $fp
+2. Organize Routine and Architecture
 
-3. Organize Routine and Architecture
-
-4. Pseudocode parser
+3. Pseudocode parser
 
 ---
 

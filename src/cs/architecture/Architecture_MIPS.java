@@ -1,8 +1,9 @@
 package cs.architecture;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
+import cs.architecture.registers.Registers;
+import cs.architecture.registers.Registers_MIPS;
 import cs.instruction.ISA_INSTRUCTION;
 
 public class Architecture_MIPS implements IArchitecture
@@ -53,16 +54,5 @@ public class Architecture_MIPS implements IArchitecture
 	public LinkedHashMap<Integer, ISA_INSTRUCTION> textTable()
 	{
 		return texttable;
-	}
-
-	@Override
-	public int searchSymbol(String symbol)
-	{
-		for(Map.Entry<Integer, ISA_INSTRUCTION> entry : symboltable.entrySet())
-		{
-			if(entry.getValue().getLabel_self().compareTo(symbol) == 0)
-				return entry.getKey();
-		}
-		return -1;
 	}
 }

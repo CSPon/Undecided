@@ -34,6 +34,8 @@ public class MIPSFrame extends javax.swing.JFrame {
     {
         initComponents();
         
+        routine = new Routine();
+        
         pcav = new PCAddressViewer(routine);
         fd = new FullDebugger(this, routine);
     }
